@@ -200,7 +200,6 @@ To contribute, see [here](#contributing).
 | 72          | Hard       | [Edir Distance](https://leetcode.com/problems/edit-distance/)                                                                                         | [C++](./C++/14_2-D_Dynamic_Programming/09_Edit_Distance.cpp) &bull; [Python](./Python/14_2-D_Dynamic_Programming/09_Edit_Distance.py)                                                                 |
 | 312         | Hard       | [Burst Balloons](https://leetcode.com/problems/burst-balloons/)                                                                                       | [C++](./C++/14_2-D_Dynamic_Programming/10_Burst_Balloons.cpp) &bull; [Python](./Python/14_2-D_Dynamic_Programming/10_Burst_Balloons.py)                                                               |
 | 10          | Hard       | [Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching/)                                                             | [C++](./C++/14_2-D_Dynamic_Programming/11_Regular_Expression_Matching.cpp) &bull; [Python](./Python/14_2-D_Dynamic_Programming/11_Regular_Expression_Matching.py)                                     |
-| 105         | Medium     | [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | [C++](./C++/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.cpp) &bull; [Python](./Python/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.py)             |
 
 ## Greedy
 
@@ -214,7 +213,6 @@ To contribute, see [here](#contributing).
 | 1899        | Medium     | [Merge Triplets to Form Target Triplet](https://leetcode.com/problems/merge-triplets-to-form-target-triplet/)                                         | [C++](./C++/15_Greedy/06_Merge_Triplets_to_Form_Target_Triplet.cpp) &bull; [Python](./Python/15_Greedy/06_Merge_Triplets_to_Form_Target_Triplet.py)                                       |
 | 763         | Medium     | [Partition Labels](https://leetcode.com/problems/partition-labels/)                                                                                   | [C++](./C++/15_Greedy/07_Partition_Labels.cpp) &bull; [Python](./Python/15_Greedy/07_Partition_Labels.py)                                                                                 |
 | 678         | Medium     | [Valid Parenthesis String](https://leetcode.com/problems/valid-parenthesis-string/)                                                                   | [C++](./C++/15_Greedy/08_Valid_Parenthesis_String.cpp) &bull; [Python](./Python/15_Greedy/08_Valid_Parenthesis_String.py)                                                                 |
-| 105         | Medium     | [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | [C++](./C++/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.cpp) &bull; [Python](./Python/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.py) |
 
 ## Intervals
 
@@ -226,7 +224,6 @@ To contribute, see [here](#contributing).
 | ???         | Easy       | [Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)                                                                                         | [C++](./C++/16_Intervals/04_Meeting_Rooms.cpp) &bull; [Python](./Python/16_Intervals/04_Meeting_Rooms.py)                                                                                 |
 | ???         | Medium     | [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)                                                                                   | [C++](./C++/16_Intervals/05_Meeting_Rooms_II.cpp) &bull; [Python](./Python/16_Intervals/05_Meeting_Rooms_II.py)                                                                           |
 | 1851        | Hard       | [Minimum Interval to Include Each Query](https://leetcode.com/problems/minimum-interval-to-include-each-query/)                                       | [C++](./C++/16_Intervals/06_Minimum_Interval_to_Include_Each_Query.cpp) &bull; [Python](./Python/16_Intervals/06_Minimum_Interval_to_Include_Each_Query.py)                               |
-| 105         | Medium     | [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | [C++](./C++/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.cpp) &bull; [Python](./Python/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.py) |
 
 ## Math & Geometry
 
@@ -240,7 +237,6 @@ To contribute, see [here](#contributing).
 | 50          | Medium     | [Pow(x, n)](https://leetcode.com/problems/powx-n/)                                                                                                    | [C++](<./C++/17_Math_&_Geometry/06_Pow(x,n).cpp>) &bull; [Python](<./Python/17_Math_&_Geometry/06_Pow(x,n).py>)                                                                           |
 | 43          | Medium     | [Multiply Strings](https://leetcode.com/problems/multiply-strings/)                                                                                   | [C++](./C++/17_Math_&_Geometry/07_Multiply_Strings.cpp) &bull; [Python](./Python/17_Math_&_Geometry/07_Multiply_Strings.py)                                                               |
 | 2013        | Medium     | [Detect Squares](https://leetcode.com/problems/detect-squares/)                                                                                       | [C++](./C++/17_Math_&_Geometry/08_Detect_Squares.cpp) &bull; [Python](./Python/17_Math_&_Geometry/08_Detect_Squares.py)                                                                   |
-| 105         | Medium     | [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | [C++](./C++/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.cpp) &bull; [Python](./Python/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.py) |
 
 ## Bit Manipulation
 
@@ -253,7 +249,6 @@ To contribute, see [here](#contributing).
 | 268         | Easy       | [Missing Number](https://leetcode.com/problems/missing-number/)                                                                                       | [C++](./C++/18_Bit_Manipulation/05_Missing_Number.cpp) &bull; [Python](./Python/18_Bit_Manipulation/05_Missing_Number.py)                                                                 |
 | 371         | Medium     | [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/)                                                                             | [C++](./C++/18_Bit_Manipulation/06_Sum_of_Two_Integers.cpp) &bull; [Python](./Python/18_Bit_Manipulation/06_Sum_of_Two_Integers.py)                                                       |
 | 7           | Medium     | [Reverse Integer](https://leetcode.com/problems/reverse-integer/)                                                                                     | [C++](./C++/18_Bit_Manipulation/07_Reverse_Integer.cpp) &bull; [Python](./Python/18_Bit_Manipulation/07_Reverse_Integer.py)                                                               |
-| 105         | Medium     | [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | [C++](./C++/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.cpp) &bull; [Python](./Python/07_Trees/13_Construct_Binary_Tree_from_Preorder_and_Inorder_Traversal.py) |
 
 
 ## Contributing
