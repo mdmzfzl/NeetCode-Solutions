@@ -1,72 +1,51 @@
 /*
-Given array of heights, return area of largest rectangle
-Ex. heights = [2,1,5,6,2,3] -> 10 (5 x 2 at index 2 and 3)
+Problem: LeetCode 84 - Largest Rectangle in Histogram
 
-Monotonic incr stack, if curr height lower extend back, find max area
+Description:
+Given an array of integers heights representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.
 
-Time: O(n)
-Space: O(n)
+Intuition:
+To find the largest rectangle in a histogram, we can utilize a stack to keep track of the indices of increasing heights. By iterating through the histogram, we can calculate the area of each rectangle formed by the heights.
+
+Approach:
+1. Initialize a stack to store the indices of increasing heights.
+2. Initialize the maximum area to 0.
+3. Iterate through each bar in the histogram:
+   - While the stack is not empty and the current bar's height is less than the height at the index at the top of the stack:
+     - Pop the index from the stack and calculate the area of the rectangle formed by the popped bar.
+     - Update the maximum area if the calculated area is greater.
+   - Push the current index onto the stack.
+4. After iterating through all bars, there might be remaining bars in the stack. Process them similarly to step 3 to calculate the areas and update the maximum area.
+5. Return the maximum area.
+
+Time Complexity:
+The time complexity is O(n), where n is the number of bars in the histogram. We iterate through each bar once.
+
+Space Complexity:
+The space complexity is O(n), where n is the number of bars in the histogram. In the worst case, all bars are stored in the stack.
 */
+
+#include<bits/stdc++.h> 
+using namespace std;
 
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
-        // pair: [index, height]
-        stack<pair<int, int>> stk;
-        int result = 0;
-        
-        for (int i = 0; i < heights.size(); i++) {
-            int start = i;
-            
-            while (!stk.empty() && stk.top().second > heights[i]) {
-                int index = stk.top().first;
-                int width = i - index;
-                int height = stk.top().second;
-                stk.pop();
-                
-                result = max(result, height * width);
-                start = index;
+        int n = heights.size();
+        stack<int> stack;
+        int maxArea = 0;
+
+        for (int i = 0; i <= n; ++i) {
+            while (!stack.empty() && (i == n || heights[i] < heights[stack.top()])) {
+                int height = heights[stack.top()];
+                stack.pop();
+                int width = stack.empty() ? i : i - stack.top() - 1;
+                maxArea = max(maxArea, height * width);
             }
-            
-            stk.push({start, heights[i]});
+
+            stack.push(i);
         }
-        
-        while (!stk.empty()) {
-            int width = heights.size() - stk.top().first;
-            int height = stk.top().second;
-            stk.pop();
-            
-            result = max(result, height * width);
-        }
-                          
-        return result;
+
+        return maxArea;
     }
 };
-
-/*
-class Solution {
-public:
-    int largestRectangleArea(vector<int>& heights) {
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
-        
-        heights.push_back(0);           // To ensure the stack is flushed at the end
-        int ans = heights[0], n = heights.size(), m = 0;
-        hgt[0] = heights[0];
-        pos[0] = 0;
-        for(int i = 1; i < n; ++i) {
-            pos[m+1] = i;
-            for(; m >= 0 && heights[i] < hgt[m]; --m) {
-                // cout<<hgt[m]<<":["<<pos[m]<<","<<i<<")\n";
-                ans = max(ans, hgt[m] * (i-pos[m]));
-            }
-            hgt[++m] = heights[i];
-        }
-        return ans;
-    }
-
-private:
-    int hgt [100001];
-    int pos [100001];
-};
-*/

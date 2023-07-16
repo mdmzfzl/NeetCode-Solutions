@@ -1,11 +1,27 @@
 /*
-    Given n pairs of parentheses, generate all combos of well-formed parentheses
-    Ex. n = 3 -> ["((()))","(()())","(())()","()(())","()()()"], n = 1 -> ["()"]
+Problem: LeetCode 22 - Generate Parentheses
 
-    Backtracking, keep valid, favor trying opens, then try closes if still valid
+Description:
+Given an integer n, generate all combinations of well-formed parentheses of length 2n.
 
-    Time: O(2^n)
-    Space: O(n)
+Intuition:
+To generate all combinations of well-formed parentheses, we can use a backtracking approach. At each step, we have two choices: either to place an opening parenthesis or a closing parenthesis.
+
+Approach:
+1. Initialize an empty result vector to store all valid combinations.
+2. Define a helper function, backtrack, that takes the current combination, the count of opening parentheses, the count of closing parentheses, and the result vector.
+3. In the backtrack function:
+   - If the length of the current combination is equal to 2n, add it to the result vector.
+   - If the count of opening parentheses is less than n, recursively call the backtrack function with the current combination appended with an opening parenthesis and an incremented count of opening parentheses.
+   - If the count of closing parentheses is less than the count of opening parentheses, recursively call the backtrack function with the current combination appended with a closing parenthesis and an incremented count of closing parentheses.
+4. Call the backtrack function initially with an empty combination, 0 opening parentheses, 0 closing parentheses, and the result vector.
+5. Return the result vector containing all valid combinations.
+
+Time Complexity:
+The time complexity is O(4^n / sqrt(n)), as there are Catalan numbers of well-formed parentheses combinations.
+
+Space Complexity:
+The space complexity is O(4^n / sqrt(n)), as there can be a total of 4^n / sqrt(n) combinations generated.
 */
 
 class Solution {

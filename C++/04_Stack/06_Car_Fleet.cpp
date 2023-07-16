@@ -1,81 +1,68 @@
 /*
-    n cars 1 road, diff pos/speeds, faster cars slow down -> car fleet, return # fleets
-    Ex. target = 12, pos = [10,8,0,5,3], speeds = [2,4,1,1,3] -> 3 (10 & 8, 0, 5 & 3)
+Problem: LeetCode 853 - Car Fleet
 
-    Sort by start pos, calculate time for each car to finish, loop backwards
-    If car behind finishes faster then catches up to fleet, else creates new fleet
+Description:
+N cars are going to the same destination along a one-lane road. The destination is target miles away.
+Each car i has a constant speed speed[i] (in miles per hour), and initial position position[i] miles towards the target along the road.
 
-    Time: O(n log n)
-    Speed: O(n)
+A car can never pass another car ahead of it, but it can catch up to it and drive bumper to bumper at the same speed.
+The distance between these two cars is ignored - they are assumed to have the same position.
+
+A car fleet is some non-empty set of cars driving at the same position and same speed. Note that a single car is also a car fleet.
+
+If a car catches up to a car fleet right at the destination point, it will still be considered as one car fleet.
+
+Intuition:
+To determine the number of car fleets that reach the destination, we can simulate the car movement and track the time it takes for each car to reach the destination.
+
+Approach:
+1. Create a vector of pairs to store the positions and speeds of the cars.
+2. Sort the vector of pairs based on the positions in descending order.
+3. Initialize the count of car fleets to 0.
+4. Iterate through each car in the sorted vector:
+   - Calculate the time it takes for the car to reach the destination (target - position) / speed.
+   - If the current car's time is greater than the previous car's time (car fleet is not possible), increment the count of car fleets.
+   - Update the previous car's time with the maximum of the current car's time and the previous car's time.
+5. Return the count of car fleets.
+
+Time Complexity:
+The time complexity is O(n log n), where n is the number of cars. Sorting the vector of pairs takes O(n log n) time.
+
+Space Complexity:
+The space complexity is O(n), where n is the number of cars. We store the positions and speeds of the cars in a vector of pairs.
 */
+
+#include<bits/stdc++.h> 
+using namespace std;
 
 class Solution {
 public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
         int n = position.size();
-        
-        // Storing position and time in stack
-        vector<pair<int, double>> cars;
-        for (int i = 0; i < n; i++) {
-            double time = (double) (target - position[i]) / speed[i];
-            cars.push_back({position[i], time});
-        }
-        sort(cars.begin(), cars.end());
-        
-        double maxTime = 0.0;
-        int result = 0;
-        
-        // Loop from behind, if the element before it arrives at the target in shorter time then it will collide, if not increment result as it will be seperate fleet
+        vector<pair<int, int>> cars;
 
-        for (int i = n - 1; i >= 0; i--) {
-            double time = cars[i].second;
-            if (time > maxTime) {
-                maxTime = time;
-                result++;
-            }
+        // Create vector of pairs to store positions and speeds
+        for (int i = 0; i < n; ++i) {
+            cars.push_back({position[i], speed[i]});
         }
-        return result;
-    }
-};
 
-/*
-const int sdfsafa = []{
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
-    return 0;
-}();
+        // Sort the vector of pairs based on positions in descending order
+        sort(cars.begin(), cars.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+            return a.first > b.first;
+        });
 
-class Solution {
-public:
-    int carFleet(int target, vector<int>& position, vector<int>& speed) {
-        int n = speed.size();
-        // vector<pair<int,int>> all(n);
-        pair<int, int> all[n];
-        for(int i = 0; i < n ; i++) {
-            all[i] = {position[i], speed[i]};
-        }
-        sort(all, all+n, greater<pair<int, int>>());
-        int count = 1;
-        pair<int, int> top = all[0];
-        for(int i = 1; i < n; i++) {
-            auto curr = all[i];
-            if(curr.second <= top.second) {
-                top = curr;
+        int count = 0;
+        double prevTime = 0.0;
+
+        for (int i = 0; i < n; ++i) {
+            double currTime = static_cast<double>(target - cars[i].first) / cars[i].second;
+
+            if (currTime > prevTime) {
                 count++;
-            }
-            else {
-                float time1 = target - top.first;
-                time1 /= top.second;
-                float time2 = target - curr.first;
-                time2 /= curr.second;
-                if(time2 > time1) {
-                    top = curr;
-                    count++;
-                }
+                prevTime = currTime;
             }
         }
+
         return count;
     }
 };
-*/

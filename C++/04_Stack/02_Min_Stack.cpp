@@ -1,75 +1,58 @@
+/*
+Problem: LeetCode 155 - Min Stack
+
+Description:
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+Intuition:
+To efficiently retrieve the minimum element in constant time, we need to keep track of the minimum value at each step. We can achieve this by using an additional stack to store the minimum values.
+
+Approach:
+1. Initialize two stacks: a main stack to store the actual values and a minimum stack to store the minimum values.
+2. When pushing a value, check if it is smaller than or equal to the top of the minimum stack. If it is, push the value onto both stacks.
+   - If it is larger, push the value only onto the main stack.
+3. When popping a value, check if the top of the main stack is equal to the top of the minimum stack.
+   - If they are equal, pop both values from both stacks.
+   - If they are not equal, pop only from the main stack.
+4. When retrieving the top element, simply return the top of the main stack.
+5. When retrieving the minimum element, simply return the top of the minimum stack.
+6. The implementation ensures that the minimum stack always has the minimum value at the top, reflecting the minimum value at each step.
+
+Time Complexity:
+All operations - push, pop, top, and getMin - have a time complexity of O(1). They are all performed in constant time.
+
+Space Complexity:
+The space complexity is O(n), where n is the number of elements pushed into the stack. The two stacks store the same number of elements as the main stack.
+*/
+
 class MinStack {
 private:
-    stack<int> Stacc;           // Mains tack for stroing the elements 
-    stack<int> minStacc;        // Min stack to store the min up until then
+    std::stack<int> mainStack;
+    std::stack<int> minStack;
 
 public:
-
     MinStack() {
-        // return minStacc.top();
     }
-    
-    void push(int val) {
-        Stacc.push(val); // Pushing in main stack
-        if(minStacc.empty() || Stacc.top() <= minStacc.top())  // Pushing in minstack if its empty or if the element is smaller than current top in min stack
-            minStacc.push(val);
-    }
-    
-    void pop() {
-        if(minStacc.top() == Stacc.top())
-            minStacc.pop();
-        Stacc.pop();
-    }
-    
-    int top() {
-        return Stacc.top();
-    }
-    
-    int getMin() {
-        return minStacc.top();
-    }
-};
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj->push(val);
- * obj->pop();
- * int param_3 = obj->top();
- * int param_4 = obj->getMin();
- */
-
-/*
-class MinStack {
-public:
-    stack<pair<int, int>> st;
-    long minSeen = LONG_MAX;
-    MinStack() {
-        // associate each value with min seen so far
-        // {val, min so far}
-    }
-    
     void push(int val) {
-        minSeen = min(minSeen, 1L * val);
-        st.push({val, minSeen});
-    }
-    
-    void pop() {
-        st.pop();
-        if(st.empty()){
-            minSeen = LONG_MAX;
-        }else{
-            minSeen = st.top().second;
+        mainStack.push(val);
+        if (minStack.empty() || val <= minStack.top()) {
+            minStack.push(val);
         }
     }
-    
-    int top() {
-        return st.top().first;
+
+    void pop() {
+        if (mainStack.top() == minStack.top()) {
+            minStack.pop();
+        }
+        mainStack.pop();
     }
-    
+
+    int top() {
+        return mainStack.top();
+    }
+
     int getMin() {
-        return (int)st.top().second;
+        return minStack.top();
     }
 };
-
-*/
