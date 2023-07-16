@@ -1,97 +1,120 @@
+/*
+Problem: LeetCode 212 - Word Search II
+
+Description:
+Given an m x n board of characters and a list of words, find all words in the board.
+Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring.
+The same letter cell may not be used more than once in a word.
+
+Intuition:
+To find all the words in the board, we can use the Trie data structure to efficiently search for each word. We perform a depth-first search (DFS) starting from each cell on the board, checking if the current sequence of characters forms a valid word in the Trie.
+
+Approach:
+1. TrieNode:
+   - Define a TrieNode class that represents each node in the Trie.
+   - Each TrieNode has an unordered_map to store the child nodes, representing the lowercase alphabets.
+   - Each TrieNode also has a boolean flag to indicate if it represents a complete word.
+
+2. Build the Trie:
+   - Construct a Trie by inserting each word from the given list into the Trie.
+
+3. DFS Search:
+   - Perform a depth-first search (DFS) starting from each cell on the board.
+   - At each cell, check if the current character exists in the Trie and move to the corresponding child node.
+   - Mark the current cell as visited.
+   - If the current node represents a complete word, add it to the result.
+   - Recursively explore the neighboring cells (up, down, left, right).
+   - Backtrack by unmarking the current cell and removing the last character from the current sequence.
+
+4. Word Search II:
+   - Initialize an empty vector to store the found words.
+   - Iterate through each cell on the board and perform the DFS search.
+   - Return the found words as the result.
+
+Time Complexity:
+- Building the Trie: O(m), where m is the total number of characters in all words.
+- DFS Search: O((m*n)*3^l), where m and n are the dimensions of the board and l is the average length of the words.
+
+Space Complexity:
+- The space complexity is O(m), where m is the total number of characters in all words (used for constructing the Trie).
+- The space complexity of the recursive stack for DFS is O(l), where l is the maximum length of the words.
+*/
+
+class TrieNode {
+public:
+    bool isWord;
+    unordered_map<char, TrieNode*> children; // Map to store the child nodes
+
+    TrieNode() {
+        isWord = false;
+    }
+};
+
 class Solution {
-private: 
-    // Defining TrieNode datatype
-    struct TrieNode {
-        TrieNode* child[26];
-        // Instead of storing isWord, we are storing the word itself
-        string word;
+public:
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        TrieNode* root = buildTrie(words); // Build the Trie
 
-        // If word is empty all children will point to nullptr
-        TrieNode() : word("") {
-            for(auto &i: child)
-                i = nullptr;
-        }
-    };
+        int rows = board.size();
+        int cols = board[0].size();
+        vector<string> result;
 
-    // Building a trie for storing all words we need to search
-    TrieNode* BuildTrie(vector<string> words) {
-        TrieNode* root = new TrieNode();
-        // Iterating through all words
-        for(int i = 0; i < words.size(); i++) {
-            string word = words[i];
-            TrieNode* current = root;
-
-            // Inserting the word
-            for(auto i: word) {
-                // index of the character i.e. a = 0, z = 25
-                int index = i - 'a';
-                // If char doesnt exist then we make it
-                if(current->child[index] == NULL)
-                    current->child[index] = new TrieNode();
-                
-                // Pointing current to the character we just inserted
-                current = current->child[index];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                string currentWord = ""; // Initialize the current word for each cell
+                dfs(board, i, j, root, currentWord, result); // Perform DFS search
             }
-            current->word = word;
         }
+
+        return result;
+    }
+
+private:
+    TrieNode* buildTrie(vector<string>& words) {
+        TrieNode* root = new TrieNode();
+
+        for (string& word : words) {
+            TrieNode* node = root;
+            for (char c : word) {
+                if (node->children.find(c) == node->children.end()) {
+                    node->children[c] = new TrieNode();
+                }
+                node = node->children[c];
+            }
+            node->isWord = true;
+        }
+
         return root;
     }
 
-    // DFS for searching a word
-    void DFS(vector<vector<char>> &board, vector<string> &result, TrieNode *node, int i, int j) {
-        char c = board[i][j];
-
-        // # is what we are using to identify an already traversed character
-        // if we traversed or the character doesnt exist, return 
-        if(c == '#' || !node->child[c - 'a'])
+    void dfs(vector<vector<char>>& board, int row, int col, TrieNode* node, string& currentWord, vector<string>& result) {
+        if (row < 0 || row >= board.size() || col < 0 || col >= board[0].size() || board[row][col] == '#') {
             return;
-        
-        node = node->child[c - 'a'];
-
-        // If we reached the node where word ends, then word exists and we push it into reuslt
-        if(node->word.size() > 0) {
-            result.push_back(node->word);
-            node->word = "";
         }
 
-        // Marking the current node as traversed to check for this word
-        board[i][j] = '#';
+        char c = board[row][col];
+        if (node->children.find(c) == node->children.end()) {
+            return;
+        }
 
-        // Traversing all directions possible from current position
-        if(i > 0)
-            DFS(board, result, node, i-1, j);
-        if(j > 0)
-            DFS(board, result, node, i, j-1);
-        if(i < board.size() - 1)
-            DFS(board, result, node, i+1, j);
-        if(j < board[0].size() - 1)
-            DFS(board, result, node, i, j+1);
-        
-        // Reverting current element to original character for checking other words
-        board[i][j] = c;
-    }
+        node = node->children[c];
+        currentWord += c;
 
-    // Clearing memory when done
-    // Optional to do
-    void clear(TrieNode *root) {
-        // for(int i = 0; i < 26; i++) if(root-> child[i]) clear(root -> child[i]);
-        for(auto &i: root->child)
-            if(i)  // if it exists
-                clear(i);
-        delete(root);
-    }
+        if (node->isWord) {
+            result.push_back(currentWord); // Add the found word to the result
+            node->isWord = false; // Mark the word as visited
+        }
 
-public:
-    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        // Building our trie of all words we want to search
-        TrieNode* root = BuildTrie(words);
-        vector<string> result;
+        board[row][col] = '#'; // Mark the current cell as visited
 
-        for(int i = 0; i < board.size(); i++) 
-            for(int j = 0; j < board[0].size(); j++)
-                DFS(board, result, root, i, j);
-        
-        clear(root);
-        return result;
+        // Explore the neighboring cells (up, down, left, right)
+        dfs(board, row - 1, col, node, currentWord, result);
+        dfs(board, row + 1, col, node, currentWord, result);
+        dfs(board, row, col - 1, node, currentWord, result);
+        dfs(board, row, col + 1, node, currentWord, result);
+
+        board[row][col] = c; // Backtrack: unmark the current cell
+
+        currentWord.pop_back(); // Remove the current character from the current word
     }
 };
