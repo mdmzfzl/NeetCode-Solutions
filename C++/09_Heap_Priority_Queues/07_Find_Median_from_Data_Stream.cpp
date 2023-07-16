@@ -1,83 +1,64 @@
-// (Max value in lower half + Min value in upper half) / 2
-// Will give us median
-// https://leetcode.com/problems/find-median-from-data-stream/solutions/1330646/c-java-python-minheap-maxheap-solution-picture-explain-clean-concise/
+/*
+Problem: LeetCode 295 - Find Median from Data Stream
+
+Description:
+Design a data structure that supports adding integers to the structure and finding the median of the current elements.
+The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value. So the median is the average of the two middle values.
+
+Intuition:
+To efficiently find the median of a data stream, we can use two heaps: a max-heap to store the smaller half of the elements, and a min-heap to store the larger half of the elements.
+The median will either be the root of the max-heap (if the heaps have equal size) or the average of the roots of both heaps (if the max-heap has one more element than the min-heap).
+
+Approach:
+1. Use two priority_queues (heaps) - a max-heap (`maxHeap`) and a min-heap (`minHeap`).
+   - The max-heap (`maxHeap`) stores the smaller half of the elements.
+   - The min-heap (`minHeap`) stores the larger half of the elements.
+2. Maintain the following conditions:
+   - The size of the max-heap is either equal to or one more than the size of the min-heap.
+   - The root of the max-heap is smaller than or equal to the root of the min-heap.
+3. When adding a new element:
+   - If the max-heap is empty or the element is less than the root of the max-heap, push the element into the max-heap.
+   - Otherwise, push the element into the min-heap.
+   - Balance the heaps by moving the root of the max-heap to the min-heap if the sizes are not balanced.
+4. To find the median:
+   - If the size of the max-heap is greater than the min-heap, return the root of the max-heap.
+   - Otherwise, return the average of the roots of both heaps.
+   
+Time Complexity:
+Adding an element and finding the median both have a time complexity of O(log n), where n is the number of elements in the data stream. This is due to the heap operations.
+
+Space Complexity:
+The space complexity is O(n), where n is the number of elements in the data stream. This is because we store the elements in the heaps.
+*/
 
 class MedianFinder {
 private:
-    // Using max heap to store lower half values
-    priority_queue<int> maxHeap;
-    // Using minHeap to store upper half values
-    priority_queue<int, vector<int>, greater<int>> minHeap;
-public:
-    MedianFinder() {
-        ios_base::sync_with_stdio(false);    
-        cin.tie(NULL);
-    }
-    
-    void addNum(int num) {
-        maxHeap.push(num);
-        // Pushing top value of maxHeap into minHeap
-        minHeap.push(maxHeap.top());
-        // Popping the pushed value
-        maxHeap.pop();
+    priority_queue<int> maxHeap;  // Max-heap to store the smaller half of the elements
+    priority_queue<int, vector<int>, greater<int>> minHeap;  // Min-heap to store the larger half of the elements
 
-        // To balance both heaps
-        if(minHeap.size() > maxHeap.size()) {
+public:
+    void addNum(int num) {
+        if (maxHeap.empty() || num <= maxHeap.top()) {
+            maxHeap.push(num);
+        } else {
+            minHeap.push(num);
+        }
+        
+        // Balance the heaps
+        if (maxHeap.size() > minHeap.size() + 1) {
+            minHeap.push(maxHeap.top());
+            maxHeap.pop();
+        } else if (maxHeap.size() < minHeap.size()) {
             maxHeap.push(minHeap.top());
             minHeap.pop();
         }
-        // maxHeap will fill first and then minHeap
     }
     
     double findMedian() {
-        if(maxHeap.size() > minHeap.size())
+        if (maxHeap.size() > minHeap.size()) {
             return maxHeap.top();
-        return (maxHeap.top() + minHeap.top()) / 2.0;
-    }
-};
-
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder* obj = new MedianFinder();
- * obj->addNum(num);
- * double param_2 = obj->findMedian();
- */
-
-/*
-class MedianFinder {
-public:
-    priority_queue<int>first_half;
-    priority_queue<int, vector<int>, greater<int>>second_half;
-
-    MedianFinder() {
-        ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-    }
-    
-    void addNum(int num) {
-        first_half.push(num);
-        int fqsize = first_half.size(), sqsize = second_half.size();
-        int total = fqsize + sqsize;
-        while((fqsize - sqsize) != ((total) & 1) && fqsize >= sqsize){
-            second_half.push(first_half.top()); first_half.pop();
-            fqsize = first_half.size(), sqsize = second_half.size();
-        }
-        if(fqsize && sqsize){
-            int ftop = first_half.top(), stop = second_half.top();
-            if(ftop > stop){
-                first_half.pop(), second_half.pop();
-                first_half.push(stop), second_half.push(ftop);
-            }
-        }
-    }
-    
-    double findMedian() {
-        int fqsize = first_half.size(), sqsize = second_half.size();
-        if((fqsize + sqsize) & 1) return first_half.top() * 1.0;
-        else{
-            double sum = first_half.top() * 1.0 + second_half.top() * 1.0;
-            return sum / 2.0;
+        } else {
+            return (maxHeap.top() + minHeap.top()) / 2.0;
         }
     }
 };
-*/

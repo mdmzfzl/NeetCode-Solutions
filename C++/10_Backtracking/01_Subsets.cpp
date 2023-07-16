@@ -1,50 +1,53 @@
-// For every node we have a choice to either select an element or not
-// https://youtu.be/REOH22Xwdkk
-// skip to 5:20 for the tree drawing
-
 /*
-// Iterative solution
-class Solution {
-public:
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> result;
-        // pushing empty subset
-        result.push_back({});
+Problem: LeetCode 78 - Subsets
 
-        for(int i = 0; i < nums.size(); i++) {
-            int size = result.size();
-            // result size is diff every iteration
-            for(int j = 0; j < size; j++) {
-                // temp = previous subarrays in result 1 by 1
-                vector<int> temp = result[j];
-                // pb number from nums to temp
-                temp.push_back(nums[i]);
-                result.push_back(temp);
-            }
-        }
-        return result;
-    }
-};
+Description:
+Given an integer array nums of unique elements, return all possible subsets (the power set).
+The solution set must not contain duplicate subsets. Return the solution in any order.
+
+Intuition:
+To find all possible subsets of a given array, we can use a backtracking approach. We start with an empty subset and gradually add elements to it, generating all possible combinations.
+
+Approach:
+1. Initialize an empty vector `subset` to store the current subset.
+2. Initialize an empty vector `result` to store all subsets.
+3. Define a helper function `generateSubsets`:
+   - If the index is equal to the size of the input array `nums`, add the current subset to the `result` vector.
+   - Otherwise:
+     - Include the current element at the current index in the subset.
+     - Recursively call `generateSubsets` with the next index.
+     - Exclude the current element from the subset.
+     - Recursively call `generateSubsets` with the next index.
+4. Call the `generateSubsets` function with the initial index 0.
+5. Return the `result` vector containing all possible subsets.
+
+Time Complexity:
+The time complexity is O(2^n), where n is the size of the input array `nums`. This is because there are 2^n possible subsets, and we generate all of them.
+
+Space Complexity:
+The space complexity is O(n), where n is the size of the input array `nums`. This is because we store the subsets in the `result` vector.
 */
 
-// Recursive solution using DFS
-// Backtracking uses DFS
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> result;
-        vector<int> current;
-        
-        DFS(result, current, nums, 0);
+        vector<int> subset;
+        generateSubsets(nums, 0, subset, result);
         return result;
     }
+    
 private:
-    void DFS(vector<vector<int>> &result, vector<int> &current, vector<int> nums, int start) {
-        result.push_back(current);
-        for(int i = start; i < nums.size(); i++) {
-            current.push_back(nums[i]);
-            DFS(result, current, nums, i+1);
-            current.pop_back();
+    void generateSubsets(const vector<int>& nums, int index, vector<int>& subset, vector<vector<int>>& result) {
+        // Base case: If we have processed all elements, add the current subset to the result
+        if (index == nums.size()) {
+            result.push_back(subset);
+            return;
         }
+        
+        subset.push_back(nums[index]);  // Include the current element
+        generateSubsets(nums, index + 1, subset, result);  // Recursively call with the next index
+        subset.pop_back();  // Exclude the current element
+        generateSubsets(nums, index + 1, subset, result);  // Recursively call with the next index
     }
 };

@@ -1,98 +1,76 @@
+/*
+Problem: LeetCode 51 - N-Queens
+
+Description:
+The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other.
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.
+
+Intuition:
+The N-Queens problem can be solved using backtracking. The idea is to place queens on the board row by row, ensuring that no two queens attack each other. We can use a recursive approach to explore all possible placements and backtrack when conflicts arise.
+
+Approach:
+1. Define a vector of vectors `board` to represent the chessboard.
+2. Define a vector `queens` to store the column index of the queens placed in each row.
+3. Define a helper function `backtrack`:
+   - If the current row is equal to `n`, it means all queens have been placed successfully. Add the current `board` configuration to the `result` vector.
+   - Otherwise:
+     - Iterate through the columns from 0 to `n`:
+       - Check if placing a queen at the current position (row, col) is valid (i.e., no conflicts with previously placed queens).
+       - If it is valid, mark the current position on the `board` as a queen ('Q') and add the current column to `queens`.
+       - Recursively call `backtrack` for the next row.
+       - Remove the queen from the `board` and backtrack by removing the last queen from `queens`.
+4. Call the `backtrack` function with the initial row 0.
+5. Return the `result` vector containing all distinct board configurations.
+
+Time Complexity:
+The time complexity is O(N!), where N is the size of the chessboard (n x n). This is because there are N! possible placements for the queens.
+
+Space Complexity:
+The space complexity is O(N), where N is the size of the chessboard (n x n). This is because we store the `board`, `queens`, and the `result` vector.
+*/
+
 class Solution {
 public:
     vector<vector<string>> solveNQueens(int n) {
-    vector<bitset<9>> solutions;
-    bitset<9> columns;
-    bitset<17> diagonals1;
-    bitset<17> diagonals2;
-
-    solveNQueensUtil(0, N, columns, diagonals1, diagonals2, solutions);
-
-    return solutions;
+        vector<vector<string>> result;
+        vector<string> board(n, string(n, '.'));  // Initialize the board with empty spaces
+        vector<int> queens;  // Column indices of the queens in each row
+        backtrack(n, 0, board, queens, result);  // Call the backtrack function to generate all valid solutions
+        return result;
     }
-
+    
 private:
-    void backtrack(vector<vector<string>>& solutions, vector<string>& board,
-                   vector<int>& cols, vector<int>& diag1, vector<int>& diag2,
-                   bitset<32>& fullCols, bitset<64>& fullDiag1, bitset<64>& fullDiag2,
-                   int row, int n) {
+    // Backtracking function to generate all valid solutions
+    void backtrack(int n, int row, vector<string>& board, vector<int>& queens, vector<vector<string>>& result) {
         if (row == n) {
-            solutions.push_back(board); // Found a valid solution
+            result.push_back(board);  // Add the current valid solution to the result
             return;
         }
-
-        int availablePositions = ((1 << n) - 1) & ~(cols[row] | diag1[row] | diag2[row]);
-        while (availablePositions > 0) {
-            int position = availablePositions & -availablePositions; // Get the rightmost available position
-            int col = __builtin_ctz(position); // Count trailing zeros to get the column index
-
-            updateState(cols, diag1, diag2, fullCols, fullDiag1, fullDiag2, row, col, n, true); // Place a queen
-            board[row][col] = 'Q';
-            backtrack(solutions, board, cols, diag1, diag2, fullCols, fullDiag1, fullDiag2, row + 1, n); // Move to the next row
-            updateState(cols, diag1, diag2, fullCols, fullDiag1, fullDiag2, row, col, n, false); // Backtrack and remove the queen
-            board[row][col] = '.';
-
-            availablePositions &= availablePositions - 1; // Clear the rightmost set bit
-        }
-    }
-
-    void updateState(vector<int>& cols, vector<int>& diag1, vector<int>& diag2,
-                     bitset<32>& fullCols, bitset<64>& fullDiag1, bitset<64>& fullDiag2,
-                     int row, int col, int n, bool isPlacing) {
-        cols[row] = isPlacing ? 1 : 0;
-        diag1[row + col] = isPlacing ? 1 : 0;
-        diag2[row - col + n - 1] = isPlacing ? 1 : 0;
-        fullCols[col] = isPlacing ? 1 : 0;
-        fullDiag1[row - col + n - 1] = isPlacing ? 1 : 0;
-        fullDiag2[row + col] = isPlacing ? 1 : 0;
-    }
-};
-
-
-/*
-// OPTIMIZED SOLUTION - using Backtracking & hashmap
-
-// TC : O(n!)
-// SC : O(n*n) = O(n^2)
-
-class Solution {
-    void solve(int col, vector<string> &board, int n, vector<int> &leftrow, vector<int> &lowerdiagonal, vector<int> &upperdiagonal, vector<vector<string>> &ans){ // TC: O(n*(n-1)*(n-2)*(n-3)...) = O(n!)
-        // base case
-        if(col == n){
-            ans.push_back(board);
-            return;
-        }
-
-        // solve 1 case and rest recurssion will take care
-        for(int row=0; row<n; row++){
-            if(leftrow[row] == 0 && lowerdiagonal[row+col] == 0 && upperdiagonal[n-1+col-row] == 0){ // isSafe func() --> TC: O(1)
-                board[row][col] = 'Q';
-                leftrow[row] = 1;
-                lowerdiagonal[row+col] = 1;
-                upperdiagonal[n-1+col-row] = 1;
-                solve(col+1, board, n, leftrow, lowerdiagonal, upperdiagonal, ans);
-                board[row][col] = '.';
-                leftrow[row] = 0;
-                lowerdiagonal[row+col] = 0;
-                upperdiagonal[n-1+col-row] = 0;
+        
+        for (int col = 0; col < n; ++col) {
+            if (isValidPlacement(row, col, queens)) {
+                board[row][col] = 'Q';  // Place the queen at the current position
+                queens.push_back(col);  // Store the column index of the queen in the current row
+                
+                // Recursively call for the next row
+                backtrack(n, row + 1, board, queens, result);
+                
+                queens.pop_back();  // Remove the last queen from the current row
+                board[row][col] = '.';  // Restore the empty space
             }
         }
     }
-
-    public:
-    vector<vector<string>> solveNQueens(int n) {
-        // write your code here
-
-        vector<string> board(n, string(n, '.')); // SC: O(n*n)
-        vector<vector<string>> ans; // SC: O(n*n*n)
-        
-        vector<int> leftrow(n, 0); // SC: O(n)
-        vector<int> lowerdiagonal(2*n-1, 0); // SC: O(n)
-        vector<int> upperdiagonal(2*n-1, 0); // SC: O(n)
-        
-        solve(0, board, n, leftrow, lowerdiagonal, upperdiagonal, ans);
-        
-        return ans;
+    
+    // Function to check if placing a queen at the current position is valid
+    bool isValidPlacement(int row, int col, const vector<int>& queens) {
+        for (int i = 0; i < queens.size(); ++i) {
+            int rowDiff = abs(row - i);
+            int colDiff = abs(col - queens[i]);
+            if (rowDiff == 0 || colDiff == 0 || rowDiff == colDiff) {
+                return false;  // Found a queen in the same row, same column, or diagonal
+            }
+        }
+        return true;  // No conflicting queens found, placement is valid
     }
 };
-*/

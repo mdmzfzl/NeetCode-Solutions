@@ -1,77 +1,66 @@
-// We'll be using a min heap, where the first element will be the smallest
-// So we keep popping the smallest elements until there are K elements remaining
-// The kth element will be the kth largest
+/*
+Problem: LeetCode 703 - Kth Largest Element in a Stream
 
-// We are using priority queue to implement heap
+Description:
+Design a class to find the kth largest element in a stream. 
+Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
-static int pr = []() { 
-    std::ios::sync_with_stdio(false); 
-    cin.tie(NULL);  
-    return 0; 
-}();
+Intuition:
+To find the kth largest element in a stream efficiently, we can use a min-heap of size k. 
+As new elements are added to the stream, we compare them with the root of the min-heap. 
+If the new element is larger than the root, we replace the root with the new element and perform heapify to maintain the heap property.
+
+Approach:
+1. Implement a class KthLargest with the following members:
+   - A min-heap to store the k largest elements. Use a priority_queue in C++ with the smallest element on top.
+   - A variable k to store the value of k.
+
+2. In the constructor of KthLargest:
+   - Initialize the variable k.
+   - Iterate through the given vector of integers and add each element to the min-heap.
+   - If the size of the min-heap exceeds k, remove the smallest element from the heap.
+
+3. In the add function:
+   - If the size of the min-heap is less than k, simply add the new element to the heap.
+   - If the new element is larger than the root of the min-heap, replace the root with the new element and perform heapify.
+   - Return the value of the root of the min-heap, which represents the kth largest element.
+
+Time Complexity:
+- Construction: O(n*log(k)), where n is the number of elements in the input vector.
+- Adding an element: O(log(k)), as we need to perform heapify after adding an element.
+
+Space Complexity:
+- The space complexity is O(k), as we store the k largest elements in the min-heap.
+*/
+
+// static int pr = []() { 
+//     std::ios::sync_with_stdio(false); 
+//     cin.tie(NULL);  
+//     return 0; 
+// }();
 
 class KthLargest {
 private:
-    // Variable to keep track of PQ size
     int k;
-    // Min heap
-    priority_queue<int, vector<int>, greater<int>> PQ;
+    priority_queue<int, vector<int>, greater<int>> minHeap; // Min-heap to store the k largest elements
+
 public:
     KthLargest(int k, vector<int>& nums) {
-        // this->k calls k of this object(private variable of this class)
         this->k = k;
-
-        // Adding elements to priority queue
-        for (int i = 0; i < nums.size(); i++) 
-            PQ.push(nums[i]);
-            
-        // removing elements till k elements remain
-        while (PQ.size() > this->k) 
-            PQ.pop();
-    }
-    
-    int add(int val) {
-        PQ.push(val);
-        // If more than K elements then remove
-        if (PQ.size() > k) 
-            PQ.pop();
-        return PQ.top();
-    }
-};
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * KthLargest* obj = new KthLargest(k, nums);
- * int param_1 = obj->add(val);
- */
-
-/*
-class KthLargest {
-    priority_queue<int, vector<int>, greater<int>> pq;
-    int n;
-public:
-    KthLargest(int k, vector<int>& nums) {
-        n = k;
-        for(auto const &i: nums) {
-            if(pq.size() < k) 
-                pq.push(i);
-            else 
-                if(pq.top() < i) {
-                    pq.pop();
-                    pq.push(i);
-                }
+        for (int num : nums) {
+            minHeap.push(num);
+            // removing elements till k elements remain
+            if (minHeap.size() > k) {
+                minHeap.pop();
+            }
         }
     }
-    
+
     int add(int val) {
-        if(pq.size() < n) 
-            pq.push(val); 
-        else 
-            if(pq.top() < val) {
-                pq.pop();
-                pq.push(val);
-            }
-        return pq.top();
+        minHeap.push(val);
+        if (minHeap.size() > k) {
+            minHeap.pop();
+        }
+        return minHeap.top();
     }
 };
-*/

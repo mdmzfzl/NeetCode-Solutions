@@ -1,90 +1,59 @@
 /*
-Solution - 
-In example, tasks = ["A","A","A","B","B","B"], n = 2
-Each round is: A B _ 
-The number of rounds will be decided by what character occurs the most ie maxFreq
-and every character can occur every n+1 times, ie A can occur on 0, 3, 6 etc
-so formula will be maxFreq * (n+1) but we will calculate the last round seperately
-(adding all elements with maxFreq because they are the only elements in last round)
-    for example, if A occurs 5 times and B occurs 3 times
-    Last two rounds will just be A
-so final formula is, (maxFreq-1)*(n+1) + (no of times maxFreq occured)
-*/
+Problem: LeetCode 621 - Task Scheduler
 
-// https://medium.com/@swgarciab/task-scheduler-leetcode-problem-a74acadf0e22
+Description:
+Given a characters array tasks, representing the tasks a CPU needs to do, where each character represents a different task. Tasks could be done in any order. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.
+However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same task cannot be executed in adjacent units of time).
+Return the least number of units of times that the CPU will take to finish all the given tasks.
 
-/*
-class Solution {
-public:
-    int leastInterval(vector<char>& tasks, int n) {
-        map<char, int> M;
-        int result, maxFrequency = 0;
+Intuition:
+To minimize the overall time, we need to arrange the tasks in such a way that the maximum number of occurrences of any task is spread apart by the cooldown period. We can then fill the gaps with idle cycles if needed.
 
-        // Making frequency map
-        for(int i: tasks){
-            M[i - 'A']++;
-            // Calculating most freq element
-            if(M[i - 'A'] > maxFrequency)
-                maxFrequency = M[i - 'A'];
-        }
-            
-        result = (maxFrequency - 1) * (n + 1);
+Approach:
+1. Count the frequency of each task and store it in a frequency array.
+2. Sort the frequency array in descending order.
+3. Find the maximum frequency `maxFreq`.
+4. Calculate the number of idle cycles required:
+   - Subtract 1 from `maxFreq` to exclude the last occurrence of the most frequent task (as it doesn't need an idle cycle after it).
+   - Multiply `maxFreq - 1` by `n` to get the number of slots occupied by the most frequent task and its cooldown periods.
+   - Subtract this value from the total number of tasks to get the number of remaining idle cycles.
+5. Calculate the minimum number of time units required:
+   - Add the total number of tasks to the number of idle cycles calculated in step 4.
+   - Return the maximum of this value and the length of the tasks array.
 
-        // Calculating number of occurences that equal maxFreq
-        for(auto i: M) 
-            if(i.second == maxFrequency)
-                result++;
+Time Complexity:
+The time complexity is O(n log n), where n is the number of tasks. This is due to the sorting operation on the frequency array.
 
-        return max((int)tasks.size(), result);
-    }
-};
+Space Complexity:
+The space complexity is O(1) since the frequency array has a fixed size of 26 (assuming tasks only contain uppercase letters).
 */
 
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
+        // Count the frequency of each task
         vector<int> frequency(26, 0);
-        for(int i = 0; i < tasks.size(); i++)
-            frequency[tasks[i] - 'A']++;
-        
-        sort(frequency.begin(), frequency.end(), greater<int>());
-
-        int maxFreq = frequency[0];
-        int count = 0;
-
-        // Calculating number of occurences that equal maxFreq
-        while(count <= 25 && frequency[count] == maxFreq )
-            count++;
-
-        int result = (maxFreq-1) * (n+1) + count;
-        result = max((int)tasks.size(), result);
-        
-        return result;
-    }
-};
-
-/*
-class Solution {
-public:
-    int leastInterval(vector<char>& tasks, int n) {
-        // Create a frequency array to keep track of the count of each task
-        vector<int> freq(26);
         for (char task : tasks) {
-            freq[task - 'A']++;
+            frequency[task - 'A']++;
         }
-        // Sort the frequency array in non-decreasing order
-        sort(freq.begin(), freq.end());
-        // Calculate the maximum frequency of any task
-        int maxFreq = freq[25] - 1;
-        // Calculate the number of idle slots that will be required
-        int idleSlots = maxFreq * n;
-        // Iterate over the frequency array from the second highest frequency to the lowest frequency
-        for (int i = 24; i >= 0 && freq[i] > 0; i--) {
-            // Subtract the minimum of the maximum frequency and the current frequency from the idle slots
-            idleSlots -= min(maxFreq, freq[i]);
+        
+        // Sort the frequency array in descending order
+        sort(frequency.rbegin(), frequency.rend());
+        
+        // Find the maximum frequency
+        int maxFreq = frequency[0];
+        
+        // Calculate the number of idle cycles required
+        int idleCycles = (maxFreq - 1) * n;
+        
+        // Subtract the remaining tasks from the idle cycles
+        for (int i = 1; i < frequency.size(); i++) {
+            idleCycles -= min(frequency[i], maxFreq - 1);
         }
-        // If there are any idle slots left, add them to the total number of tasks
-        return idleSlots > 0 ? idleSlots + tasks.size() : tasks.size();
+        
+        // Calculate the minimum number of time units required
+        int minTime = tasks.size() + max(0, idleCycles);
+        
+        return minTime;
     }
 };
-*/
