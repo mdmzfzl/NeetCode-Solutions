@@ -1,3 +1,31 @@
+/*
+Problem: LeetCode 98 - Validate Binary Search Tree
+
+Description:
+Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+Intuition:
+A binary search tree (BST) is a binary tree in which the value of each node is greater than all the values in its left subtree and less than all the values in its right subtree. 
+To validate a BST, we can perform an in-order traversal and check if the values are in ascending order.
+
+Approach:
+1. Initialize a previous value to store the last visited value during the in-order traversal.
+2. Create a helper function, `isValidBSTHelper`, to perform the in-order traversal and validate the BST.
+3. In the `isValidBSTHelper` function:
+   - Check if the current node is `nullptr`. If so, return true since it does not violate the BST property.
+   - Recursively call the `isValidBSTHelper` function for the left subtree. If it returns false, return false.
+   - Check if the current node's value is less than or equal to the previous value. If so, return false.
+   - Update the previous value to be the current node's value.
+   - Recursively call the `isValidBSTHelper` function for the right subtree. If it returns false, return false.
+4. Return true if the entire tree has been traversed without any violations.
+
+Time Complexity:
+The time complexity of the approach is O(n), where n is the number of nodes in the binary tree. We visit each node once during the in-order traversal.
+
+Space Complexity:
+The space complexity is O(h), where h is the height of the binary tree. This is the space used by the recursive call stack.
+*/
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -10,41 +38,28 @@
  * };
  */
 
-/*
-The idea is to write a utility helper function that traverses down the tree keeping track of the narrowing min and max allowed values as it goes, looking at each node only once. The initial values for min and max should be LONG_MIN and LONG_MAX — they narrow from there.
-*/
-
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        return helper(root, LONG_MIN, LONG_MAX);
+        long long prev = LLONG_MIN; // Use long long to handle edge case with INT_MIN
+        return isValidBSTHelper(root, prev);
     }
+
 private:
-    bool helper(TreeNode* root, long left, long right){
-        if (!root)
+    bool isValidBSTHelper(TreeNode* node, long long& prev) {
+        if (node == nullptr) {
             return true;
+        }
 
-        if (root->val < right && root->val > left)
-           return helper(root->left, left, root->val) && helper(root->right, root->val, right);
-        
-        return false;
-    }
-};
-
-/*
-class Solution {
-public:
-    bool check(TreeNode* root, long long l, long long r){
-        if (root==NULL) 
-            return true;
-        if (!(root->val >= l && root->val <= r)) 
+        if (!isValidBSTHelper(node->left, prev)) {
             return false;
-        if (check(root->left, l, (long long)(root->val) - 1) && check(root->right, (long long)(root->val) + 1, r)) 
-            return true;
-        return false;
-    }
-    bool isValidBST(TreeNode* root) {
-        return check(root, INT_MIN, INT_MAX);
+        }
+
+        if (node->val <= prev) {
+            return false;
+        }
+        prev = node->val;
+
+        return isValidBSTHelper(node->right, prev);
     }
 };
-*/
