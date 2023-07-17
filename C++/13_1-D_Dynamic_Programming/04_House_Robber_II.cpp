@@ -2,61 +2,65 @@
 Problem: LeetCode 213 - House Robber II
 
 Description:
-You are a professional robber planning to rob houses along a street. Each house has a certain amount of money
-stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one.
-Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two
-adjacent houses were broken into on the same night. Given an integer array nums representing the amount of money
-of each house, return the maximum amount of money you can rob tonight without alerting the police.
+You are a professional robber planning to rob houses along a street.
+Each house has a certain amount of money stashed, and the only constraint stopping you from robbing each of them is that adjacent houses have a security system connected, 
+and it will automatically contact the police if two adjacent houses are broken into on the same night.
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+Note: This problem is a variation of LeetCode 198 - House Robber with a circular street, where the first and last houses are adjacent.
+
+Intuition:
+To maximize the amount of money robbed, we can consider dynamic programming.
+The problem becomes more complex due to the circular nature of the street.
+Since the first and last houses are adjacent, we have two possibilities: either rob the first house and skip the last house or skip the first house and rob the last house.
+We can solve this problem by splitting it into two separate subproblems:
+1. Rob houses from the first to the second-to-last house.
+2. Rob houses from the second to the last house.
+The maximum amount of money robbed will be the maximum between the two subproblems.
 
 Approach:
-1. If the input array nums is empty, return 0.
-2. If the input array nums has only one house, return the money in that house.
-3. Define two vectors, minusLast and minusFirst, to store the amounts of money excluding the last and first houses, respectively.
-4. Use the helper function to find the maximum amount of money that can be robbed from either the minusLast or minusFirst vectors.
-5. Return the maximum amount of money obtained.
+1. If the size of the nums array is 1, return nums[0] as it is the only house.
+2. Compute the maximum amount of money robbed by considering the two subproblems:
+   a. Rob houses from the first to the second-to-last house using the same approach as in the House Robber problem (LeetCode 198).
+   b. Rob houses from the second to the last house using the same approach as in the House Robber problem (LeetCode 198).
+3. Return the maximum amount between the two subproblems.
 
 Time Complexity:
-The time complexity of this approach is O(n), where n is the size of the input array nums.
-This is because we iterate through the input array once to calculate the maximum amount of money that can be robbed.
+The time complexity is O(n), where n is the size of the nums array. We iterate through the nums array twice: once for each subproblem.
 
 Space Complexity:
-The space complexity is O(n), as we use two additional vectors to store the amounts of money excluding the last and first houses.
+The space complexity is O(1) since we use constant extra space to store the intermediate results.
 
-Let's implement the solution!
+Dynamic Programming:
+- Subproblem: The subproblem is finding the maximum amount of money that can be robbed from a range of houses.
+- Recurrence Relation: dp[i] = max(dp[i-2] + nums[i], dp[i-1]), where dp[i] represents the maximum amount of money that can be robbed up to the ith house.
+- Base Case: dp[0] = nums[0] and dp[1] = max(nums[0], nums[1]), as the maximum amount to rob the first two houses depends on their values.
 */
 
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        if(nums.empty())
-            return 0;
-        if(nums.size() == 1)
+        int n = nums.size();
+        
+        if (n == 1) {
             return nums[0];
-        
-        int result;
-        vector<int> minusLast, minusFirst;
-        // All elements excluding the last
-        minusLast = nums; minusLast.pop_back();
-        // All elements excluding the first
-        minusFirst = nums; minusFirst.erase(minusFirst.begin());
-        
-        result = max(helper(minusLast), helper(minusFirst));
-        return result;
-    }
-
-private:
-    // This is the same function from House Robber I
-    int helper(vector<int>& nums) {
-        if(nums.size() == 0)
-            return 0;
-        
-        int prev = 0, curr = 0, next = 0;
-
-        for(int i = 0; i < nums.size(); i++) {
-            next = max(prev + nums[i], curr);
-            prev = curr;
-            curr = next;
         }
-        return curr;
+        
+        int max1 = robRange(nums, 0, n - 2);
+        int max2 = robRange(nums, 1, n - 1);
+        
+        return max(max1, max2);
+    }
+    
+    int robRange(vector<int>& nums, int start, int end) {
+        int prev1 = 0;
+        int prev2 = 0;
+        
+        for (int i = start; i <= end; ++i) {
+            int current = max(prev1 + nums[i], prev2);
+            prev1 = prev2;
+            prev2 = current;
+        }
+        
+        return prev2;
     }
 };
