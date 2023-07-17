@@ -1,71 +1,77 @@
-/**
- * * To solve - 
- * 1. Move over the boundary of board, and find O's 
- * 2. Every time we find an O, perform DFS from it's position
- * 3. In DFS convert all 'O' to 'E'(so we can differentiate which 'O's can be flipped and which cannot)
- * 4. After all DFSs have been performed, board contains three elements: E, O and X
- * 5. 'O' are left over elements which are not connected to any boundary O, so flip them to 'X'
- * 6. 'E' are elements which cannot be flipped to 'X', so flip them back to 'O'
-*/
-
 /*
-    Given a matrix, capture ('X') all regions that are surrounded ('O')
+Problem: LeetCode 130 - Surrounded Regions
 
-    Distinguish captured vs escaped, 'X' vs 'O' vs 'E'
+Description:
+Given an m x n matrix board containing 'X' and 'O', capture all regions that are surrounded by 'X'.
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
 
-    Time: O(m x n)
-    Space: O(m x n)
+Intuition:
+To capture the surrounded regions, we need to identify the regions that are connected to the borders of the matrix. The regions that are not connected to the borders are the ones that need to be captured. 
+We can use a depth-first search (DFS) approach to identify and mark the regions that are connected to the borders, and then iterate through the matrix to capture the remaining regions.
+
+Approach:
+1. Traverse the borders of the matrix and perform a DFS to mark the regions that are connected to the borders:
+   - If a cell is 'O', perform a DFS to mark all its neighboring 'O' cells as connected to the border.
+2. Iterate through the entire matrix:
+   - If a cell is 'O' and not marked as connected to the border, capture it by changing it to 'X'.
+   - If a cell is marked as connected to the border, restore it to 'O'.
+3. The regions that are not marked as connected to the border are the captured regions.
+
+Time Complexity:
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. We visit each cell once.
+
+Space Complexity:
+The space complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. This is the space used for the recursion stack during the DFS traversal.
 */
 
 class Solution {
-public: 
-    void solve(vector<vector<char>> &board) {
-        m = board.size();
-        if(m == 0) 
-			return;
-        n = board[0].size();
-
-        // Moving over first and last column
-        for (int i = 0; i < m; i++) {
-            if(board[i][0] == 'O') 
-                dfs(board, i, 0);
-            if(board[i][n - 1] == 'O') 
-                dfs(board, i, n - 1);
+public:
+    void solve(vector<vector<char>>& board) {
+        if (board.empty()) {
+            return;
         }
-
-		// Moving over first and last row 
-        for (int j = 0; j < n; j++) {
-            if(board[0][j] == 'O')
-                dfs(board, 0, j);
-            if(board[m - 1][j] == 'O')
-            dfs(board, m - 1, j);
+        
+        int m = board.size();
+        int n = board[0].size();
+        
+        // Traverse the top and bottom borders
+        for (int col = 0; col < n; ++col) {
+            dfs(board, 0, col);
+            dfs(board, m - 1, col);
         }
-
-        // flip cells to correct final states
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        
+        // Traverse the left and right borders
+        for (int row = 0; row < m; ++row) {
+            dfs(board, row, 0);
+            dfs(board, row, n - 1);
+        }
+        
+        // Capture the remaining regions
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
                 if (board[i][j] == 'O') {
-                    board[i][j] = 'X';
-                }
-                if (board[i][j] == 'E') {
-                    board[i][j] = 'O';
+                    board[i][j] = 'X';  // Capture the region
+                } else if (board[i][j] == '#') {
+                    board[i][j] = 'O';  // Restore the region
                 }
             }
         }
     }
     
-private: 
-    int m, n;
-    void dfs(vector<vector<char>> &board, int i, int j) {
-        if (i < 0 || i >= m || j < 0 || j >= n || board[i][j] != 'O') {
+private:
+    void dfs(vector<vector<char>>& board, int row, int col) {
+        int m = board.size();
+        int n = board[0].size();
+        
+        if (row < 0 || row >= m || col < 0 || col >= n || board[row][col] != 'O') {
             return;
         }
-
-        board[i][j] = 'E';
-
-        dfs(board, i - 1, j);
-        dfs(board, i + 1, j);
-        dfs(board, i, j - 1);
-        dfs(board, i, j + 1);
+        
+        board[row][col] = '#';  // Mark the cell as connected to the border
+        
+        dfs(board, row - 1, col);  // Up
+        dfs(board, row + 1, col);  // Down
+        dfs(board, row, col - 1);  // Left
+        dfs(board, row, col + 1);  // Right
     }
 };

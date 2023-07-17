@@ -1,57 +1,65 @@
 /*
-    Graph of n nodes, given edges array, return # of connected components
-    Ex. n = 5, edges = [[0,1],[1,2],[3,4]] -> 2
+Problem: LeetCode 323 - Number of Connected Components in an Undirected Graph
 
-    Union find, for each edge combine, if already in same set keep traversing
-    If not in same set, decrement count by 1, count will store # of components
+Description:
+Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to find the number of connected components in an undirected graph.
 
-    Time: O(n)
-    Space: O(n)
+Intuition:
+This problem can be approached as a graph problem where the nodes represent the vertices and the edges represent the connections between the vertices. We can use depth-first search (DFS) or breadth-first search (BFS) to explore the graph and count the number of connected components.
+
+Approach:
+1. Build an adjacency list representation of the graph using the given edges.
+2. Initialize a visited array to track the visited nodes during the graph traversal.
+3. Initialize a count variable to keep track of the number of connected components.
+4. Iterate through each node in the graph:
+   - If the node is not visited, perform a DFS or BFS traversal from that node:
+     - Increment the count by 1.
+     - Mark all the connected nodes as visited.
+5. Return the count, which represents the number of connected components.
+
+Time Complexity:
+The time complexity depends on the graph traversal algorithm used. Using DFS or BFS, the time complexity is O(V + E), where V is the number of nodes (vertices) and E is the number of edges. We visit each node and edge once.
+
+Space Complexity:
+The space complexity is O(V + E), where V is the number of nodes (vertices) and E is the number of edges. This is the space used for the adjacency list and the visited array.
 */
 
 class Solution {
 public:
     int countComponents(int n, vector<vector<int>>& edges) {
-        vector<int> parents;
-        vector<int> ranks;
-        for (int i = 0; i < n; i++) {
-            parents.push_back(i);
-            ranks.push_back(1);
+        vector<vector<int>> graph(n);   // Adjacency list representation of the graph
+        vector<int> visited(n, 0);      // Visited array to track the visited nodes
+        int count = 0;                  // Number of connected components
+        
+        // Build the graph
+        for (const auto& edge : edges) {
+            int node1 = edge[0];
+            int node2 = edge[1];
+            graph[node1].push_back(node2);
+            graph[node2].push_back(node1);
         }
         
-        int result = n;
-        for (int i = 0; i < edges.size(); i++) {
-            int n1 = edges[i][0];
-            int n2 = edges[i][1];
-            result -= doUnion(parents, ranks, n1, n2);
+        // Perform graph traversal to count the connected components
+        for (int i = 0; i < n; ++i) {
+            if (visited[i] == 0) {
+                ++count;
+                dfs(i, graph, visited);
+                // Or use bfs(i, graph, visited) for BFS traversal
+            }
         }
-        return result;
-    }
-private:
-    int doFind(vector<int>& parents, int n) {
-        int p = parents[n];
-        while (p != parents[p]) {
-            parents[p] = parents[parents[p]];
-            p = parents[p];
-        }
-        return p;
+        
+        return count;
     }
     
-    int doUnion(vector<int>& parents, vector<int>& ranks, int n1, int n2) {
-        int p1 = doFind(parents, n1);
-        int p2 = doFind(parents, n2);
-        if (p1 == p2) {
-            return 0;
-        }
+private:
+    void dfs(int node, vector<vector<int>>& graph, vector<int>& visited) {
+        visited[node] = 1;  // Mark the current node as visited
         
-        if (ranks[p1] > ranks[p2]) {
-            parents[p2] = p1;
-            ranks[p1] += ranks[p2];
-        } else {
-            parents[p1] = p2;
-            ranks[p2] += ranks[p1];
+        // Perform DFS traversal on the neighbors
+        for (int neighbor : graph[node]) {
+            if (visited[neighbor] == 0) {
+                dfs(neighbor, graph, visited);
+            }
         }
-        
-        return 1;
     }
 };

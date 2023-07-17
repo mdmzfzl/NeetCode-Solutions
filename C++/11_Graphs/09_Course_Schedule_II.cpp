@@ -1,99 +1,75 @@
 /*
-    All courses can be completed if there's no cycle, check for cycles
+Problem: LeetCode 210 - Course Schedule II
 
-    Time: O(V + E)
-    Space: O(V + E)
+Description:
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
+
+Intuition:
+This problem can be approached as a graph problem where the courses represent nodes and the prerequisites represent directed edges. To determine the ordering of courses, we can use the topological sorting algorithm. If there is a cycle in the graph, it means there is a dependency loop, and we cannot finish all the courses.
+
+Approach:
+1. Build an adjacency list representation of the graph using the prerequisites.
+2. Initialize an array to store the in-degree of each course. In-degree represents the number of prerequisites for each course.
+3. Create a queue and enqueue all the courses with an in-degree of 0.
+4. Perform a topological sorting:
+   - While the queue is not empty, dequeue a course:
+     - Decrement the in-degree of its neighbors by 1.
+     - If any neighbor has an in-degree of 0, enqueue it.
+     - Add the dequeued course to the result list.
+5. If all the courses have been visited, return the result list. Otherwise, return an empty array.
+
+Time Complexity:
+The time complexity is O(V + E), where V is the number of courses (nodes) and E is the number of prerequisites (edges). We visit each course and prerequisite once.
+
+Space Complexity:
+The space complexity is O(V + E), where V is the number of courses (nodes) and E is the number of prerequisites (edges). This is the space used for the adjacency list, the in-degree array, the queue, and the result list.
 */
 
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        unordered_map<int, vector<int>> m;
-        // build adjacency list of prereqs
-        for (int i = 0; i < prerequisites.size(); i++) {
-            m[prerequisites[i][0]].push_back(prerequisites[i][1]);
-        }
-        unordered_set<int> visit;
-        unordered_set<int> cycle;
+        vector<vector<int>> graph(numCourses);   // Adjacency list representation of the graph
+        vector<int> inDegree(numCourses, 0);      // In-degree of each course
+        vector<int> result;                       // Result list of the course order
         
-        vector<int> result;
-        for (int course = 0; course < numCourses; course++) {
-            if (!dfs(course, m, visit, cycle, result)) {
-                return {};
+        // Build the graph and calculate the in-degree of each course
+        for (const auto& prerequisite : prerequisites) {
+            int course = prerequisite[0];
+            int prerequisiteCourse = prerequisite[1];
+            graph[prerequisiteCourse].push_back(course);
+            ++inDegree[course];
+        }
+        
+        queue<int> q;   // Queue to store courses with in-degree 0
+        
+        // Enqueue courses with in-degree 0
+        for (int i = 0; i < numCourses; ++i) {
+            if (inDegree[i] == 0) {
+                q.push(i);
             }
         }
-        return result;
-    }
-private:
-    // a course has 3 possible states:
-    // visited -> course added to result
-    // visiting -> course not added to result, but added to cycle
-    // unvisited -> course not added to result or cycle
-    bool dfs(int course, unordered_map<int, vector<int>>& m, unordered_set<int>& visit,
-        unordered_set<int>& cycle, vector<int>& result) {
         
-        if (cycle.find(course) != cycle.end()) {
-            return false;
-        }
-        if (visit.find(course) != visit.end()) {
-            return true;
-        }
-        cycle.insert(course);
-        for (int i = 0; i < m[course].size(); i++) {
-            int nextCourse = m[course][i];
-            if (!dfs(nextCourse, m, visit, cycle, result)) {
-                return false;
-            }
-        }
-        cycle.erase(course);
-        visit.insert(course);
-        result.push_back(course);
-        return true;
-    }
-};
-
-/**
- * ? Approach - Topological sort using DFS
- * * 1. Initialize a 2D vector graph and result & inDegree vector, to help us in keeping track of whether a node is visited or not.
- * * 2. Start DFS from a course which has 0 prerequisites i.e the inDegree is 0 and mark it as visited.
- * * 3. After completion of a course, add the current course to our result. Since we added a course we will reduce the indegree for all the courses whose prerequisites was the current course.
- * * 4. If the indegree bof a course becomes 0, add them into DFS and start DFS call from that course.
- * * 5. Repeat the steps by calling dfs again for each course with indegree 0.
- * * 6. In the end, return result if it contains all numCourses i.e Check size of result. If size == numCourses, return result, else return []
-*/
-/*
-class Solution {
-public:
-    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        //Initializing a 2D graph, result and inDegree array
-        vector<vector<int>> graph(numCourses);
-        vector<int> result, inDegree(numCourses);
-        
-        // inDegree
-        for(auto& prereq : prerequisites)
-            graph[prereq[1]].push_back(prereq[0]),
-            inDegree[prereq[0]]++;
-        
-        // DFS call
-        function<void(int)> dfs = [&](int current) {
-            // Adding the current course into the result 
-            result.push_back(current);            
-            // Marking the current course that we added as visited
-            inDegree[current] = -1;                     
+        // Perform topological sorting
+        while (!q.empty()) {
+            int course = q.front();
+            q.pop();
+            result.push_back(course);   // Add the course to the result list
             
-            // If any next course has a indegree of 0 i.e. if it has no prerequisites requirement than make dfs call for that course
-            for(auto nextCourse : graph[current])          
-                if(--inDegree[nextCourse] == 0)     
-                    dfs(nextCourse);                
-        };
+            // Decrement the in-degree of neighbors and enqueue if their in-degree becomes 0
+            for (const auto& neighbor : graph[course]) {
+                if (--inDegree[neighbor] == 0) {
+                    q.push(neighbor);
+                }
+            }
+        }
         
-        // If the indegree becomes 0 of a course then again add them into DFS and start DFS call from that course .
-        for(int i = 0; i < numCourses; i++)
-            if(inDegree[i] == 0) dfs(i);                   
+        // If all the courses have been visited, return the result list
+        if (result.size() == numCourses) {
+            return result;
+        }
         
-        //In the end return `result` if it contains all `numCourses` else return  []
-        if(size(result) == numCourses) return result;
-        return {};
+        return {};   // Return an empty array if it is impossible to finish all courses
     }
 };
-*/

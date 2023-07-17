@@ -1,87 +1,95 @@
-/**
- * * Approach
- * 1. Create a visited grid to store the state of the cell (fresh, rotten, or empty).
- * 2. Initialize a queue to store the rotten oranges and count the number of fresh oranges.
- * 3. Check if there are no fresh oranges, return 0, or if there are no rotten oranges, return -1.
- * 4. Loop while the queue is not empty. 
- *      a. Store the size of the queue.
- *      b. Loop through the size of the queue. 
- *          i. Get the front cell of the queue.
- *          ii. Check all four directions of the cell to see if there are any fresh oranges.
- *          iii. If there is a fresh orange, change its state to rotten and decrement the count of fresh oranges, and push the cell into the queue.
- *      c. Increment the minutes.
- * 5. If there are no fresh oranges, return the minutes.
- * 6. If there are still fresh oranges, return -1.
-*/
-
 /*
-    BFS: rotten will contaminate neighbors first, then propagate out
+Problem: LeetCode 994 - Rotting Oranges
 
-    Time: O(m x n)
-    Space: O(m x n)
+Description:
+You are given an m x n grid where each cell can have one of three values:
+- 0 representing an empty cell.
+- 1 representing a fresh orange.
+- 2 representing a rotten orange.
+Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.
+
+Intuition:
+To find the minimum number of minutes needed to rot all the oranges, we can use a breadth-first search (BFS) approach. We start with the initial rotten oranges and spread the rot to their adjacent fresh oranges. We continue this process in rounds until no more fresh oranges can be infected. The number of rounds needed corresponds to the minimum minutes required.
+
+Approach:
+1. Initialize a queue to store the coordinates of the rotten oranges.
+2. Initialize variables to keep track of the number of fresh oranges and the number of minutes passed.
+3. Iterate through the grid to find the initial rotten oranges and count the number of fresh oranges.
+   - Enqueue the coordinates of the rotten oranges into the queue.
+4. Perform a BFS traversal:
+   - For each round, process all the rotten oranges in the queue.
+   - For each rotten orange, check its adjacent cells (up, down, left, right):
+     - If an adjacent cell is a fresh orange, mark it as rotten, decrease the count of fresh oranges, and enqueue its coordinates.
+   - Increment the number of minutes.
+5. After the BFS traversal, check if there are any remaining fresh oranges. If so, return -1.
+6. Return the number of minutes minus one since the last round is not counted as a minute needed to rot the oranges.
+
+Time Complexity:
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the grid. In the worst case, we may need to visit all the cells.
+
+Space Complexity:
+The space complexity is O(m * n), where m is the number of rows and n is the number of columns in the grid. This is the space used for the queue to store the coordinates of the rotten oranges.
 */
 
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
+        if (grid.empty()) {
+            return 0;
+        }
+        
         int m = grid.size();
         int n = grid[0].size();
+        int freshOranges = 0;
+        int minutes = 0;
         
-        // build initial set of rotten oranges
-        queue<pair<int, int>> q;
-        int fresh = 0;
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        queue<pair<int, int>> rottenOranges;  // Queue to store the coordinates of the rotten oranges
+        
+        // Find the initial rotten oranges and count the number of fresh oranges
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
                 if (grid[i][j] == 2) {
-                    q.push({i, j});
+                    rottenOranges.push({i, j});
                 } else if (grid[i][j] == 1) {
-                    fresh++;
+                    ++freshOranges;
                 }
             }
         }
-        // mark the start of a minute
-        q.push({-1, -1});
         
-        int result = -1;
-        
-        // start rotting process via BFS
-        while (!q.empty()) {
-            int row = q.front().first;
-            int col = q.front().second;
-            q.pop();
+        // Perform a BFS traversal
+        while (!rottenOranges.empty() && freshOranges > 0) {
+            int size = rottenOranges.size();
             
-            if (row == -1) {
-                // finish 1 minute of processing, mark next minute
-                result++;
-                if (!q.empty()) {
-                    q.push({-1, -1});
-                }
-            } else {
-                // rotten orange, contaminate its neighbors
-                for (int i = 0; i < dirs.size(); i++) {
-                    int x = row + dirs[i][0];
-                    int y = col + dirs[i][1];
+            for (int i = 0; i < size; ++i) {
+                int row = rottenOranges.front().first;
+                int col = rottenOranges.front().second;
+                rottenOranges.pop();
+                
+                // Check adjacent cells (up, down, left, right)
+                vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+                for (const auto& dir : directions) {
+                    int newRow = row + dir.first;
+                    int newCol = col + dir.second;
                     
-                    if (x < 0 || x >= m || y < 0 || y >= n) {
-                        continue;
-                    }
-                    
-                    if (grid[x][y] == 1) {
-                        // contaminate
-                        grid[x][y] = 2;
-                        fresh--;
-                        // this orange will now contaminate others
-                        q.push({x, y});
+                    if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && grid[newRow][newCol] == 1) {
+                        // Mark the adjacent fresh orange as rotten
+                        grid[newRow][newCol] = 2;
+                        rottenOranges.push({newRow, newCol});
+                        --freshOranges;
                     }
                 }
             }
+            
+            if (!rottenOranges.empty()) {
+                ++minutes;  // Increment the number of minutes
+            }
         }
         
-        if (fresh == 0) {
-            return result;
+        if (freshOranges > 0) {
+            return -1;  // There are remaining fresh oranges
         }
-        return -1;
+        
+        return minutes;
     }
-private:
-    vector<vector<int>> dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 };

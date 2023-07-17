@@ -1,42 +1,61 @@
 /*
-    Top & left pacific, bottom & right atlantic, determine spots that flow to both
+Problem: LeetCode 417 - Pacific Atlantic Water Flow
 
-    Instead go outside in, from oceans to spots where rain could flow from
-    Faster bc avoids repeated work: cells along a path can also reach that ocean
+Description:
+Given an m x n matrix of non-negative integers representing the height of each unit cell in a continent, the "Pacific ocean" touches the left and top edges of the matrix, and the "Atlantic ocean" touches the right and bottom edges.
+Water can only flow in four directions (up, down, left, or right) from a cell to its neighboring cells with equal or lower height.
+Find the list of grid coordinates where water can flow to both the Pacific and Atlantic oceans.
 
-    Time: O(m x n)
-    Space: O(m x n)
+Intuition:
+To find the cells where water can flow to both the Pacific and Atlantic oceans, we can use a depth-first search (DFS) or breadth-first search (BFS) approach. The idea is to start the traversal from the ocean borders (Pacific and Atlantic) and mark the cells that can be reached by water. Finally, we find the cells that are marked by both traversals.
+
+Approach:
+1. Create two boolean matrices `canReachPacific` and `canReachAtlantic`, initialized with false, to track the cells that can be reached by water from the respective oceans.
+2. Perform a DFS or BFS traversal from the ocean borders to mark the cells that can be reached by water:
+   - For the Pacific ocean:
+     - Start from the leftmost column and the topmost row. Traverse all neighboring cells with equal or lower heights and mark them as reachable by water from the Pacific ocean.
+   - For the Atlantic ocean:
+     - Start from the rightmost column and the bottommost row. Traverse all neighboring cells with equal or lower heights and mark them as reachable by water from the Atlantic ocean.
+3. Iterate through all the cells and find the cells that are marked as reachable by both oceans.
+4. Return the list of grid coordinates representing the cells that can flow to both oceans.
+
+Time Complexity:
+The time complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. We perform a DFS or BFS traversal on each cell once.
+
+Space Complexity:
+The space complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. This is the space used to store the boolean matrices and the recursion stack or the queue during the DFS or BFS traversal.
 */
 
 class Solution {
 public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        // row and col sizes
-        row = heights.size();
-        col = heights[0].size();
-        
-        // Vectors for checking if water can flow from the corners to inside
-        vector<vector<bool>> pacific(row, vector<bool>(col));
-        vector<vector<bool>> atlantic(row, vector<bool>(col));
-        
-        // Doing DFS for all the elements on edges of the island
-        for (int i = 0; i < row; i++) {
-            dfs(heights, pacific, i, 0);
-            dfs(heights, atlantic, i, col - 1);
-        }
-        
-        for (int j = 0; j < col; j++) {
-            dfs(heights, pacific, 0, j);
-            dfs(heights, atlantic, row - 1, j);
-        }
-        
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
         vector<vector<int>> result;
+        if (matrix.empty()) {
+            return result;
+        }
         
-        // If water can flow both to the atlantic and pacific
-        // add to the result vector
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (pacific[i][j] && atlantic[i][j]) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        
+        vector<vector<bool>> canReachPacific(m, vector<bool>(n, false));  // Matrix to track cells reachable from the Pacific ocean
+        vector<vector<bool>> canReachAtlantic(m, vector<bool>(n, false));  // Matrix to track cells reachable from the Atlantic ocean
+        
+        // Traverse the top and bottom borders to mark cells reachable from the Pacific and Atlantic oceans
+        for (int col = 0; col < n; ++col) {
+            dfs(matrix, 0, col, INT_MIN, canReachPacific);
+            dfs(matrix, m - 1, col, INT_MIN, canReachAtlantic);
+        }
+        
+        // Traverse the left and right borders to mark cells reachable from the Pacific and Atlantic oceans
+        for (int row = 0; row < m; ++row) {
+            dfs(matrix, row, 0, INT_MIN, canReachPacific);
+            dfs(matrix, row, n - 1, INT_MIN, canReachAtlantic);
+        }
+        
+        // Find the cells that are reachable from both the Pacific and Atlantic oceans
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (canReachPacific[i][j] && canReachAtlantic[i][j]) {
                     result.push_back({i, j});
                 }
             }
@@ -44,24 +63,23 @@ public:
         
         return result;
     }
-
+    
 private:
-    int row, col;
-    void dfs(vector<vector<int>>& heights, vector<vector<bool>>& visited, int i, int j) {
+    void dfs(const vector<vector<int>>& matrix, int row, int col, int prevHeight, vector<vector<bool>>& canReachOcean) {
+        int m = matrix.size();
+        int n = matrix[0].size();
         
-        visited[i][j] = true;
+        // Check if the current cell is out of bounds or has been visited already
+        if (row < 0 || row >= m || col < 0 || col >= n || matrix[row][col] < prevHeight || canReachOcean[row][col]) {
+            return;
+        }
         
-        if (i > 0 && !visited[i - 1][j] && heights[i - 1][j] >= heights[i][j]) {
-            dfs(heights, visited, i - 1, j);
-        }
-        if (i < row - 1 && !visited[i + 1][j] && heights[i + 1][j] >= heights[i][j]) {
-            dfs(heights, visited, i + 1, j);
-        }
-        if (j > 0 && !visited[i][j - 1] && heights[i][j - 1] >= heights[i][j]) {
-            dfs(heights, visited, i, j - 1);
-        }
-        if (j < col - 1 && !visited[i][j + 1] && heights[i][j + 1] >= heights[i][j]) {
-            dfs(heights, visited, i, j + 1);
-        }
+        canReachOcean[row][col] = true;  // Mark the current cell as reachable
+        
+        // Recursively traverse the neighboring cells
+        dfs(matrix, row - 1, col, matrix[row][col], canReachOcean);  // Up
+        dfs(matrix, row + 1, col, matrix[row][col], canReachOcean);  // Down
+        dfs(matrix, row, col - 1, matrix[row][col], canReachOcean);  // Left
+        dfs(matrix, row, col + 1, matrix[row][col], canReachOcean);  // Right
     }
 };

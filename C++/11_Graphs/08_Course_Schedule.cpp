@@ -1,117 +1,120 @@
-/**
- * ? Approach - Using Topological sort
- * * 1. First we build an adjacency matrix for the given graph.
- * * 2. We create an array indegree and indegree[i] is the number of edges approaching a node.
- * * 3. If no node has indegree 0, then a cycle exists and we can definitely not finish all the courses.
- * * 4. If there's a node with indegree 0, we start with the node, we move to it's child nodes and keep on decrementing their indegrees.
- * * 5. If in the end, we're able to reach all nodes, that means we can finish all the courses, so we return true.
- * Time Complexity: O(V + E)
- * Space Complexity: O(V)
+/*
+Problem: LeetCode 207 - Course Schedule
+
+Description:
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
+For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+Return true if you can finish all courses. Otherwise, return false.
+
+Intuition:
+This problem can be approached as a graph problem where the courses represent nodes and the prerequisites represent directed edges. To determine if it is possible to finish all courses, we need to check if there is a cycle in the graph. If there is a cycle, it means there is a dependency loop, and we cannot finish all the courses.
+
+Approach:
+1. Build an adjacency list representation of the graph using the prerequisites.
+2. Initialize a visited array to track the visited nodes during the DFS traversal.
+3. Iterate through each node in the graph and perform a DFS traversal to detect cycles:
+   - If the current node is being visited, it means there is a cycle, so return false.
+   - If the current node is not visited, perform a DFS traversal on its neighbors.
+4. If no cycles are detected after the DFS traversal, return true.
+
+Time Complexity:
+The time complexity is O(V + E), where V is the number of courses (nodes) and E is the number of prerequisites (edges). We visit each course and prerequisite once.
+
+Space Complexity:
+The space complexity is O(V + E), where V is the number of courses (nodes) and E is the number of prerequisites (edges). This is the space used for the adjacency list and the visited array.
 */
 
 class Solution {
-public: 
-    bool canFinish(int n, vector<vector<int>> &p) {
-        if (p.size() == 0) 
-            return true; //all courses independent
-
-        vector<int> indegree(n, 0); //counts the number of edges approaching a particular node
-        vector<vector<int>> graph(n); //adjacency matrix of the given graph
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses);  // Adjacency list representation of the graph
+        vector<int> visited(numCourses, 0);     // Visited array to track the visited nodes
+        
+        // Build the graph
+        for (const auto& prerequisite : prerequisites) {
+            int course = prerequisite[0];
+            int prerequisiteCourse = prerequisite[1];
+            graph[course].push_back(prerequisiteCourse);
+        }
+        
+        // Perform a DFS traversal to detect cycles
+        for (int course = 0; course < numCourses; ++course) {
+            if (!dfs(course, graph, visited)) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
     
-        for (auto & x: p) {
-            graph[x[1]].push_back(x[0]);
-            indegree[x[0]]++;
+private:
+    bool dfs(int course, vector<vector<int>>& graph, vector<int>& visited) {
+        // If the current course is being visited, it means there is a cycle
+        if (visited[course] == 1) {
+            return false;
         }
-
-        queue < int > q;
-        for (int i = 0; i < n; i++) {
-            if (indegree[i] == 0) q.push(i), indegree[i]--;
+        
+        // If the current course is already visited, return true
+        if (visited[course] == -1) {
+            return true;
         }
-        if (q.size() == 0) return false; //cycle exists if there is no node with indegree 0
+        
+        visited[course] = 1;  // Mark the current course as being visited
+        
+        // Perform a DFS traversal on the neighbors
+        for (const auto& neighbor : graph[course]) {
+            if (!dfs(neighbor, graph, visited)) {
+                return false;
+            }
+        }
+        
+        visited[course] = -1;  // Mark the current course as visited
+        
+        return true;
+    }
+};
 
-        int count = 0; //No. of nodes you're able to reach till the end
+// Topological sort
+// Same time and space complexity but this can be more efficient in terms of practical performance
+/*
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> graph(numCourses);   // Adjacency list representation of the graph
+        vector<int> inDegree(numCourses, 0);      // In-degree of each course
+        
+        // Build the graph and calculate the in-degree of each course
+        for (const auto& prerequisite : prerequisites) {
+            int course = prerequisite[0];
+            int prerequisiteCourse = prerequisite[1];
+            graph[prerequisiteCourse].push_back(course);
+            ++inDegree[course];
+        }
+        
+        queue<int> q;   // Queue to store courses with in-degree 0
+        
+        // Enqueue courses with in-degree 0
+        for (int i = 0; i < numCourses; ++i) {
+            if (inDegree[i] == 0) {
+                q.push(i);
+            }
+        }
+        
+        // Perform topological sorting
         while (!q.empty()) {
-            int size = q.size();
-
-            for (int i = 0; i < size; i++) {
-                int curr = q.front();
-                q.pop();
-                count++;
-                for (auto child: graph[curr]) {
-                    indegree[child]--; //decrement the indegree of the nodes until you've reached all nodes
-                    if (indegree[child] == 0) q.push(child);
+            int course = q.front();
+            q.pop();
+            --numCourses;    // Decrement the number of remaining courses
+            
+            // Decrement the in-degree of neighbors and enqueue if their in-degree becomes 0
+            for (const auto& neighbor : graph[course]) {
+                if (--inDegree[neighbor] == 0) {
+                    q.push(neighbor);
                 }
             }
         }
-        if (count == n) 
-            return true;
-        return false;
-    }
-};
-
-/*
-class Solution {
-public:
-  bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-    vector<vector<int>> adjacency(numCourses);
-    vector<bool> visited(numCourses);
-
-    for (vector<int>& p : prerequisites) {
-      if (p[0] == p[1]) return false;
-      adjacency[p[0]].push_back(p[1]);
-    }
-
-    for (int course = 0; course < numCourses; course++) {
-      if (!dfs(course, adjacency, visited)) return false;
-    }
-
-    return true;
-  }
-
-  bool dfs(int course, vector<vector<int>>& adjacency, vector<bool>& visited) {
-    if (visited[course]) return false;
-
-    visited[course] = true;
-
-    vector<int>& prerequisites = adjacency[course];
-
-    for (int i = prerequisites.size() - 1; i > -1; i--) {
-      if (!dfs(prerequisites[i], adjacency, visited)) return false;
-      prerequisites.pop_back();
-    }
-
-    visited[course] = false;
-
-    return true;
-  }
-};
-*/
-
-/*
-class Solution {
-public:
-    bool canFinish(int n, vector<vector<int>>& pre) {
-        vector<int> adj[n],ino(n,0);
-        for(auto p : pre) {
-            adj[p[0]].push_back(p[1]);
-            ino[p[1]]++;
-        }
-        vector<int> topo;
-        queue<int> q;
-        for(int i=0;i<n;i++) {
-            if(ino[i]==0) {
-                q.push(i);
-            } 
-        }
-        while(!q.empty()) {
-            int f = q.front();q.pop();
-            topo.push_back(f);
-            for(auto k : adj[f]) {
-                ino[k]--;
-                if(ino[k]==0) q.push(k);
-            }
-        }
-        return topo.size()==n;
+        
+        return numCourses == 0;
     }
 };
 */
