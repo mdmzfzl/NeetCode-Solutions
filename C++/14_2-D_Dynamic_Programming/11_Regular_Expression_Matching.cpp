@@ -46,25 +46,37 @@ public:
         
         // Create a 2D DP table and initialize base cases
         vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
+        
+        // Base case: an empty pattern matches an empty string
         dp[0][0] = true;
+        
+        // Initialize the first row for pattern p
         for (int j = 1; j <= n; j++) {
             if (p[j - 1] == '*') {
+                // If the current character in pattern is '*', it can match zero or more of the preceding element
+                // So, we check if it matches two characters back in the pattern (j - 2) for an empty string
                 dp[0][j] = dp[0][j - 2];
             }
         }
         
-        // Fill in the DP table
+        // Fill in the DP table row by row
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
+                    // If the current pattern character matches the current string character or it's a '.', 
+                    // we take the value from the diagonal (dp[i - 1][j - 1]) as the result for the current cell
                     dp[i][j] = dp[i - 1][j - 1];
                 } else if (p[j - 1] == '*') {
+                    // If the current pattern character is '*', it can match zero or more of the preceding element
+                    // So, we check if it matches two characters back in the pattern (j - 2) for an empty string
+                    // or if the current string character matches the preceding pattern character
+                    // (dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'))
                     dp[i][j] = dp[i][j - 2] || (dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'));
                 }
             }
         }
         
-        return dp[m][n];
+        return dp[m][n]; // The last cell (dp[m][n]) contains the result for the entire matching process
     }
 };
 
