@@ -23,7 +23,7 @@ The space complexity is O(1) for the result vector, and no additional data struc
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         if (intervals.empty()) return {};
 
@@ -32,12 +32,12 @@ public:
         sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
             return a[0] < b[0];
         });
-
         vector<vector<int>> result;
         result.push_back(intervals[0]);
 
         for (int i = 1; i < intervals.size(); i++) {
             vector<int>& lastInterval = result.back();
+
             if (intervals[i][0] > lastInterval[1]) {
                 // No overlap, add the current interval to the result
                 result.push_back(intervals[i]);

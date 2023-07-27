@@ -7,7 +7,7 @@ Each number in candidates may only be used once in the combination.
 Note: The solution set must not contain duplicate combinations.
 
 Intuition:
-To find all unique combinations that sum to the target, we can use a backtracking approach. The idea is to generate all possible combinations by trying out different candidate elements at each step. 
+To find all unique combinations that sum to the target, we can use a backtracking approach. The idea is to generate all possible combinations by trying out different candidate elements at each step.
 However, we need to skip duplicate combinations to avoid duplicates in the solution set.
 
 Approach:
@@ -34,7 +34,7 @@ The space complexity is O(n), where n is the size of the input array `candidates
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         vector<vector<int>> result;
         vector<int> combination;
@@ -42,23 +42,23 @@ public:
         backtrack(candidates, target, 0, combination, result);
         return result;
     }
-    
-private:
+
+  private:
     void backtrack(const vector<int>& candidates, int target, int index, vector<int>& combination, vector<vector<int>>& result) {
         if (target == 0) {
             result.push_back(combination);
             return;
         }
-        
+
         for (int i = index; i < candidates.size(); ++i) {
             if (candidates[i] > target) {
                 break;  // Skip remaining candidates since they will be larger and won't fit
             }
-            
+
             if (i > index && candidates[i] == candidates[i - 1]) {
                 continue;  // Skip duplicate candidates to avoid duplicate combinations
             }
-            
+
             combination.push_back(candidates[i]);  // Include the current candidate
             backtrack(candidates, target - candidates[i], i + 1, combination, result);  // Recursively call with updated target and next index
             combination.pop_back();  // Exclude the current candidate (backtrack)

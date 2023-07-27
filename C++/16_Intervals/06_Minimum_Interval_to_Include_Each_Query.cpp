@@ -32,25 +32,22 @@ The space complexity is O(n + m) to store the vectors of pairs and the priority 
 */
 
 class Solution {
-public:
+  public:
     vector<int> minInterval(vector<vector<int>>& intervals, vector<int>& queries) {
         vector<int> sortedQueries = queries;
-        
         // [size of interval, end of interval]
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         // {query -> size of interval}
         unordered_map<int, int> m;
-        
         // Also need only valid intervals, so sort by start time & sort queries
         sort(intervals.begin(), intervals.end());
         sort(sortedQueries.begin(), sortedQueries.end());
-        
         vector<int> result;
-        
         int i = 0;
+
         for (int j = 0; j < sortedQueries.size(); j++) {
             int query = sortedQueries[j];
-            
+
             // Push intervals into the min heap whose start time is less than or equal to the current query value
             while (i < intervals.size() && intervals[i][0] <= query) {
                 int left = intervals[i][0];
@@ -58,12 +55,12 @@ public:
                 pq.push({right - left + 1, right});
                 i++;
             }
-            
+
             // Pop the invalid intervals from the min heap (intervals whose end time is less than the current query value)
             while (!pq.empty() && pq.top().second < query) {
                 pq.pop();
             }
-            
+
             // Store the minimum interval size for the current query in the unordered_map
             if (!pq.empty()) {
                 m[query] = pq.top().first;
@@ -71,11 +68,12 @@ public:
                 m[query] = -1;
             }
         }
-        
+
         // Build the result vector using the unordered_map for each query
         for (int j = 0; j < queries.size(); j++) {
             result.push_back(m[queries[j]]);
         }
+
         return result;
     }
 };

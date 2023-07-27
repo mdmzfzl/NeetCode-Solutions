@@ -22,13 +22,13 @@ The space complexity is O(1), as we are reusing the input array for storing the 
 */
 
 class Solution {
-public:
+  public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
         vector<int> output(n, 1);
-
         // Calculate prefix product
         int prefix = 1;
+
         for (int i = 0; i < n; i++) {
             output[i] *= prefix;
             prefix *= nums[i];
@@ -36,6 +36,7 @@ public:
 
         // Calculate suffix product and multiply with prefix product stored in the output array
         int suffix = 1;
+
         for (int i = n - 1; i >= 0; i--) {
             output[i] *= suffix;
             suffix *= nums[i];
@@ -52,7 +53,7 @@ public:
 //         // First, compute the prefix product and store in res
 //         // res[i] = product of elements in nums from index 0, 1, ... to i - 1
 //         for (int i = 0; i < nums.size() - 1; i++) {
-//             res[i+1] = nums[i] * res[i]; 
+//             res[i+1] = nums[i] * res[i];
 //         }
 //         // Second, compute the final result
 //         int suffixProduct = 1;

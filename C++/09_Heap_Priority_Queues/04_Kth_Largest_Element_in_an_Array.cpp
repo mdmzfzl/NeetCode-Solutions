@@ -49,7 +49,7 @@ Space Complexity:
 */
 
 class Solution {
-public:
+  public:
     int quickselect(vector<int>& nums, int left, int right, int k) {
         // Base case: if the left and right indices are the same, return the element at that index
         if (left >= right) {
@@ -58,7 +58,6 @@ public:
 
         // Choose a pivot element
         int pivot = nums[left + (right - left) / 2];
-
         // Initialize two pointers, one from the left and one from the right
         int i = left - 1;
         int j = right + 1;
@@ -93,7 +92,6 @@ public:
         // Disable synchronization between C and C++ standard streams for faster I/O
         cin.tie(0);
         ios::sync_with_stdio(false);
-
         // Call the quickselect algorithm to find the kth largest element
         return quickselect(nums, 0, nums.size() - 1, k);
     }

@@ -26,16 +26,16 @@ The space complexity is O(min(m, n)), where m is the number of rows and n is the
 */
 
 class Solution {
-public:
+  public:
     int numIslands(vector<vector<char>>& grid) {
         if (grid.empty()) {
             return 0;
         }
-        
+
         int m = grid.size();  // Number of rows in the grid
         int n = grid[0].size();  // Number of columns in the grid
         int count = 0;  // Counter for the number of islands
-        
+
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (grid[i][j] == '1') {  // Found a new island
@@ -45,44 +45,42 @@ public:
                 }
             }
         }
-        
+
         return count;
     }
-    
-private:
+
+  private:
     void dfs(vector<vector<char>>& grid, int row, int col) {
         if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] != '1') {
             return;  // Out of bounds or already visited cell
         }
-        
+
         grid[row][col] = '0';  // Mark the current cell as visited
-        
         // Recursively call DFS for the neighboring cells (up, down, left, right)
         dfs(grid, row - 1, col);  // Up
         dfs(grid, row + 1, col);  // Down
         dfs(grid, row, col - 1);  // Left
         dfs(grid, row, col + 1);  // Right
     }
-    
+
     void bfs(vector<vector<char>>& grid, int row, int col) {
         int m = grid.size();  // Number of rows in the grid
         int n = grid[0].size();  // Number of columns in the grid
         queue<pair<int, int>> q;  // Queue to store cell positions
         q.push({row, col});  // Start with the current cell
         grid[row][col] = '0';  // Mark the current cell as visited
-        
         vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};  // Possible directions (up, down, left, right)
-        
+
         while (!q.empty()) {
             int r = q.front().first;  // Row of the current cell
             int c = q.front().second;  // Column of the current cell
             q.pop();
-            
+
             // Explore the neighboring cells
             for (const auto& dir : directions) {
                 int nr = r + dir.first;  // Row of the neighboring cell
                 int nc = c + dir.second;  // Column of the neighboring cell
-                
+
                 // Check if the neighboring cell is within the grid and is unvisited
                 if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] == '1') {
                     q.push({nr, nc});  // Add the neighboring cell to the queue

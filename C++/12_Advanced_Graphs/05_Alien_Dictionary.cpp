@@ -4,7 +4,7 @@ Problem: LeetCode 269 - Alien Dictionary
 Description:
 Given a list of words in the alien language, find the order of the characters in this language.
 
-The alien language is represented by a given dictionary, which will have words in an arbitrary order. 
+The alien language is represented by a given dictionary, which will have words in an arbitrary order.
 Each word consists of lowercase letters ('a' to 'z') and will not have duplicate characters.
 
 It is guaranteed that no two words in the dictionary have the same ordering of letters.
@@ -32,22 +32,19 @@ Topological Sorting:
 */
 
 class Solution {
-public:
+  public:
     string alienOrder(vector<string>& words) {
         // Initialize the graph and indegree array
         vector<vector<bool>> graph(26, vector<bool>(26, false));
         vector<int> indegree(26, -1);
-        
         // Step 1: Build the graph and calculate indegrees
         buildGraph(words, graph, indegree);
-        
         // Step 2: Perform topological sorting using DFS
         string result = topologicalSort(graph, indegree);
-        
         return result;
     }
-    
-private:
+
+  private:
     // Helper function to build the graph and calculate indegrees
     void buildGraph(vector<string>& words, vector<vector<bool>>& graph, vector<int>& indegree) {
         for (string& word : words) {
@@ -55,60 +52,62 @@ private:
                 indegree[c - 'a'] = 0;
             }
         }
-        
+
         for (int i = 1; i < words.size(); i++) {
             string prevWord = words[i - 1];
             string currWord = words[i];
             int len = min(prevWord.length(), currWord.length());
-            
+
             for (int j = 0; j < len; j++) {
                 char prevChar = prevWord[j];
                 char currChar = currWord[j];
-                
+
                 if (prevChar != currChar) {
                     if (!graph[prevChar - 'a'][currChar - 'a']) {
                         graph[prevChar - 'a'][currChar - 'a'] = true;
                         indegree[currChar - 'a']++;
                     }
+
                     break;
                 }
             }
         }
     }
-    
+
     // Helper function for topological sorting using DFS
     string topologicalSort(vector<vector<bool>>& graph, vector<int>& indegree) {
         string result = "";
         stack<char> st;
-        
+
         for (int i = 0; i < 26; i++) {
             if (indegree[i] == 0) {
                 st.push('a' + i);
             }
         }
-        
+
         while (!st.empty()) {
             char curr = st.top();
             st.pop();
             result += curr;
-            
+
             for (int i = 0; i < 26; i++) {
                 if (graph[curr - 'a'][i]) {
                     indegree[i]--;
+
                     if (indegree[i] == 0) {
                         st.push('a' + i);
                     }
                 }
             }
         }
-        
+
         // If there are still edges in the graph, it means there is a cycle
         for (int i = 0; i < 26; i++) {
             if (indegree[i] > 0) {
                 return "";
             }
         }
-        
+
         return result;
     }
 };
@@ -121,23 +120,23 @@ public:
     string alienOrder(vector<string>& words) {
         unordered_map<char, vector<char>> graph;
         unordered_map<char, int> indegree;
-        
+
         // Step 1: Build the graph and calculate indegrees
         for (string& word : words) {
             for (char c : word) {
                 indegree[c] = 0;
             }
         }
-        
+
         for (int i = 1; i < words.size(); i++) {
             string prevWord = words[i - 1];
             string currWord = words[i];
             int len = min(prevWord.length(), currWord.length());
-            
+
             for (int j = 0; j < len; j++) {
                 char prevChar = prevWord[j];
                 char currChar = currWord[j];
-                
+
                 if (prevChar != currChar) {
                     graph[prevChar].push_back(currChar);
                     indegree[currChar]++;
@@ -145,29 +144,29 @@ public:
                 }
             }
         }
-        
+
         // Step 2: Perform topological sorting using DFS
         string result;
         stack<char> st;
-        
+
         for (const auto& entry : indegree) {
             if (entry.second == 0) {
                 st.push(entry.first);
             }
         }
-        
+
         while (!st.empty()) {
             char curr = st.top();
             st.pop();
             result += curr;
-            
+
             for (char next : graph[curr]) {
                 if (--indegree[next] == 0) {
                     st.push(next);
                 }
             }
         }
-        
+
         return result.size() == indegree.size() ? result : "";
     }
 };

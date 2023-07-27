@@ -16,7 +16,7 @@ Approach:
    between the first i characters of text1 and the first j characters of text2.
 2. Initialize the first row and first column of dp to 0.
 3. Iterate through the characters of text1 and text2:
-   - If the current characters are equal, dp[i][j] = dp[i-1][j-1] + 1. 
+   - If the current characters are equal, dp[i][j] = dp[i-1][j-1] + 1.
      This means that we include the current character in the longest common subsequence.
    - Otherwise, dp[i][j] = max(dp[i-1][j], dp[i][j-1]).
      This means that we exclude one character either from text1 or text2 to find the longest common subsequence.
@@ -35,23 +35,22 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int longestCommonSubsequence(string text1, string text2) {
         int m = text1.length();
         int n = text2.length();
-        
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0)); // Length of longest common subsequence
-        
+
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                if (text1[i-1] == text2[j-1]) {
-                    dp[i][j] = dp[i-1][j-1] + 1; // Include the current character
+                if (text1[i - 1] == text2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1; // Include the current character
                 } else {
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]); // Exclude one character
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); // Exclude one character
                 }
             }
         }
-        
+
         return dp[m][n]; // Length of longest common subsequence
     }
 };

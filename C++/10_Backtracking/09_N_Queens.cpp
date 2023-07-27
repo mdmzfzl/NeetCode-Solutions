@@ -31,7 +31,7 @@ The space complexity is O(N), where N is the size of the chessboard (n x n). Thi
 */
 
 class Solution {
-public:
+  public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> result;
         vector<string> board(n, string(n, '.'));  // Initialize the board with empty spaces
@@ -39,38 +39,38 @@ public:
         backtrack(n, 0, board, queens, result);  // Call the backtrack function to generate all valid solutions
         return result;
     }
-    
-private:
+
+  private:
     // Backtracking function to generate all valid solutions
     void backtrack(int n, int row, vector<string>& board, vector<int>& queens, vector<vector<string>>& result) {
         if (row == n) {
             result.push_back(board);  // Add the current valid solution to the result
             return;
         }
-        
+
         for (int col = 0; col < n; ++col) {
             if (isValidPlacement(row, col, queens)) {
                 board[row][col] = 'Q';  // Place the queen at the current position
                 queens.push_back(col);  // Store the column index of the queen in the current row
-                
                 // Recursively call for the next row
                 backtrack(n, row + 1, board, queens, result);
-                
                 queens.pop_back();  // Remove the last queen from the current row
                 board[row][col] = '.';  // Restore the empty space
             }
         }
     }
-    
+
     // Function to check if placing a queen at the current position is valid
     bool isValidPlacement(int row, int col, const vector<int>& queens) {
         for (int i = 0; i < queens.size(); ++i) {
             int rowDiff = abs(row - i);
             int colDiff = abs(col - queens[i]);
+
             if (rowDiff == 0 || colDiff == 0 || rowDiff == colDiff) {
                 return false;  // Found a queen in the same row, same column, or diagonal
             }
         }
+
         return true;  // No conflicting queens found, placement is valid
     }
 };

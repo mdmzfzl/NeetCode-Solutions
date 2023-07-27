@@ -30,49 +30,49 @@ The space complexity is O(N * M^2), where N is the number of words in the wordLi
 */
 
 class Solution {
-public:
+  public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         unordered_set<string> wordSet(wordList.begin(), wordList.end());  // Convert wordList to a set for efficient lookup
-        
+
         if (wordSet.find(endWord) == wordSet.end()) {
             return 0;  // endWord is not in the wordList, no transformation sequence possible
         }
-        
+
         queue<string> q;
         q.push(beginWord);
         int distance = 1;
-        
+
         while (!q.empty()) {
             int levelSize = q.size();
-            
+
             for (int i = 0; i < levelSize; ++i) {
                 string currentWord = q.front();
                 q.pop();
-                
+
                 // Check each character position of the word and replace it with all possible alphabets
                 for (int j = 0; j < currentWord.length(); ++j) {
                     char originalChar = currentWord[j];
-                    
+
                     for (char c = 'a'; c <= 'z'; ++c) {
                         currentWord[j] = c;
-                        
+
                         if (currentWord == endWord) {
                             return distance + 1;  // Transformation sequence found, return the distance
                         }
-                        
+
                         if (wordSet.find(currentWord) != wordSet.end()) {
                             q.push(currentWord);  // Add the transformed word to the queue
                             wordSet.erase(currentWord);  // Remove the transformed word from the wordSet
                         }
                     }
-                    
+
                     currentWord[j] = originalChar;  // Revert back the character
                 }
             }
-            
+
             ++distance;  // Increment the distance for each level of BFS traversal
         }
-        
+
         return 0;  // No transformation sequence found
     }
 };

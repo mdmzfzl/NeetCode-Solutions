@@ -25,12 +25,12 @@ The space complexity is O(V + E), where V is the number of nodes (vertices) and 
 */
 
 class Solution {
-public:
+  public:
     int countComponents(int n, vector<vector<int>>& edges) {
         vector<vector<int>> graph(n);   // Adjacency list representation of the graph
         vector<int> visited(n, 0);      // Visited array to track the visited nodes
         int count = 0;                  // Number of connected components
-        
+
         // Build the graph
         for (const auto& edge : edges) {
             int node1 = edge[0];
@@ -38,7 +38,7 @@ public:
             graph[node1].push_back(node2);
             graph[node2].push_back(node1);
         }
-        
+
         // Perform graph traversal to count the connected components
         for (int i = 0; i < n; ++i) {
             if (visited[i] == 0) {
@@ -47,14 +47,14 @@ public:
                 // Or use bfs(i, graph, visited) for BFS traversal
             }
         }
-        
+
         return count;
     }
-    
-private:
+
+  private:
     void dfs(int node, vector<vector<int>>& graph, vector<int>& visited) {
         visited[node] = 1;  // Mark the current node as visited
-        
+
         // Perform DFS traversal on the neighbors
         for (int neighbor : graph[node]) {
             if (visited[neighbor] == 0) {

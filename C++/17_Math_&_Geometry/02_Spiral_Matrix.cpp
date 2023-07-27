@@ -25,10 +25,13 @@ The space complexity is O(1) as we are not using any additional space.
 */
 
 class Solution {
-public:
+  public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> result;
-        if (matrix.empty()) return result;
+
+        if (matrix.empty()) {
+            return result;
+        }
 
         int m = matrix.size();
         int n = matrix[0].size();
@@ -39,12 +42,14 @@ public:
             for (int i = left; i <= right; i++) {
                 result.push_back(matrix[top][i]);
             }
+
             top++;
 
             // Traverse from top to bottom along the right boundary
             for (int i = top; i <= bottom; i++) {
                 result.push_back(matrix[i][right]);
             }
+
             right--;
 
             // Traverse from right to left along the bottom boundary
@@ -52,6 +57,7 @@ public:
                 for (int i = right; i >= left; i--) {
                     result.push_back(matrix[bottom][i]);
                 }
+
                 bottom--;
             }
 
@@ -60,6 +66,7 @@ public:
                 for (int i = bottom; i >= top; i--) {
                     result.push_back(matrix[i][left]);
                 }
+
                 left++;
             }
         }

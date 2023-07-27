@@ -27,11 +27,11 @@ The space complexity is O(V + E), where V is the number of nodes (vertices) and 
 */
 
 class Solution {
-public:
+  public:
     bool validTree(int n, vector<vector<int>>& edges) {
         vector<vector<int>> graph(n);   // Adjacency list representation of the graph
         vector<int> visited(n, 0);      // Visited array to track the visited nodes
-        
+
         // Build the graph
         for (const auto& edge : edges) {
             int node1 = edge[0];
@@ -39,38 +39,37 @@ public:
             graph[node1].push_back(node2);
             graph[node2].push_back(node1);
         }
-        
+
         // Perform graph traversal to check for cycles and reachability
         if (!dfs(0, -1, graph, visited)) {
             return false;
         }
-        
+
         // Check if all nodes are visited
         for (int i = 0; i < n; ++i) {
             if (visited[i] == 0) {
                 return false;
             }
         }
-        
+
         return true;
     }
-    
-private:
+
+  private:
     bool dfs(int node, int parent, vector<vector<int>>& graph, vector<int>& visited) {
         visited[node] = 1;  // Mark the current node as visited
-        
+
         // Perform DFS traversal on the neighbors
         for (int neighbor : graph[node]) {
             if (visited[neighbor] == 0) {
                 if (!dfs(neighbor, node, graph, visited)) {
                     return false;
                 }
-            }
-            else if (neighbor != parent) {
+            } else if (neighbor != parent) {
                 return false;
             }
         }
-        
+
         return true;
     }
 };

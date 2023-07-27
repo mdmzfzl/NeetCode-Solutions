@@ -23,7 +23,7 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 */
 
 class Solution {
-public:
+  public:
     int findMin(vector<int>& nums) {
         int left = 0; // Initialize the left pointer to the start of the array
         int right = nums.size() - 1; // Initialize the right pointer to the end of the array
@@ -53,7 +53,7 @@ public:
 //     int findMin(vector<int>& nums) {
 //         int low = 0;
 //         int high = nums.size() - 1;
-        
+
 //         // not low <= high since not searching for target
 //         while (low < high) {
 //             int mid = low + (high - low) / 2;
@@ -69,7 +69,7 @@ public:
 //                 high = mid;
 //             }
 //         }
-        
+
 //         // low lands on correct value, never disqualified mins
 //         return nums[low];
 //     }

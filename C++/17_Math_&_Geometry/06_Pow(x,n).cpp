@@ -24,28 +24,32 @@ The space complexity is O(log n) as well due to the recursive function calls.
 */
 
 class Solution {
-public:
+  public:
     double myPow(double x, long long n) {
         // Base case: x^0 = 1
-        if (n == 0)
+        if (n == 0) {
             return 1.0;
-        
+        }
+
         // Base case: x^1 = x
-        if (n == 1)
+        if (n == 1) {
             return x;
-        
+        }
+
         // If n is negative, calculate 1/x^-n
-        if (n < 0)
+        if (n < 0) {
             return 1.0 / myPow(x, -n);
-        
+        }
+
         // Calculate x^n using recursion and divide-and-conquer
         double halfPow = myPow(x, n / 2);
         double result = halfPow * halfPow;
-        
+
         // If n is odd, multiply with x
-        if (n % 2 != 0)
+        if (n % 2 != 0) {
             result *= x;
-        
+        }
+
         return result;
     }
 };
@@ -59,25 +63,25 @@ public:
         // Handle negative exponent by inverting the base
         if (n < 0) {
             x = 1 / x;
-        } 
-        
+        }
+
         // Take the absolute value of the exponent to avoid issues with INT_MIN
         long num = labs(n);
-        
+
         // Initialize the result to 1
         double pow = 1;
-        
+
         // Exponentiation by squaring algorithm
         while (num) { // While the exponent is not zero
             if (num & 1) { // If the least significant bit of the exponent is 1
                 pow *= x; // Multiply the result by the current base value
             }
-            
+
             x *= x; // Square the base value for the next iteration
             num >>= 1; // Right-shift the exponent to remove the least significant bit
         }
-        
-        return pow; 
+
+        return pow;
     }
 };
 */

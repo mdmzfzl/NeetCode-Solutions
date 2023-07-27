@@ -24,15 +24,17 @@ The space complexity is O(n), as the hash map can potentially store all elements
 */
 
 class Solution {
-public:
+  public:
     vector<int> twoSum(vector<int>& nums, int target) {
         unordered_map<int, int> numMap;
 
         for (int i = 0; i < nums.size(); i++) {
             int complement = target - nums[i];
+
             if (numMap.count(complement) > 0) {
                 return {numMap[complement], i};
             }
+
             numMap[nums[i]] = i;
         }
 
@@ -51,8 +53,8 @@ public:
 //             // If we find the compliment
 //             if(M.find(compliment) != M.end()) {
 //                 // returning i and index of compliment
-//                 res.push_back(M[compliment]); 
-//                 res.push_back(i); 
+//                 res.push_back(M[compliment]);
+//                 res.push_back(i);
 //             }
 //             else // insert pair
 //                 M.insert( {nums[i], i});

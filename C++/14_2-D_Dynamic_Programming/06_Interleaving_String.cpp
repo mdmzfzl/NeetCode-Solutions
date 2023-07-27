@@ -30,18 +30,18 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     bool isInterleave(string s1, string s2, string s3) {
         int m = s1.length(), n = s2.length();
-        
+
         // If the lengths of s1 and s2 do not add up to the length of s3, it's not possible to form s3 by interleaving s1 and s2
-        if (m + n != s3.length())
+        if (m + n != s3.length()) {
             return false;
+        }
 
         // Create a 2D dp array to store the results of subproblems
         // dp[i][j] represents whether the first i characters of s1 and the first j characters of s2 can form the first i + j characters of s3
         vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
-        
         // Base case: Both s1 and s2 are empty, and the result is true
         dp[0][0] = true;
 
@@ -49,11 +49,14 @@ public:
         for (int i = 0; i <= m; i++) {
             for (int j = 0; j <= n; j++) {
                 // Check if the previous characters of s1 and s3 match
-                if (i > 0 && s1[i - 1] == s3[i + j - 1])
+                if (i > 0 && s1[i - 1] == s3[i + j - 1]) {
                     dp[i][j] = dp[i][j] || dp[i - 1][j];
+                }
+
                 // Check if the previous characters of s2 and s3 match
-                if (j > 0 && s2[j - 1] == s3[i + j - 1])
+                if (j > 0 && s2[j - 1] == s3[i + j - 1]) {
                     dp[i][j] = dp[i][j] || dp[i][j - 1];
+                }
             }
         }
 

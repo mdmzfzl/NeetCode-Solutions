@@ -34,9 +34,10 @@ struct ListNodeComparator {
 };
 
 class Solution {
-public:
+  public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         priority_queue<ListNode*, vector<ListNode*>, ListNodeComparator> pq;
+
         for (ListNode* head : lists) {
             if (head) {
                 pq.push(head);

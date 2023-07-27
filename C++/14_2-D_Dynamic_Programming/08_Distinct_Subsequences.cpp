@@ -3,7 +3,7 @@ Problem: LeetCode 115 - Distinct Subsequences
 
 Description:
 Given two strings s and t, return the number of distinct subsequences of s which equals t.
-A string's subsequence is a new string formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. 
+A string's subsequence is a new string formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters.
 It is guaranteed the answer fits on a 32-bit signed integer.
 
 Intuition:
@@ -32,19 +32,18 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int numDistinct(string s, string t) {
         int m = s.length();
         int n = t.length();
-        
         // Create a 2D DP array to store the number of distinct subsequences
         vector<vector<unsigned long long>> dp(m + 1, vector<unsigned long long>(n + 1, 0));
-        
+
         // Base case: there is one way to delete all characters from s to get an empty string (t = "")
         for (int i = 0; i <= m; i++) {
             dp[i][0] = 1;
         }
-        
+
         // Calculate the number of distinct subsequences
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
@@ -57,7 +56,7 @@ public:
                 }
             }
         }
-        
+
         // The value at dp[m][n] represents the number of distinct subsequences of t in s
         return dp[m][n];
     }

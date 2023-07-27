@@ -29,28 +29,28 @@ The space complexity is O(1) as the size of the hash map is constant (26 charact
 */
 
 class Solution {
-public:
+  public:
     vector<int> partitionLabels(string s) {
         unordered_map<char, int> lastOccurrence;
         vector<int> result;
         int start = 0, end = 0;
-        
+
         // Store the last occurrence of each character in the hash map
         for (int i = 0; i < s.length(); ++i) {
             lastOccurrence[s[i]] = i;
         }
-        
+
         // Iterate through the string and find the boundaries of each partition
         for (int i = 0; i < s.length(); ++i) {
             end = max(end, lastOccurrence[s[i]]);
-            
+
             // If we have reached the end of the current partition
             if (i == end) {
                 result.push_back(end - start + 1);
                 start = i + 1;
             }
         }
-        
+
         return result;
     }
 };

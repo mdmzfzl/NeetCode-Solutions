@@ -3,8 +3,8 @@ Problem: LeetCode 141 - Linked List Cycle
 
 Description:
 Given a linked list, determine if it has a cycle in it.
-To represent a cycle in the given linked list, we use an integer pos, 
-which represents the position (0-indexed) in the linked list where the tail connects to. 
+To represent a cycle in the given linked list, we use an integer pos,
+which represents the position (0-indexed) in the linked list where the tail connects to.
 If pos is -1, there is no cycle in the linked list.
 
 Intuition:
@@ -29,20 +29,20 @@ The space complexity is O(1) since we only use two pointers to detect the cycle.
 */
 
 class Solution {
-public:
+  public:
     bool hasCycle(ListNode* head) {
         ListNode* slow = head;
         ListNode* fast = head;
-        
+
         while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
-            
+
             if (slow == fast) {
                 return true;
             }
         }
-        
+
         return false;
     }
 };

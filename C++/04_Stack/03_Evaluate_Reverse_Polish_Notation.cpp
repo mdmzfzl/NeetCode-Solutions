@@ -24,7 +24,7 @@ The space complexity is O(n), where n is the number of tokens in the input list.
 */
 
 class Solution {
-public:
+  public:
     int evalRPN(std::vector<std::string>& tokens) {
         std::stack<int> stack;
 
@@ -34,7 +34,6 @@ public:
                 stack.pop();
                 int operand1 = stack.top();
                 stack.pop();
-
                 int result = performOperation(operand1, operand2, token);
                 stack.push(result);
             } else {
@@ -45,7 +44,7 @@ public:
         return stack.top();
     }
 
-private:
+  private:
     bool isOperator(const std::string& token) {
         return token == "+" || token == "-" || token == "*" || token == "/";
     }

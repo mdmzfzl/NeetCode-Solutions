@@ -23,7 +23,7 @@ The space complexity is O(1) since we are using a constant amount of extra space
 */
 
 class Solution {
-public:
+  public:
     ListNode* reverseList(ListNode* head) {
         ListNode* current = head;
         ListNode* previous = nullptr;

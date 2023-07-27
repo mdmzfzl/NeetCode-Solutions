@@ -22,11 +22,10 @@ The space complexity is O(1) as we are using the first row and first column of t
 */
 
 class Solution {
-public:
+  public:
     void setZeroes(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-
         bool firstRowZero = false;
         bool firstColZero = false;
 

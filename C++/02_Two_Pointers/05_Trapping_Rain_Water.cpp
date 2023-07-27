@@ -5,8 +5,8 @@ Description:
 Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
 
 Intuition:
-To determine the amount of water that can be trapped, we need to consider the height of each bar and the width between the bars. 
-The amount of water trapped at a particular position depends on the minimum height of the tallest bars on its left and right sides minus the elevation. 
+To determine the amount of water that can be trapped, we need to consider the height of each bar and the width between the bars.
+The amount of water trapped at a particular position depends on the minimum height of the tallest bars on its left and right sides minus the elevation.
 
 Approach:
 1. Initialize two pointers, `left` pointing to the start of the array (index 0), and `right` pointing to the end of the array.
@@ -33,7 +33,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 */
 
 class Solution {
-public:
+  public:
     int trap(vector<int>& height) {
         int left = 0, right = height.size() - 1;
         int leftMax = 0, rightMax = 0;
@@ -56,8 +56,8 @@ public:
 };
 
 /*
-Solution - 
-The key is we can calculate the amount of water at any given index by 
+Solution -
+The key is we can calculate the amount of water at any given index by
 -> taking minimum of (max of left nd right so far)
 -> that will give us water in between them
 -> then subtract the height to remove the elevation
@@ -90,7 +90,7 @@ and then just calculate, min(maxleft, maxright) - height[i];
 //             int temp = min(leftMax[i], rightMax[i]) - height[i];
 //             if(temp < 0)
 //                 temp = 0;
-            
+
 //             result += temp;
 //         }
 //         return result;
@@ -101,7 +101,7 @@ and then just calculate, min(maxleft, maxright) - height[i];
 class Solution {
 public:
     int trap(vector<int>& H) {
-        
+
         int n = H.size(), mx = 0, ans = 0;
         int idx = max_element(begin(H), end(H)) - begin(H);
 

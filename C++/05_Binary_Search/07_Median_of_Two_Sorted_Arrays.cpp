@@ -28,7 +28,7 @@ The space complexity is O(1) as the approach uses only a constant amount of extr
 */
 
 class Solution {
-public:
+  public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         // Ensure nums1 is the smaller array
         if (nums1.size() > nums2.size()) {
@@ -53,8 +53,8 @@ public:
                 right = i - 1;
             } else {
                 // Found the correct partitioning
-
                 int maxLeft = 0;
+
                 if (i == 0) {
                     maxLeft = nums2[j - 1];
                 } else if (j == 0) {
@@ -68,6 +68,7 @@ public:
                 }
 
                 int minRight = 0;
+
                 if (i == m) {
                     minRight = nums2[j];
                 } else if (j == n) {
@@ -87,16 +88,16 @@ public:
 
 // class Solution {
 // public:
-//     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {      
+//     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 //         if (nums1.size() > nums2.size()) {
 //             // if nums1 is bigger we swap it because we're gonna assume nums1 is smaller
 //             return findMedianSortedArrays(nums2, nums1);
 //         }
-        
+
 //         int m = nums1.size();
 //         int n = nums2.size();
 
-//         double Answer = 0.0; 
+//         double Answer = 0.0;
 
 //         // Now that nums1 is smaller
 //         int L = 0, R = m;
@@ -110,7 +111,7 @@ public:
 //             int b = (MidM < m) ? nums1[MidM] : INT_MAX;
 //             int c = (MidN > 0) ? nums2[MidN - 1] : INT_MIN;
 //             int d = (MidN < n) ? nums2[MidN] : INT_MAX;
-            
+
 
 //             // If both halves are correctly sorted
 //             if(a <= d && c <= b) {
@@ -119,7 +120,7 @@ public:
 //                     Answer = (max(a, c) + min(b, d)) / 2.0;
 //                 else
 //                     Answer = max(a, c);
-                
+
 //                 break;
 //             }
 
@@ -127,7 +128,7 @@ public:
 //             else if(d < a)
 //                 R = MidM - 1;
 //             // If not correctly sorted and right side of nums1 is lesser than left part of nums2 i.e. c < b
-//             else 
+//             else
 //                 L = MidM + 1;
 //         }
 

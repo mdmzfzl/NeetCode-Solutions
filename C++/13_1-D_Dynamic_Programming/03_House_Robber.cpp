@@ -2,8 +2,8 @@
 Problem: LeetCode 198 - House Robber
 
 Description:
-You are a professional robber planning to rob houses along a street. 
-Each house has a certain amount of money stashed, and the only constraint stopping you from robbing each of them is that adjacent houses have a security system connected, 
+You are a professional robber planning to rob houses along a street.
+Each house has a certain amount of money stashed, and the only constraint stopping you from robbing each of them is that adjacent houses have a security system connected,
 and it will automatically contact the police if two adjacent houses are broken into on the same night.
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
@@ -19,7 +19,7 @@ Approach:
    - dp[i] represents the maximum amount of money that can be robbed up to the ith house.
 2. Set the base cases: dp[0] = 0 and dp[1] = nums[0].
 3. Iterate from 2 to n:
-   - Compute dp[i] by taking the maximum amount between the current house's value plus the amount robbed from the house two steps back and the amount robbed from the previous house: 
+   - Compute dp[i] by taking the maximum amount between the current house's value plus the amount robbed from the house two steps back and the amount robbed from the previous house:
      dp[i] = max(dp[i-2] + nums[i-1], dp[i-1]).
 4. Return dp[n], which represents the maximum amount of money that can be robbed.
 
@@ -36,18 +36,17 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int rob(vector<int>& nums) {
         int n = nums.size();
         vector<int> dp(n + 1);
-        
         dp[0] = 0;
         dp[1] = nums[0];
-        
+
         for (int i = 2; i <= n; ++i) {
             dp[i] = max(dp[i - 2] + nums[i - 1], dp[i - 1]);
         }
-        
+
         return dp[n];
     }
 };
@@ -60,13 +59,13 @@ public:
 //         int prev = 0;
 //         int curr = 0;
 //         int next = 0;
-        
+
 //         for (int i = 0; i < nums.size(); i++) {
 //             next = max(prev + nums[i], curr);
 //             prev = curr;
 //             curr = next;
 //         }
-        
+
 //         return curr;
 //     }
 // };

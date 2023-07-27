@@ -22,7 +22,7 @@ The space complexity is O(m + n) to store the intermediate products.
 */
 
 class Solution {
-public:
+  public:
     string multiply(string num1, string num2) {
         int m = num1.size();
         int n = num2.size();

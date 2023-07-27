@@ -28,12 +28,12 @@ The space complexity is O(V + E), where V is the number of courses (nodes) and E
 */
 
 class Solution {
-public:
+  public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         vector<vector<int>> graph(numCourses);   // Adjacency list representation of the graph
         vector<int> inDegree(numCourses, 0);      // In-degree of each course
         vector<int> result;                       // Result list of the course order
-        
+
         // Build the graph and calculate the in-degree of each course
         for (const auto& prerequisite : prerequisites) {
             int course = prerequisite[0];
@@ -41,22 +41,22 @@ public:
             graph[prerequisiteCourse].push_back(course);
             ++inDegree[course];
         }
-        
+
         queue<int> q;   // Queue to store courses with in-degree 0
-        
+
         // Enqueue courses with in-degree 0
         for (int i = 0; i < numCourses; ++i) {
             if (inDegree[i] == 0) {
                 q.push(i);
             }
         }
-        
+
         // Perform topological sorting
         while (!q.empty()) {
             int course = q.front();
             q.pop();
             result.push_back(course);   // Add the course to the result list
-            
+
             // Decrement the in-degree of neighbors and enqueue if their in-degree becomes 0
             for (const auto& neighbor : graph[course]) {
                 if (--inDegree[neighbor] == 0) {
@@ -64,12 +64,12 @@ public:
                 }
             }
         }
-        
+
         // If all the courses have been visited, return the result list
         if (result.size() == numCourses) {
             return result;
         }
-        
+
         return {};   // Return an empty array if it is impossible to finish all courses
     }
 };

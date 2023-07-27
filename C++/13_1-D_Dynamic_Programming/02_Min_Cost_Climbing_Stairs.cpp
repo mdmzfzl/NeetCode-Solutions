@@ -17,7 +17,7 @@ Approach:
    - dp[i] represents the minimum cost to reach the ith step.
 2. Set the base cases: dp[0] = cost[0] and dp[1] = cost[1].
 3. Iterate from 2 to n:
-   - Compute dp[i] by taking the minimum cost between the (i-1)th step and the (i-2)th step, plus the cost of the current step: 
+   - Compute dp[i] by taking the minimum cost between the (i-1)th step and the (i-2)th step, plus the cost of the current step:
      dp[i] = min(dp[i-1], dp[i-2]) + cost[i].
 4. Return the minimum cost between reaching the (n-1)th step and the nth step: min(dp[n-1], dp[n]).
 
@@ -34,18 +34,17 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int minCostClimbingStairs(vector<int>& cost) {
         int n = cost.size();
         vector<int> dp(n + 1);
-        
         dp[0] = cost[0];
         dp[1] = cost[1];
-        
+
         for (int i = 2; i <= n; ++i) {
             dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];
         }
-        
+
         return min(dp[n - 1], dp[n]);
     }
 };

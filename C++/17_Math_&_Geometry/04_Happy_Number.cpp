@@ -24,28 +24,28 @@ The space complexity is O(log n) as we use a set to keep track of the numbers en
 */
 
 class Solution {
-public:
+  public:
     bool isHappy(int n) {
         unordered_set<int> seen;
-        
+
         while (n != 1 && seen.find(n) == seen.end()) {
             seen.insert(n);
             n = getNextNumber(n);
         }
-        
+
         return n == 1;
     }
-    
-private:
+
+  private:
     int getNextNumber(int n) {
         int sum = 0;
-        
+
         while (n > 0) {
             int digit = n % 10;
             sum += digit * digit;
             n /= 10;
         }
-        
+
         return sum;
     }
 };

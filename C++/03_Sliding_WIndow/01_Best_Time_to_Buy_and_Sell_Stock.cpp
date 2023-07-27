@@ -7,7 +7,7 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
 Intuition:
-To maximize the profit, we need to find the largest difference between any two prices, where the lower price comes before the higher price. 
+To maximize the profit, we need to find the largest difference between any two prices, where the lower price comes before the higher price.
 We can track the minimum price seen so far and calculate the maximum profit by subtracting the minimum price from each subsequent price.
 
 Approach:
@@ -27,7 +27,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 */
 
 class Solution {
-public:
+  public:
     int maxProfit(vector<int>& prices) {
         int minPrice = INT_MAX;
         int maxProfit = 0;
@@ -52,7 +52,7 @@ public:
 //         for(int i = 0; i < prices.size(); i++) {
 //             if(prices[i] < leastSoFar)
 //                 leastSoFar = prices[i];
-            
+
 //             profit = prices[i] - leastSoFar;
 //             if(result < profit)
 //                 result = profit;
@@ -74,7 +74,7 @@ public:
         for(int x: prices) {
             int diff = x - minbuy;
             profit = max(profit, diff);
-            minbuy = min(minbuy, x); 
+            minbuy = min(minbuy, x);
         }
 
         return profit;

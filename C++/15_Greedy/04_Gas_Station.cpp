@@ -34,31 +34,31 @@ The space complexity is O(1), as we use only a constant amount of extra space fo
 */
 
 class Solution {
-public:
+  public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
         int totalGas = 0; // Total gas available
         int totalCost = 0; // Total cost of traveling the circuit
         int currentGas = 0; // Current gas in the tank
         int start = 0; // Starting gas station index
-        
+
         for (int i = 0; i < gas.size(); i++) {
             int diff = gas[i] - cost[i]; // Difference between gas available and cost to travel to the next station
             totalGas += gas[i];
             totalCost += cost[i];
             currentGas += diff;
-            
+
             // If currentGas becomes negative, reset it to 0 and update start to be the next station index
             if (currentGas < 0) {
                 currentGas = 0;
                 start = i + 1;
             }
         }
-        
+
         // If totalGas is greater than or equal to totalCost, there exists a valid starting gas station
         if (totalGas >= totalCost) {
             return start;
         }
-        
+
         // If totalGas is less than totalCost, there is no valid starting gas station
         return -1;
     }

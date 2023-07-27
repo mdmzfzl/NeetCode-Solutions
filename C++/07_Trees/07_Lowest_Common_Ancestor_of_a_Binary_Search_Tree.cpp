@@ -34,7 +34,7 @@ The space complexity is O(h), where h is the height of the BST. This is the spac
  */
 
 class Solution {
-public:
+  public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         // If both `p` and `q` are smaller than the current node, recurse on the left subtree
         if (p->val < root->val && q->val < root->val) {

@@ -3,7 +3,7 @@ Problem: LeetCode 213 - House Robber II
 
 Description:
 You are a professional robber planning to rob houses along a street.
-Each house has a certain amount of money stashed, and the only constraint stopping you from robbing each of them is that adjacent houses have a security system connected, 
+Each house has a certain amount of money stashed, and the only constraint stopping you from robbing each of them is that adjacent houses have a security system connected,
 and it will automatically contact the police if two adjacent houses are broken into on the same night.
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 Note: This problem is a variation of LeetCode 198 - House Robber with a circular street, where the first and last houses are adjacent.
@@ -37,30 +37,29 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int rob(vector<int>& nums) {
         int n = nums.size();
-        
+
         if (n == 1) {
             return nums[0];
         }
-        
+
         int max1 = robRange(nums, 0, n - 2);
         int max2 = robRange(nums, 1, n - 1);
-        
         return max(max1, max2);
     }
-    
+
     int robRange(vector<int>& nums, int start, int end) {
         int prev1 = 0;
         int prev2 = 0;
-        
+
         for (int i = start; i <= end; ++i) {
             int current = max(prev1 + nums[i], prev2);
             prev1 = prev2;
             prev2 = current;
         }
-        
+
         return prev2;
     }
 };

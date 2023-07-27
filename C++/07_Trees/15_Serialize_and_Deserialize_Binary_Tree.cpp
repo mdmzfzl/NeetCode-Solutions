@@ -13,7 +13,7 @@ Approach:
    - When encountering a non-empty node, append its value to the serialized string, followed by a separator.
    - When encountering a nullptr or empty node, append a special character (e.g., 'N') to represent it.
    - Use a separator character (e.g., ',') to separate the values in the serialized string.
-   
+
 2. Deserialization:
    - Split the serialized string by the separator to obtain an array of values.
    - Create a queue to hold the values from the array.
@@ -26,7 +26,7 @@ Approach:
      - Return the current node.
    - Call the helper function with the queue to build the binary tree.
    - Return the root of the binary tree.
-   
+
 Time Complexity:
 - Serialization: O(n), where n is the number of nodes in the binary tree. We perform a pre-order traversal to serialize the tree.
 - Deserialization: O(n), where n is the number of nodes in the binary tree. We iterate through the serialized string to deserialize and reconstruct the tree.
@@ -48,7 +48,7 @@ Space Complexity:
  */
 
 class Codec {
-public:
+  public:
     string serialize(TreeNode* root) {
         string serialized = "";
         PreOrder(root, serialized);
@@ -61,13 +61,14 @@ public:
         return MakeTree(Q);
     }
 
-private:
+  private:
     void PreOrder(TreeNode* root, string& str) {
         if (!root) {
             str.push_back('N');
             str.push_back(',');
             return;
         }
+
         str += to_string(root->val) + ",";
         PreOrder(root->left, str);
         PreOrder(root->right, str);
@@ -77,14 +78,14 @@ private:
         string S = Q.front();
         Q.pop();
 
-        if (S == "N")
+        if (S == "N") {
             return nullptr;
+        }
 
         // stoi -> string to integer
         TreeNode* root = new TreeNode(stoi(S));
         root->left = MakeTree(Q);
         root->right = MakeTree(Q);
-
         return root;
     }
 
@@ -129,7 +130,7 @@ private:
 //         return MakeTree(Q);
 //     }
 
-// private: 
+// private:
 //     // Function to make string using pre-order traversal
 //     void PreOrder(TreeNode* root, string &str) {
 //         // If root is null then insert N into string
@@ -147,12 +148,12 @@ private:
 //     }
 
 //     TreeNode* MakeTree(queue<string> &Q) {
-//         string S = Q.front(); 
+//         string S = Q.front();
 //         Q.pop();
 
 //         if(S == "N")
 //             return NULL;
-        
+
 //         // stoi -> string to integer
 //         TreeNode* root = new TreeNode(stoi(S));
 

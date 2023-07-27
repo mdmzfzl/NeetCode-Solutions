@@ -5,8 +5,8 @@ Description:
 Given two integers a and b, return the sum of the two integers without using the '+' and '-' operators.
 
 Intuition:
-We can use bitwise operations to perform addition without using the '+' operator. 
-The bitwise XOR operation (^) will give us the sum of two integers without considering the carry. 
+We can use bitwise operations to perform addition without using the '+' operator.
+The bitwise XOR operation (^) will give us the sum of two integers without considering the carry.
 To handle the carry, we can use the bitwise AND operation (&) and left shift (<<) to calculate the carry.
 
 Approach:
@@ -25,13 +25,14 @@ The space complexity is O(1) as we use only a constant amount of extra space.
 */
 
 class Solution {
-public:
+  public:
     int getSum(int a, int b) {
         while (b != 0) {
             int carry = (unsigned int)(a & b) << 1; // Use unsigned int to handle negative numbers
             a = a ^ b;
             b = carry;
         }
+
         return a;
     }
 };

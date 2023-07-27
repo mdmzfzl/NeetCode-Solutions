@@ -2,7 +2,7 @@
 Problem: LeetCode 678 - Valid Parenthesis String
 
 Description:
-Given a string s containing only three types of characters: '(', ')', and '*', 
+Given a string s containing only three types of characters: '(', ')', and '*',
 return true if s is valid.
 
 The string is valid if the following conditions are met:
@@ -44,10 +44,10 @@ The space complexity is O(n), as in the worst case, both stacks can have all ele
 */
 
 class Solution {
-public:
+  public:
     bool checkValidString(string s) {
         stack<int> leftStack, starStack;
-        
+
         for (int i = 0; i < s.length(); ++i) {
             if (s[i] == '(') {
                 leftStack.push(i);
@@ -63,15 +63,16 @@ public:
                 }
             }
         }
-        
+
         while (!leftStack.empty() && !starStack.empty()) {
             if (leftStack.top() > starStack.top()) {
                 return false;
             }
+
             leftStack.pop();
             starStack.pop();
         }
-        
+
         return leftStack.empty();
     }
 };

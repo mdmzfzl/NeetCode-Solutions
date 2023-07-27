@@ -28,7 +28,7 @@ The space complexity is O(n), where n is the length of the input string `s`. In 
 */
 
 class Solution {
-public:
+  public:
     bool isValid(string s) {
         stack<char> bracketStack;
 
@@ -37,6 +37,7 @@ public:
                 if (bracketStack.empty() || !isMatchingPair(bracketStack.top(), ch)) {
                     return false;
                 }
+
                 bracketStack.pop();
             } else {
                 bracketStack.push(ch);
@@ -46,7 +47,7 @@ public:
         return bracketStack.empty();
     }
 
-private:
+  private:
     bool isMatchingPair(char opening, char closing) {
         return (opening == '(' && closing == ')') ||
                (opening == '{' && closing == '}') ||

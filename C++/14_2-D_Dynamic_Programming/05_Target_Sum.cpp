@@ -32,22 +32,21 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int findTargetSumWays(vector<int>& nums, int target) {
         // Calculate the sum of all elements in the nums array
         int sum = accumulate(nums.begin(), nums.end(), 0);
-        
+
         // If the target is greater than the sum or less than the negative sum, it's not possible to achieve the target
-        if (target > sum || target < -sum)
+        if (target > sum || target < -sum) {
             return 0;
-        
+        }
+
         int n = nums.size();
-        
         // Create a 2D dp array to store the number of ways to achieve each possible sum
         // dp[i][j] represents the number of ways to achieve sum j using the first i elements of the nums array
         // We use 2 * sum + 1 as the column size to handle negative numbers
         vector<vector<int>> dp(n + 1, vector<int>(2 * sum + 1, 0));
-        
         // Base case: There's one way to achieve a sum of 0 using an empty subset (no elements)
         dp[0][sum] = 1;
 

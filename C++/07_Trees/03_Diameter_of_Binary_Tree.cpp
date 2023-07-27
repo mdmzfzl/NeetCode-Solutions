@@ -47,14 +47,14 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
 // };
 
 class Solution {
-public:
+  public:
     int diameterOfBinaryTree(TreeNode* root) {
         int diameter = 0;
         maxDepth(root, diameter);
         return diameter;
     }
 
-private:
+  private:
     // Depth First Search
     int maxDepth(TreeNode* root, int& diameter) {
         // Base case: if the root is null, return 0
@@ -65,10 +65,8 @@ private:
         // Recursively calculate the maximum depth of the left and right subtrees
         int leftDepth = maxDepth(root->left, diameter);
         int rightDepth = maxDepth(root->right, diameter);
-
         // Update the diameter by taking the maximum of the current diameter and the sum of the maximum depths of the left and right subtrees
         diameter = max(diameter, leftDepth + rightDepth);
-
         // Return the maximum depth among the left and right subtrees, plus 1 for the current level
         return max(leftDepth, rightDepth) + 1;
     }

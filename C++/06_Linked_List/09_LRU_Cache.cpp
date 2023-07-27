@@ -24,7 +24,7 @@ Approach:
    If it doesn't, we add a new node to the front of the doubly linked list and update the hashmap.
    If the number of keys exceeds the capacity, we remove the least recently used node from the back of the doubly linked list
    and also remove the corresponding key from the hashmap.
-   
+
 Time Complexity:
 Both get and put operations have a time complexity of O(1) since all operations (insert, delete, and access) on the doubly linked list are constant time.
 
@@ -33,14 +33,14 @@ The space complexity is O(capacity) to store the key-value pairs and doubly link
 */
 
 class LRUCache {
-private:
+  private:
     // Structure to represent a doubly linked list node
     struct ListNode {
         int key;         // The key of the cache item
         int value;       // The value of the cache item
         ListNode* prev;  // Pointer to the previous node in the list
         ListNode* next;  // Pointer to the next node in the list
-        
+
         ListNode(int k, int v) : key(k), value(v), prev(nullptr), next(nullptr) {}
     };
 
@@ -63,7 +63,7 @@ private:
         node->next->prev = node->prev;
     }
 
-public:
+  public:
     // Constructor to initialize the LRUCache with a given capacity
     LRUCache(int capacity) {
         this->capacity = capacity;
@@ -81,6 +81,7 @@ public:
             addToFront(node);
             return node->value;   // Return the value associated with the key
         }
+
         return -1; // Key not found, return -1
     }
 
@@ -98,15 +99,17 @@ public:
                 hashmap.erase(removedNode->key); // Remove the key from the hashmap
                 delete removedNode; // Free the memory of the removed node
             }
+
             ListNode* newNode = new ListNode(key, value); // Create a new node for the key-value pair
             addToFront(newNode); // Add the new node to the front of the list
             hashmap[key] = newNode; // Add the key-node mapping to the hashmap
         }
     }
-    
+
     // Destructor to properly deallocate memory for the ListNode objects
     ~LRUCache() {
         ListNode* curr = head;
+
         while (curr) {
             ListNode* temp = curr;
             curr = curr->next;

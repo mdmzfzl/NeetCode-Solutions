@@ -37,12 +37,12 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
  */
 
 class Solution {
-public:
+  public:
     bool isBalanced(TreeNode* root) {
         return checkHeight(root) != -1;
     }
 
-private:
+  private:
     int checkHeight(TreeNode* root) {
         // Base case: if the root is null, return 0
         if (root == nullptr) {

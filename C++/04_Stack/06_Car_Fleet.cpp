@@ -32,11 +32,11 @@ Space Complexity:
 The space complexity is O(n), where n is the number of cars. We store the positions and speeds of the cars in a vector of pairs.
 */
 
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 using namespace std;
 
 class Solution {
-public:
+  public:
     int carFleet(int target, vector<int>& position, vector<int>& speed) {
         int n = position.size();
         vector<pair<int, int>> cars;
@@ -50,7 +50,6 @@ public:
         sort(cars.begin(), cars.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
             return a.first > b.first;
         });
-
         int count = 0;
         double prevTime = 0.0;
 

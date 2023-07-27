@@ -31,11 +31,11 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
         vector<int> dp(n, 1);  // Length of longest increasing subsequence ending at each index
-        
+
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 if (nums[i] > nums[j]) {
@@ -43,7 +43,7 @@ public:
                 }
             }
         }
-        
+
         return *max_element(dp.begin(), dp.end());
     }
 };

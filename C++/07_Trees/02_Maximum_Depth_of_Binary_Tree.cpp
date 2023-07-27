@@ -34,7 +34,7 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
  */
 
 class Solution {
-public:
+  public:
     int maxDepth(TreeNode* root) {
         // Base case: if the root is null, return 0
         if (root == nullptr) {
@@ -44,7 +44,6 @@ public:
         // Recursively calculate the maximum depth of the left and right subtrees
         int leftDepth = maxDepth(root->left);
         int rightDepth = maxDepth(root->right);
-
         // Return the maximum depth among the left and right subtrees, plus 1 for the current level
         return max(leftDepth, rightDepth) + 1;
     }
@@ -56,7 +55,7 @@ public:
 //     int maxDepth(TreeNode* root) {
 //         if(!root)
 //             return 0;
-        
-//         return 1 + max(maxDepth(root->left), maxDepth(root->right)); 
+
+//         return 1 + max(maxDepth(root->left), maxDepth(root->right));
 //     }
 // };

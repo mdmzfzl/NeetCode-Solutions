@@ -6,7 +6,7 @@ Given an array nums of n integers, find all unique triplets in the array which g
 The solution set must not contain duplicate triplets.
 
 Intuition:
-To find unique triplets that sum up to zero, we can leverage the two-pointer approach. By sorting the array and iterating through each element, we can convert the problem into finding two numbers that sum up to the negation of the current element. 
+To find unique triplets that sum up to zero, we can leverage the two-pointer approach. By sorting the array and iterating through each element, we can convert the problem into finding two numbers that sum up to the negation of the current element.
 
 Approach:
 1. Sort the input array `nums` in non-decreasing order.
@@ -30,11 +30,10 @@ The space complexity is O(1) as we are using a constant amount of space to store
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> result;
         int n = nums.size();
-
         sort(nums.begin(), nums.end());
 
         for (int i = 0; i < n - 2; i++) {
@@ -55,6 +54,7 @@ public:
                     while (left < right && nums[left] == nums[left - 1]) {
                         left++;
                     }
+
                     while (left < right && nums[right] == nums[right + 1]) {
                         right--;
                     }

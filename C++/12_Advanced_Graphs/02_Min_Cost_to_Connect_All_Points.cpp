@@ -2,21 +2,21 @@
 Problem: LeetCode 1584 - Min Cost to Connect All Points
 
 Description:
-You are given an array points representing integer coordinates of some points on a 2D-plane, 
-where points[i] = [xi, yi]. The cost of connecting two points [xi, yi] and [xj, yj] is the 
+You are given an array points representing integer coordinates of some points on a 2D-plane,
+where points[i] = [xi, yi]. The cost of connecting two points [xi, yi] and [xj, yj] is the
 manhattan distance between them: |xi - xj| + |yi - yj|, where |val| denotes the absolute value of val.
-Return the minimum cost to make all points connected. All points are connected if there is exactly 
+Return the minimum cost to make all points connected. All points are connected if there is exactly
 one simple path between any two points.
 
 Intuition:
-To connect all the points, we need to find the minimum spanning tree (MST) of the graph. The MST is a 
+To connect all the points, we need to find the minimum spanning tree (MST) of the graph. The MST is a
 subgraph that connects all vertices together with the minimum possible total edge weight.
 
 Approach:
-1. Create a graph representation using an adjacency matrix, where graph[i][j] represents the manhattan 
+1. Create a graph representation using an adjacency matrix, where graph[i][j] represents the manhattan
    distance between point i and point j.
 2. Use Prim's algorithm to find the MST of the graph.
-3. Start the MST with an arbitrary point (let's say the first point), and keep adding the nearest 
+3. Start the MST with an arbitrary point (let's say the first point), and keep adding the nearest
    non-visited point until all points are visited.
 4. Calculate the total cost of the MST, which will be the minimum cost to connect all points.
 
@@ -24,35 +24,36 @@ Time Complexity:
 The time complexity of Prim's algorithm is O(V^2), where V is the number of vertices (points).
 
 Space Complexity:
-The space complexity is O(V^2), where V is the number of vertices (points). We use an adjacency matrix 
+The space complexity is O(V^2), where V is the number of vertices (points). We use an adjacency matrix
 to represent the graph.
 */
 
 class Solution {
-public:
+  public:
     int minCostConnectPoints(vector<vector<int>>& points) {
         int n = points.size();
         vector<bool> visited(n, false);
         vector<int> minCost(n, INT_MAX);
-        
         // A lambda function to calculate the Manhattan distance between two points
         auto getManhattanDistance = [](const vector<int>& p1, const vector<int>& p2) {
             return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1]);
         };
-        
         int result = 0;
         minCost[0] = 0; // Start with the first point
+
         for (int i = 0; i < n; ++i) {
             int u = -1;
+
             // Find the nearest non-visited point
             for (int j = 0; j < n; ++j) {
                 if (!visited[j] && (u == -1 || minCost[j] < minCost[u])) {
                     u = j;
                 }
             }
+
             visited[u] = true;
             result += minCost[u];
-            
+
             // Update the minimum cost for the remaining points
             for (int j = 0; j < n; ++j) {
                 if (!visited[j]) {
@@ -60,6 +61,7 @@ public:
                 }
             }
         }
+
         return result;
     }
 };

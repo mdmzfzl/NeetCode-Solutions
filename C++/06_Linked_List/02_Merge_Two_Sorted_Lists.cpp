@@ -2,13 +2,13 @@
 Problem: LeetCode 21 - Merge Two Sorted Lists
 
 Description:
-Merge two sorted linked lists and return it as a new sorted list. 
+Merge two sorted linked lists and return it as a new sorted list.
 The new list should be made by splicing together the nodes of the first two lists.
 
 Intuition:
-To merge two sorted linked lists, we can use a simple approach where we compare the values of the nodes at the head of both lists. 
+To merge two sorted linked lists, we can use a simple approach where we compare the values of the nodes at the head of both lists.
 We create a dummy node to serve as the new merged list's head. Then, we compare the values of the current nodes from both lists.
-Whichever node's value is smaller, we append that node to the merged list and move its pointer to the next node. 
+Whichever node's value is smaller, we append that node to the merged list and move its pointer to the next node.
 We repeat this process until we have traversed both input lists completely.
 
 Approach:
@@ -29,7 +29,7 @@ The space complexity is O(1), as we only use a constant amount of extra space fo
 */
 
 class Solution {
-public:
+  public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode* dummy = new ListNode(0);
         ListNode* curr = dummy;
@@ -42,6 +42,7 @@ public:
                 curr->next = l2;
                 l2 = l2->next;
             }
+
             curr = curr->next;
         }
 

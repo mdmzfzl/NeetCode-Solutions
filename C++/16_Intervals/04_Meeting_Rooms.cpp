@@ -21,9 +21,11 @@ The space complexity is O(1) as we only use a constant amount of additional spac
 */
 
 class Solution {
-public:
+  public:
     bool canAttendMeetings(vector<vector<int>>& intervals) {
-        if (intervals.empty()) return true;
+        if (intervals.empty()) {
+            return true;
+        }
 
         // Sort the intervals based on their start times in ascending order
         sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {

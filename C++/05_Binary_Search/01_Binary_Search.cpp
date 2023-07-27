@@ -24,7 +24,7 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 */
 
 class Solution {
-public:
+  public:
     int search(vector<int>& nums, int target) {
         int left = 0;
         int right = nums.size() - 1;

@@ -2,12 +2,12 @@
 Problem: LeetCode 703 - Kth Largest Element in a Stream
 
 Description:
-Design a class to find the kth largest element in a stream. 
+Design a class to find the kth largest element in a stream.
 Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
 Intuition:
-To find the kth largest element in a stream efficiently, we can use a min-heap of size k. 
-As new elements are added to the stream, we compare them with the root of the min-heap. 
+To find the kth largest element in a stream efficiently, we can use a min-heap of size k.
+As new elements are added to the stream, we compare them with the root of the min-heap.
 If the new element is larger than the root, we replace the root with the new element and perform heapify to maintain the heap property.
 
 Approach:
@@ -33,22 +33,24 @@ Space Complexity:
 - The space complexity is O(k), as we store the k largest elements in the min-heap.
 */
 
-// static int pr = []() { 
-//     std::ios::sync_with_stdio(false); 
-//     cin.tie(NULL);  
-//     return 0; 
+// static int pr = []() {
+//     std::ios::sync_with_stdio(false);
+//     cin.tie(NULL);
+//     return 0;
 // }();
 
 class KthLargest {
-private:
+  private:
     int k;
     priority_queue<int, vector<int>, greater<int>> minHeap; // Min-heap to store the k largest elements
 
-public:
+  public:
     KthLargest(int k, vector<int>& nums) {
         this->k = k;
+
         for (int num : nums) {
             minHeap.push(num);
+
             // removing elements till k elements remain
             if (minHeap.size() > k) {
                 minHeap.pop();
@@ -58,9 +60,11 @@ public:
 
     int add(int val) {
         minHeap.push(val);
+
         if (minHeap.size() > k) {
             minHeap.pop();
         }
+
         return minHeap.top();
     }
 };

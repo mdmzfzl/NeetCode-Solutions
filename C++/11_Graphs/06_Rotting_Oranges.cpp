@@ -33,19 +33,18 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 */
 
 class Solution {
-public:
+  public:
     int orangesRotting(vector<vector<int>>& grid) {
         if (grid.empty()) {
             return 0;
         }
-        
+
         int m = grid.size();
         int n = grid[0].size();
         int freshOranges = 0;
         int minutes = 0;
-        
         queue<pair<int, int>> rottenOranges;  // Queue to store the coordinates of the rotten oranges
-        
+
         // Find the initial rotten oranges and count the number of fresh oranges
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
@@ -56,22 +55,22 @@ public:
                 }
             }
         }
-        
+
         // Perform a BFS traversal
         while (!rottenOranges.empty() && freshOranges > 0) {
             int size = rottenOranges.size();
-            
+
             for (int i = 0; i < size; ++i) {
                 int row = rottenOranges.front().first;
                 int col = rottenOranges.front().second;
                 rottenOranges.pop();
-                
                 // Check adjacent cells (up, down, left, right)
                 vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
                 for (const auto& dir : directions) {
                     int newRow = row + dir.first;
                     int newCol = col + dir.second;
-                    
+
                     if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && grid[newRow][newCol] == 1) {
                         // Mark the adjacent fresh orange as rotten
                         grid[newRow][newCol] = 2;
@@ -80,16 +79,16 @@ public:
                     }
                 }
             }
-            
+
             if (!rottenOranges.empty()) {
                 ++minutes;  // Increment the number of minutes
             }
         }
-        
+
         if (freshOranges > 0) {
             return -1;  // There are remaining fresh oranges
         }
-        
+
         return minutes;
     }
 };

@@ -31,7 +31,7 @@ The space complexity is O(1), as we use only a constant amount of extra space th
 */
 
 class Solution {
-public:
+  public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode* dummy = new ListNode(0);
         dummy->next = head;
@@ -51,14 +51,11 @@ public:
             }
 
             ListNode* nextGroup = groupEnd->next;
-
             // Reverse the current k-group
             reverseGroup(groupStart, groupEnd);
-
             // Connect reversed k-group to the previous group
             current->next = groupEnd;
             groupStart->next = nextGroup;
-
             // Move the current pointer to the next group
             current = groupStart;
         }
@@ -66,7 +63,7 @@ public:
         return dummy->next;
     }
 
-private:
+  private:
     // Helper function to reverse a k-group of nodes
     void reverseGroup(ListNode* head, ListNode* tail) {
         ListNode* prev = nullptr;

@@ -6,7 +6,7 @@ Given an array nums of distinct integers, return all possible permutations of th
 You can return the answer in any order.
 
 Intuition:
-To find all possible permutations of a given array, we can use a backtracking approach. The idea is to generate all possible arrangements by trying out different elements at each step. 
+To find all possible permutations of a given array, we can use a backtracking approach. The idea is to generate all possible arrangements by trying out different elements at each step.
 We explore each element, including it in the current permutation if it hasn't been used before. By backtracking, we generate all valid permutations.
 
 Approach:
@@ -31,7 +31,7 @@ The space complexity is O(N), where N is the size of the input array `nums`. Thi
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> result;
         vector<int> permutation;
@@ -39,19 +39,19 @@ public:
         backtrack(nums, used, permutation, result);
         return result;
     }
-    
-private:
+
+  private:
     void backtrack(const vector<int>& nums, vector<bool>& used, vector<int>& permutation, vector<vector<int>>& result) {
         if (permutation.size() == nums.size()) {
             result.push_back(permutation);
             return;
         }
-        
+
         for (int i = 0; i < nums.size(); ++i) {
             if (used[i]) {
                 continue;  // Skip already used elements
             }
-            
+
             used[i] = true;  // Mark the current element as used
             permutation.push_back(nums[i]);  // Include the current element in the permutation
             backtrack(nums, used, permutation, result);  // Recursively call with updated permutation
@@ -81,7 +81,7 @@ private:
 //             swap(nums[i], nums[start]);
 //             backtrack(result, nums, start+1);
 //             // Once we come out of the recursion, we backtrack by swapping back the elements at indices start and i. This is necessary to restore the original order of elements and avoid duplicates.
-//             swap(nums[i], nums[start]);           
+//             swap(nums[i], nums[start]);
 //         }
 //     }
 // };

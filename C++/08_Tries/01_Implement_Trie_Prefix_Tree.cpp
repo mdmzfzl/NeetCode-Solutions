@@ -42,12 +42,13 @@ Space Complexity:
 */
 
 class TrieNode {
-public:
+  public:
     bool isWord;
     TrieNode* children[26];
-    
+
     TrieNode() {
         isWord = false;
+
         for (int i = 0; i < 26; i++) {
             children[i] = nullptr;
         }
@@ -55,47 +56,59 @@ public:
 };
 
 class Trie {
-private:
+  private:
     TrieNode* root;
-    
-public:
+
+  public:
     Trie() {
         root = new TrieNode();
     }
-    
+
     void insert(string word) {
         TrieNode* node = root;
+
         for (char c : word) {
             int index = c - 'a';
+
             if (!node->children[index]) {
                 node->children[index] = new TrieNode();
             }
+
             node = node->children[index];
         }
+
         node->isWord = true;
     }
-    
+
     bool search(string word) {
         TrieNode* node = root;
+
         for (char c : word) {
             int index = c - 'a';
+
             if (!node->children[index]) {
                 return false;
             }
+
             node = node->children[index];
         }
+
         return node->isWord;
     }
-    
+
     bool startsWith(string prefix) {
         TrieNode* node = root;
+
         for (char c : prefix) {
             int index = c - 'a';
+
             if (!node->children[index]) {
                 return false;
             }
+
             node = node->children[index];
         }
+
         return true;
     }
 };
@@ -113,7 +126,7 @@ private:
         //Constructor to initialise values
         TrieNode() {
             isWord = false;
-            for (auto &c : child) 
+            for (auto &c : child)
                 c = nullptr;
         }
     };
@@ -124,7 +137,7 @@ public:
     Trie() {
         root = new TrieNode();
     }
-    
+
     void insert(string word) {
         // Pointer to point the character we insert in trie
         TrieNode* current = root;
@@ -133,13 +146,13 @@ public:
             int index = i - 'a';
             if(current->child[index] == NULL)
                 current->child[index] = new TrieNode();
-            
+
             // Pointing current to the character we just inserted
             current = current->child[index];
         }
         current->isWord = true;
     }
-    
+
     bool search(string word) {
         TrieNode *current = root;
         for(auto i: word) {
@@ -149,12 +162,12 @@ public:
             if(current->child[index] == NULL)
                 return false;
 
-            current = current->child[index]; 
+            current = current->child[index];
         }
         // Will return true if it's a word
         return current->isWord;
     }
-    
+
     // Same code as search but here we dont need to check if its a word
     bool startsWith(string prefix) {
         TrieNode *current = root;
@@ -165,7 +178,7 @@ public:
             if(current->child[index] == NULL)
                 return false;
 
-            current = current->child[index]; 
+            current = current->child[index];
         }
         return true;
     }

@@ -24,22 +24,22 @@ The space complexity is O(1) as we are performing the rotation in-place without 
 */
 
 class Solution {
-public:
+  public:
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
-        
+
         // Step 1: Transpose the matrix
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n; j++) {
                 swap(matrix[i][j], matrix[j][i]);
             }
         }
-        
+
         // Step 2: Reverse each row of the transposed matrix
         for (int i = 0; i < n; i++) {
             int start = 0;
             int end = n - 1;
-            
+
             while (start < end) {
                 swap(matrix[i][start], matrix[i][end]);
                 start++;

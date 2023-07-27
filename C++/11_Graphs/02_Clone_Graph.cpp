@@ -27,31 +27,31 @@ The space complexity is O(V), where V is the number of nodes (vertices) in the g
 */
 
 class Solution {
-public:
+  public:
     Node* cloneGraph(Node* node) {
         if (node == nullptr) {
             return nullptr;
         }
-        
+
         unordered_map<Node*, Node*> nodeMap;  // Map to store copies of nodes
         return cloneNode(node, nodeMap);
     }
-    
-private:
+
+  private:
     Node* cloneNode(Node* node, unordered_map<Node*, Node*>& nodeMap) {
         // If a copy of the current node already exists, return it
         if (nodeMap.find(node) != nodeMap.end()) {
             return nodeMap[node];
         }
-        
+
         Node* newNode = new Node(node->val);  // Create a new copy of the current node
         nodeMap[node] = newNode;  // Add the current node to the map
-        
+
         // Recursively clone the neighbors of the current node
         for (Node* neighbor : node->neighbors) {
             newNode->neighbors.push_back(cloneNode(neighbor, nodeMap));
         }
-        
+
         return newNode;
     }
 };

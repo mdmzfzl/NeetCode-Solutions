@@ -28,31 +28,33 @@ The space complexity is O(n), as we store the frequencies of elements in the has
 */
 
 class Solution {
-public:
+  public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         int n = nums.size();
-        
         unordered_map<int, int> m;
+
         for (int i = 0; i < n; i++) {
             m[nums[i]]++;
         }
-        
+
         vector<vector<int>> buckets(n + 1);
+
         for (auto it = m.begin(); it != m.end(); it++) {
             buckets[it->second].push_back(it->first);
         }
-        
+
         vector<int> result;
-        
+
         for (int i = n; i >= 0; i--) {
             if (result.size() >= k) {
                 break;
             }
+
             if (!buckets[i].empty()) {
                 result.insert(result.end(), buckets[i].begin(), buckets[i].end());
             }
         }
-        
+
         return result;
     }
 };
@@ -124,16 +126,16 @@ public:
 
         for(int i = 0; i < nums.size(); i++) {
             // it reaches end of map if it didn't find the element
-            if(M.find(nums[i]) == M.end()) 
+            if(M.find(nums[i]) == M.end())
                 M[nums[i]] = 1;
             else
                 M[nums[i]]++;
         }
-        
+
         for(auto i : M) {
             arr.push_back( make_pair(i.second, i.first) );
         }
-        
+
         sort(arr.rbegin(), arr.rend());
 
         for(int i = 0; i < k; i++) {

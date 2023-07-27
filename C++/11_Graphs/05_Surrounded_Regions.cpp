@@ -6,7 +6,7 @@ Given an m x n matrix board containing 'X' and 'O', capture all regions that are
 A region is captured by flipping all 'O's into 'X's in that surrounded region.
 
 Intuition:
-To capture the surrounded regions, we need to identify the regions that are connected to the borders of the matrix. The regions that are not connected to the borders are the ones that need to be captured. 
+To capture the surrounded regions, we need to identify the regions that are connected to the borders of the matrix. The regions that are not connected to the borders are the ones that need to be captured.
 We can use a depth-first search (DFS) approach to identify and mark the regions that are connected to the borders, and then iterate through the matrix to capture the remaining regions.
 
 Approach:
@@ -25,27 +25,27 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 */
 
 class Solution {
-public:
+  public:
     void solve(vector<vector<char>>& board) {
         if (board.empty()) {
             return;
         }
-        
+
         int m = board.size();
         int n = board[0].size();
-        
+
         // Traverse the top and bottom borders
         for (int col = 0; col < n; ++col) {
             dfs(board, 0, col);
             dfs(board, m - 1, col);
         }
-        
+
         // Traverse the left and right borders
         for (int row = 0; row < m; ++row) {
             dfs(board, row, 0);
             dfs(board, row, n - 1);
         }
-        
+
         // Capture the remaining regions
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
@@ -57,18 +57,17 @@ public:
             }
         }
     }
-    
-private:
+
+  private:
     void dfs(vector<vector<char>>& board, int row, int col) {
         int m = board.size();
         int n = board[0].size();
-        
+
         if (row < 0 || row >= m || col < 0 || col >= n || board[row][col] != 'O') {
             return;
         }
-        
+
         board[row][col] = '#';  // Mark the cell as connected to the border
-        
         dfs(board, row - 1, col);  // Up
         dfs(board, row + 1, col);  // Down
         dfs(board, row, col - 1);  // Left

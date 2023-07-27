@@ -19,7 +19,7 @@ The space complexity is O(n), as the hash set can potentially store all elements
 */
 
 class Solution {
-public:
+  public:
     bool containsDuplicate(vector<int>& nums) {
         unordered_set<int> seen;
 
@@ -27,6 +27,7 @@ public:
             if (seen.count(num) > 0) {
                 return true; // Duplicate found
             }
+
             seen.insert(num);
         }
 
@@ -49,9 +50,9 @@ public:
 
         // Sort using LSD Radix
         Sort(reinterpret_cast<unsigned int*>(&(nums[0])), count);
-        
+
         --count;
-        for(size_t i = 0; i < count; ++i) 
+        for(size_t i = 0; i < count; ++i)
             if(nums[i] == nums[i+1])
                 return true;
 

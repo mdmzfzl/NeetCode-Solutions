@@ -2,13 +2,13 @@
 Problem: LeetCode 11 - Container With Most Water
 
 Description:
-Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). 
-n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0). 
+Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai).
+n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
 Find two lines, which, together with the x-axis, forms a container, such that the container contains the most water.
 
 Intuition:
-To maximize the container's area, we need to find two vertical lines that enclose the most water. 
-The area is determined by the height of the shorter line and the distance between the lines. 
+To maximize the container's area, we need to find two vertical lines that enclose the most water.
+The area is determined by the height of the shorter line and the distance between the lines.
 We can start with the maximum width and move the pointers inward, always choosing the next height that is greater than the current one.
 
 Approach:
@@ -21,7 +21,7 @@ Approach:
 4. Return `maxArea`, which represents the maximum container area.
 
 Time Complexity:
-The time complexity is O(n), where n is the number of elements in the input array. 
+The time complexity is O(n), where n is the number of elements in the input array.
 We only need to iterate through the array once from both ends.
 
 Space Complexity:
@@ -29,7 +29,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 */
 
 class Solution {
-public:
+  public:
     int maxArea(vector<int>& height) {
         int left = 0, right = height.size() - 1;
         int maxArea = 0;
@@ -38,10 +38,11 @@ public:
             int currArea = min(height[left], height[right]) * (right - left);
             maxArea = max(maxArea, currArea);
 
-            if (height[left] < height[right])
+            if (height[left] < height[right]) {
                 left++;
-            else
+            } else {
                 right--;
+            }
         }
 
         return maxArea;
@@ -59,10 +60,10 @@ public:
 //             currResult = min(height[leftPointer], height[rightPointer]) * dist;
 
 //             result = max(result, currResult);
-            
-//             if( height[leftPointer] > height[rightPointer] ) 
+
+//             if( height[leftPointer] > height[rightPointer] )
 //                 rightPointer--;
-//             else 
+//             else
 //                 leftPointer++;
 //         }
 //         return result;
@@ -78,9 +79,9 @@ public:
         while (i < j) {
             int h = min(height[i], height[j]);
             water = max(water, (j - i) * h);
-            while(height[i] <= h && i < j) 
+            while(height[i] <= h && i < j)
                 i++;
-            while(height[j] <= h && i < j) 
+            while(height[j] <= h && i < j)
                 j--;
         }
         return water;

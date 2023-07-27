@@ -28,7 +28,7 @@ The space complexity is O(1) as we are using only a constant amount of extra spa
 */
 
 class Solution {
-public:
+  public:
     bool mergeTriplets(vector<vector<int>>& triplets, vector<int>& target) {
         int x = 0, y = 0, z = 0;
 

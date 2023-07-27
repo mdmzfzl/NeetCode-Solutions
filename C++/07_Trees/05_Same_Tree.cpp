@@ -37,7 +37,7 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
  */
 
 class Solution {
-public:
+  public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
         // Base case: if both roots are null, return true
         if (p == nullptr && q == nullptr) {

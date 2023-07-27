@@ -35,7 +35,7 @@ The space complexity is O(1) as we are using a fixed-size vector `count` to stor
 */
 
 class Solution {
-public:
+  public:
     int characterReplacement(string s, int k) {
         vector<int> count(26, 0);
         int left = 0, right = 0;
@@ -60,7 +60,7 @@ public:
 
 
 //   -> Have two pointer L and R start at 0
-//   -> Keep incrementing R until size of the window(R-L) minus 
+//   -> Keep incrementing R until size of the window(R-L) minus
 //      the most frequent element is lesser than or equal to k.
 //      i.e Window Size - Most Frequent Element count <= K
 //      Because K is the max number of changes we can make
@@ -71,17 +71,17 @@ public:
 //     int characterReplacement(string s, int k) {
 //         int L = 0, R = 0;
 //         int maxFreq = 0, maxLength = 0;
-//         unordered_map<char, int> M; //For storing chars and their frequency 
-        
+//         unordered_map<char, int> M; //For storing chars and their frequency
+
 //         while(R < s.size()) {
 //             // int winLen = R - L + 1; // Sliding window length
 //             M[s[R]]++;      // Updating frequency in Map
 //             maxFreq = max(maxFreq, M[s[R]]); // if curr freq is greater than maxFreq, update
-//             if(R-L+1 - maxFreq > k) { 
+//             if(R-L+1 - maxFreq > k) {
 //                 M[s[L]]--;      // Decrementing count of L'th element because we're gonna move L
 //                 L++;
 //             }
-//             // Technically we will never need to reduce the maxFreq, 
+//             // Technically we will never need to reduce the maxFreq,
 //             // because answer will be set around around it
 //             // We can adjust the length, so basically the ans is maxFreq + K
 //             maxLength = max(maxLength, R-L+1);

@@ -34,13 +34,14 @@ The space complexity is O(1) as both `targetFreq` and `windowFreq` have a fixed 
 */
 
 class Solution {
-public:
+  public:
     string minWindow(string s, string t) {
         vector<int> targetFreq(128, 0);
         vector<int> windowFreq(128, 0);
 
-        for (char ch : t)
+        for (char ch : t) {
             targetFreq[ch]++;
+        }
 
         int left = 0;
         int right = 0;
@@ -50,8 +51,10 @@ public:
 
         while (right < s.length()) {
             windowFreq[s[right]]++;
-            if (windowFreq[s[right]] <= targetFreq[s[right]])
+
+            if (windowFreq[s[right]] <= targetFreq[s[right]]) {
                 count++;
+            }
 
             while (count == t.length()) {
                 if (right - left + 1 < minLen) {
@@ -60,8 +63,10 @@ public:
                 }
 
                 windowFreq[s[left]]--;
-                if (windowFreq[s[left]] < targetFreq[s[left]])
+
+                if (windowFreq[s[left]] < targetFreq[s[left]]) {
                     count--;
+                }
 
                 left++;
             }
@@ -82,11 +87,11 @@ public:
 //         unordered_map<char, int> M;
 //         for(int i = 0; i < t.size(); i++)
 //             M[t[i]]++;
-        
+
 //         int L = 0, R = 0;
 //         int count = t.size();  // No. of chars in t that need to be n S
 //         int minLength = INT_MAX;
-//         int minStart = 0; // We have to return string, so this variable is for storing teh starting index 
+//         int minStart = 0; // We have to return string, so this variable is for storing teh starting index
 
 //         while(R < s.size()) {
 //             if(M[s[R]] > 0)     // If we find an element from T(which we put in M)
@@ -104,7 +109,7 @@ public:
 //                 }
 //                 M[s[L]]++; // Updating the value in Map
 //                 // If the current L element is from T, then increase count
-//                 if(M[s[L]] > 0) {   
+//                 if(M[s[L]] > 0) {
 //                     count++;
 //                 }
 //                 L++;
@@ -123,16 +128,16 @@ class Solution {
 public:
     string minWindow(string s, string t) {
         int cnt[128] = {}, diff = t.size();
-        for(int i = 0; i < t.size(); i++) 
+        for(int i = 0; i < t.size(); i++)
             cnt[t[i]]++;
         int left = 0, right = 0, idx = 0, size = 2e5;
         while(right < s.size()) {
-            if(cnt[s[right++]]-- > 0) 
+            if(cnt[s[right++]]-- > 0)
                 diff--;
             while(diff == 0) {
-                if(right-left < size) 
+                if(right-left < size)
                     size = right-(idx = left);
-                if(cnt[s[left++]]++ == 0) 
+                if(cnt[s[left++]]++ == 0)
                     diff++;
             }
         }

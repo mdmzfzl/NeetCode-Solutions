@@ -46,14 +46,14 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
  */
 
 class Solution {
-public:
+  public:
     int maxPathSum(TreeNode* root) {
         int maxSum = INT_MIN;
         maxPathSumHelper(root, maxSum);
         return maxSum;
     }
 
-private:
+  private:
     int maxPathSumHelper(TreeNode* node, int& maxSum) {
         if (node == nullptr) {
             return 0;
@@ -62,12 +62,10 @@ private:
         // Recursively calculate the maximum path sum for the left and right subtrees
         int leftSum = maxPathSumHelper(node->left, maxSum);
         int rightSum = maxPathSumHelper(node->right, maxSum);
-
         // Calculate the maximum sum path that includes the current node
         int maxChildSum = max(max(leftSum, rightSum), 0);
         int maxSumWithNode = max(maxChildSum + node->val, leftSum + rightSum + node->val);
         maxSum = max(maxSum, maxSumWithNode);
-
         // Return the maximum sum path that includes the current node by adding it to the maximum child sum
         return max(maxChildSum + node->val, node->val);
     }

@@ -29,31 +29,29 @@ The space complexity is O(1) since the frequency array has a fixed size of 26 (a
 */
 
 class Solution {
-public:
+  public:
     int leastInterval(vector<char>& tasks, int n) {
         // Count the frequency of each task
         vector<int> frequency(26, 0);
+
         for (char task : tasks) {
             frequency[task - 'A']++;
         }
-        
+
         // Sort the frequency array in descending order
         sort(frequency.rbegin(), frequency.rend());
-        
         // Find the maximum frequency
         int maxFreq = frequency[0];
-        
         // Calculate the number of idle cycles required
         int idleCycles = (maxFreq - 1) * n;
-        
+
         // Subtract the remaining tasks from the idle cycles
         for (int i = 1; i < frequency.size(); i++) {
             idleCycles -= min(frequency[i], maxFreq - 1);
         }
-        
+
         // Calculate the minimum number of time units required
         int minTime = tasks.size() + max(0, idleCycles);
-        
         return minTime;
     }
 };

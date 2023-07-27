@@ -22,15 +22,16 @@ Space Complexity:
 The space complexity is O(1), as we use a fixed-size array of size 26 to store the counts.
 */
 
-auto init = [](){
+auto init = []() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
     return 0;
-}();
+}
+();
 
 class Solution {
-public:
+  public:
     bool isAnagram(string s, string t) {
         if (s.length() != t.length()) {
             return false;
@@ -58,13 +59,13 @@ public:
 
 // class Solution {
 // public:
-//     bool isAnagram(string s, string t) {       
+//     bool isAnagram(string s, string t) {
 //         if(s.size() != t.size())
 //                 return false;
-        
+
 //         sort(s.begin(), s.end());
 //         sort(t.begin(), t.end());
-        
+
 //         return s == t;
 //     }
 // };

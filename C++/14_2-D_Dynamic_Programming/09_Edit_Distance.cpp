@@ -38,18 +38,18 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int minDistance(string word1, string word2) {
         if (word1.empty() && word2.empty()) {
             return 0;
         }
+
         if (word1.empty() || word2.empty()) {
             return 1;
         }
-        
+
         int m = word1.size();
         int n = word2.size();
-
         // Create a 2D DP table to store the minimum edit distance for subproblems
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
@@ -59,6 +59,7 @@ public:
         for (int i = 0; i <= m; i++) {
             dp[i][0] = i;
         }
+
         for (int j = 0; j <= n; j++) {
             dp[0][j] = j;
         }

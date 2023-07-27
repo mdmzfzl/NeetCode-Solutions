@@ -25,12 +25,12 @@ Time Complexity:
 The time complexity is O(n), where n is the length of the input string. We iterate through the string once with the sliding window approach.
 
 Space Complexity:
-The space complexity is O(min(n, m)), where n is the length of the input string and m is the size of the character set. 
+The space complexity is O(min(n, m)), where n is the length of the input string and m is the size of the character set.
 In the worst case, the character set can be as large as the input string, but it can also be limited by the number of distinct characters.
 */
 
 class Solution {
-public:
+  public:
     int lengthOfLongestSubstring(string s) {
         int left = 0, right = 0;
         int maxLen = 0;
@@ -61,7 +61,7 @@ public:
 //         while(i < s.size()) {
 //             if(chegg.find(s[i]) == chegg.end()) {
 //                 chegg.insert(s[i]);
-//                 i++;   
+//                 i++;
 //             }
 //             else{
 //                 chegg.erase(s[j]);

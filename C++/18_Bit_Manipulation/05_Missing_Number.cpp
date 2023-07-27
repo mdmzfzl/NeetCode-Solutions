@@ -2,11 +2,11 @@
 Problem: LeetCode 268 - Missing Number
 
 Description:
-Given an array nums containing n distinct numbers in the range [0, n], 
+Given an array nums containing n distinct numbers in the range [0, n],
 return the only number in the range that is missing from the array.
 
 Intuition:
-We can use the mathematical concept of finding the sum of the first n natural numbers 
+We can use the mathematical concept of finding the sum of the first n natural numbers
 and subtract the sum of the elements in the given array to find the missing number.
 
 Approach:
@@ -22,16 +22,16 @@ The space complexity is O(1) as we use only a constant amount of extra space to 
 */
 
 class Solution {
-public:
+  public:
     int missingNumber(std::vector<int>& nums) {
         int n = nums.size();
         int expectedSum = n * (n + 1) / 2;
         int actualSum = 0;
-        
+
         for (int num : nums) {
             actualSum += num;
         }
-        
+
         return expectedSum - actualSum;
     }
 };

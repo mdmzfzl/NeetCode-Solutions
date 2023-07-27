@@ -37,10 +37,10 @@ The space complexity is O(n), where n is the total number of entries in the hash
 */
 
 class TimeMap {
-private:
+  private:
     unordered_map<string, vector<pair<int, string>>> data; // Hashmap to store key-value pairs
 
-public:
+  public:
     TimeMap() {}
 
     void set(string key, string value, int timestamp) {

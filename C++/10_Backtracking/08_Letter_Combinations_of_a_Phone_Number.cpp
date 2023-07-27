@@ -31,31 +31,32 @@ The space complexity is O(N + M), where N is the number of digits that map to 3 
 */
 
 class Solution {
-public:
+  public:
     vector<string> letterCombinations(string digits) {
         vector<string> result;
+
         if (digits.empty()) {
             return result;  // If the input is empty, return an empty result
         }
-        
+
         vector<string> mapping = {
             "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
         };
-        
         string combination;  // Store the current combination
         backtrack(digits, mapping, 0, combination, result);  // Call the backtrack function to generate all valid combinations
         return result;
     }
-    
-private:
+
+  private:
     // Depth First Search (DFS) Backtracking function
     void backtrack(const string& digits, const vector<string>& mapping, int index, string& combination, vector<string>& result) {
         if (index == digits.length()) {
             result.push_back(combination);  // Add the current combination to the result
             return;
         }
-        
+
         string letters = mapping[digits[index] - '0'];  // Get the corresponding letters for the current digit
+
         for (char letter : letters) {
             combination.push_back(letter);  // Add the letter to the current combination
             backtrack(digits, mapping, index + 1, combination, result);  // Recursively call with the next index
@@ -64,7 +65,7 @@ private:
     }
 };
 
-/* 
+/*
 // Breadth First Search((BFS)
 class Solution {
 public:

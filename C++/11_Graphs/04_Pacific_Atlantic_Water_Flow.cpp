@@ -27,31 +27,31 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
         vector<vector<int>> result;
+
         if (matrix.empty()) {
             return result;
         }
-        
+
         int m = matrix.size();
         int n = matrix[0].size();
-        
         vector<vector<bool>> canReachPacific(m, vector<bool>(n, false));  // Matrix to track cells reachable from the Pacific ocean
         vector<vector<bool>> canReachAtlantic(m, vector<bool>(n, false));  // Matrix to track cells reachable from the Atlantic ocean
-        
+
         // Traverse the top and bottom borders to mark cells reachable from the Pacific and Atlantic oceans
         for (int col = 0; col < n; ++col) {
             dfs(matrix, 0, col, INT_MIN, canReachPacific);
             dfs(matrix, m - 1, col, INT_MIN, canReachAtlantic);
         }
-        
+
         // Traverse the left and right borders to mark cells reachable from the Pacific and Atlantic oceans
         for (int row = 0; row < m; ++row) {
             dfs(matrix, row, 0, INT_MIN, canReachPacific);
             dfs(matrix, row, n - 1, INT_MIN, canReachAtlantic);
         }
-        
+
         // Find the cells that are reachable from both the Pacific and Atlantic oceans
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
@@ -60,22 +60,21 @@ public:
                 }
             }
         }
-        
+
         return result;
     }
-    
-private:
+
+  private:
     void dfs(const vector<vector<int>>& matrix, int row, int col, int prevHeight, vector<vector<bool>>& canReachOcean) {
         int m = matrix.size();
         int n = matrix[0].size();
-        
+
         // Check if the current cell is out of bounds or has been visited already
         if (row < 0 || row >= m || col < 0 || col >= n || matrix[row][col] < prevHeight || canReachOcean[row][col]) {
             return;
         }
-        
+
         canReachOcean[row][col] = true;  // Mark the current cell as reachable
-        
         // Recursively traverse the neighboring cells
         dfs(matrix, row - 1, col, matrix[row][col], canReachOcean);  // Up
         dfs(matrix, row + 1, col, matrix[row][col], canReachOcean);  // Down

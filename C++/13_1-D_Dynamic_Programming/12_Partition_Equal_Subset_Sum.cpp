@@ -32,20 +32,19 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     bool canPartition(vector<int>& nums) {
         int n = nums.size();
         int sum = accumulate(nums.begin(), nums.end(), 0); // Calculate the total sum
-        
+
         if (sum % 2 != 0) {
             return false; // If the total sum is odd, it's not possible to partition into equal subsets
         }
-        
+
         int target = sum / 2;
         vector<bool> dp(target + 1, false); // Subset with sum i can be formed
-        
         dp[0] = true; // Base case: Empty subset with sum 0 can be formed
-        
+
         for (int num : nums) {
             for (int i = target; i >= num; i--) {
                 if (dp[i - num]) {
@@ -53,7 +52,7 @@ public:
                 }
             }
         }
-        
+
         return dp[target];
     }
 };

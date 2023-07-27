@@ -44,12 +44,13 @@ Space Complexity:
 */
 
 class TrieNode {
-public:
+  public:
     bool isWord;
     TrieNode* children[26];
 
     TrieNode() {
         isWord = false;
+
         for (int i = 0; i < 26; i++) {
             children[i] = nullptr;
         }
@@ -57,23 +58,27 @@ public:
 };
 
 class WordDictionary {
-private:
+  private:
     TrieNode* root;
 
-public:
+  public:
     WordDictionary() {
         root = new TrieNode();
     }
 
     void addWord(string word) {
         TrieNode* node = root;
+
         for (char c : word) {
             int index = c - 'a';
+
             if (!node->children[index]) {
                 node->children[index] = new TrieNode();
             }
+
             node = node->children[index];
         }
+
         node->isWord = true;
     }
 
@@ -87,8 +92,10 @@ public:
         }
 
         char c = word[index];
+
         if (c != '.') {
             int childIndex = c - 'a';
+
             if (node->children[childIndex]) {
                 return searchHelper(word, node->children[childIndex], index + 1);
             } else {
@@ -100,6 +107,7 @@ public:
                     return true;
                 }
             }
+
             return false;
         }
     }
@@ -121,22 +129,22 @@ private:
     TrieNode* root;
 
     bool searchInNode(string& word, int i, TrieNode* node) {
-        if (node == NULL) 
+        if (node == NULL)
             return false;
-        
-        if (i == word.size()) 
+
+        if (i == word.size())
             return node->isWord;
-        
+
         // if its an alphabet and not .
-        if (word[i] != '.') 
+        if (word[i] != '.')
             return searchInNode(word, i + 1, node->child[word[i] - 'a']);
-        
+
         // If the current character is a dot, we need to check all children of the current node
         // recursively by skipping over the dot character and moving to the next character of the word
-        for (int j = 0; j < 26; j++) 
-            if (searchInNode(word, i + 1, node->child[j])) 
+        for (int j = 0; j < 26; j++)
+            if (searchInNode(word, i + 1, node->child[j]))
                 return true;
-            
+
         return false;
     }
 
@@ -144,7 +152,7 @@ public:
     WordDictionary() {
         root = new TrieNode();
     }
-    
+
     void addWord(string word) {
         TrieNode *current = root;
 
@@ -152,12 +160,12 @@ public:
             int i = c - 'a';
             if(!current->child[i])
                 current->child[i] = new TrieNode();
-            
+
             current = current->child[i];
         }
         current->isWord = true;
     }
-    
+
     bool search(string word) {
         TrieNode* node = root;
         return searchInNode(word, 0, node);

@@ -37,11 +37,12 @@ Dynamic Programming:
 // https://leetcode.com/problems/burst-balloons/solutions/892552/for-those-who-are-not-able-to-understand-any-solution-with-diagram/
 
 class Solution {
-public:
+  public:
     int maxCoins(vector<int>& nums) {
         int n = nums.size();
         // Create a new array with borders containing 1 to simplify the logic
         vector<int> numsWithBorders(n + 2, 1);
+
         for (int i = 0; i < n; i++) {
             numsWithBorders[i + 1] = nums[i];
         }
@@ -58,6 +59,7 @@ public:
         for (int len = 2; len <= n + 1; len++) {
             for (int i = 0; i <= n + 1 - len; i++) {
                 int j = i + len;
+
                 for (int k = i + 1; k < j; k++) {
                     // Calculate the maximum coins for the subarray [i, j] by considering
                     // each possible balloon to be the last one to be bursted in the subarray
@@ -86,7 +88,7 @@ public:
 
                 int leftNeighbor = (start == 0) ? 1 : nums[start - 1]; // Get the value of the left neighbor (if it exists)
                 int rightNeighbor = (end + 1 == n) ? 1 : nums[end + 1]; // Get the value of the right neighbor (if it exists)
-                
+
                 if (len == 1) {
                     // If the subarray contains only one balloon, the maximum coins obtained will be just the value of that balloon
                     dp[start][end] = nums[start] * leftNeighbor * rightNeighbor;

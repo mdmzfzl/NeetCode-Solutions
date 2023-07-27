@@ -36,19 +36,18 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     string longestPalindrome(string s) {
         int n = s.length();
         vector<vector<bool>> dp(n, vector<bool>(n, false));
-        
         int start = 0;
         int maxLen = 1;
-        
+
         // Base case: single characters are palindromes
         for (int i = 0; i < n; i++) {
             dp[i][i] = true;
         }
-        
+
         // Base case: two identical characters are palindromes
         for (int i = 0; i < n - 1; i++) {
             if (s[i] == s[i + 1]) {
@@ -57,12 +56,12 @@ public:
                 maxLen = 2;
             }
         }
-        
+
         // Check for palindromes of length greater than 2
         for (int len = 3; len <= n; len++) {
             for (int i = 0; i < n - len + 1; i++) {
                 int j = i + len - 1;
-                
+
                 if (s[i] == s[j] && dp[i + 1][j - 1]) {
                     dp[i][j] = true;
                     start = i;
@@ -70,7 +69,7 @@ public:
                 }
             }
         }
-        
+
         return s.substr(start, maxLen);
     }
 };
@@ -98,9 +97,9 @@ public:
 //     // need the index and length to cut the string using substr
 //     int start = 0, maxLength = 1;
 //     void helper(string S, int L, int R) {
-//         while(L >= 0 && R < S.size() && S[L] == S[R]) 
+//         while(L >= 0 && R < S.size() && S[L] == S[R])
 //             L--, R++;
-        
+
 //         int len = R - L - 1;
 //         if(len > maxLength) {
 //             start = L + 1;

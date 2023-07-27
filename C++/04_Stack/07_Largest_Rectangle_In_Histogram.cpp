@@ -25,11 +25,11 @@ Space Complexity:
 The space complexity is O(n), where n is the number of bars in the histogram. In the worst case, all bars are stored in the stack.
 */
 
-#include<bits/stdc++.h> 
+#include<bits/stdc++.h>
 using namespace std;
 
 class Solution {
-public:
+  public:
     int largestRectangleArea(vector<int>& heights) {
         int n = heights.size();
         stack<int> stack;

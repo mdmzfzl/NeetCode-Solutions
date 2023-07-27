@@ -32,7 +32,7 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 #include <cmath>
 
 class Solution {
-public:
+  public:
     int minEatingSpeed(vector<int>& piles, int h) {
         int left = 1;
         int right = *max_element(piles.begin(), piles.end());

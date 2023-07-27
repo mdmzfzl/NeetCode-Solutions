@@ -27,28 +27,28 @@ The space complexity is O(1) since we only use a few variables to store indices 
 
 // Better solution but not dynamic programming
 class Solution {
-public:
+  public:
     int countSubstrings(string s) {
         int count = 0;
         int n = s.length();
-        
+
         for (int i = 0; i < n; i++) {
             count += countPalindromes(s, i, i);      // Odd-length palindromes
             count += countPalindromes(s, i, i + 1);  // Even-length palindromes
         }
-        
+
         return count;
     }
-    
+
     int countPalindromes(string s, int left, int right) {
         int count = 0;
-        
+
         while (left >= 0 && right < s.length() && s[left] == s[right]) {
             count++;
             left--;
             right++;
         }
-        
+
         return count;
     }
 };
@@ -91,15 +91,15 @@ Dynamic Programming:
 //     int countSubstrings(string s) {
 //         int n = s.length();
 //         vector<vector<bool>> dp(n, vector<bool>(n, false));
-        
+
 //         int count = 0;
-        
+
 //         // Base case: single characters are palindromes
 //         for (int i = 0; i < n; i++) {
 //             dp[i][i] = true;
 //             count++;
 //         }
-        
+
 //         // Base case: two identical characters are palindromes
 //         for (int i = 0; i < n - 1; i++) {
 //             if (s[i] == s[i + 1]) {
@@ -107,19 +107,19 @@ Dynamic Programming:
 //                 count++;
 //             }
 //         }
-        
+
 //         // Check for palindromes of length greater than 2
 //         for (int len = 3; len <= n; len++) {
 //             for (int i = 0; i < n - len + 1; i++) {
 //                 int j = i + len - 1;
-                
+
 //                 if (s[i] == s[j] && dp[i + 1][j - 1]) {
 //                     dp[i][j] = true;
 //                     count++;
 //                 }
 //             }
 //         }
-        
+
 //         return count;
 //     }
 // };

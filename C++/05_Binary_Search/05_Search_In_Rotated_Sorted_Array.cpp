@@ -29,13 +29,13 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 */
 
 class Solution {
-public:
+  public:
     int search(vector<int>& nums, int target) {
-        int left = 0; 
-        int right = nums.size() - 1; 
+        int left = 0;
+        int right = nums.size() - 1;
 
-        while (left <= right) { 
-            int middle = left + (right - left) / 2; 
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
 
             if (nums[middle] == target) { // If middle element is equal to the target value, return the middle index
                 return middle;

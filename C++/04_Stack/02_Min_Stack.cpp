@@ -26,16 +26,17 @@ The space complexity is O(n), where n is the number of elements pushed into the 
 */
 
 class MinStack {
-private:
+  private:
     std::stack<int> mainStack;
     std::stack<int> minStack;
 
-public:
+  public:
     MinStack() {
     }
 
     void push(int val) {
         mainStack.push(val);
+
         if (minStack.empty() || val <= minStack.top()) {
             minStack.push(val);
         }
@@ -45,6 +46,7 @@ public:
         if (mainStack.top() == minStack.top()) {
             minStack.pop();
         }
+
         mainStack.pop();
     }
 

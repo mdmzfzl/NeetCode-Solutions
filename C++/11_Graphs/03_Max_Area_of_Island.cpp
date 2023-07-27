@@ -26,16 +26,16 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 */
 
 class Solution {
-public:
+  public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
         if (grid.empty()) {
             return 0;
         }
-        
+
         int m = grid.size();
         int n = grid[0].size();
         int maxArea = 0;
-        
+
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (grid[i][j] == 1) {
@@ -43,26 +43,23 @@ public:
                 }
             }
         }
-        
+
         return maxArea;
     }
-    
-private:
+
+  private:
     int dfs(vector<vector<int>>& grid, int row, int col) {
         if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] == 0) {
             return 0;
         }
-        
+
         grid[row][col] = 0;  // Mark the current cell as visited
-        
         int area = 1;  // Count the current cell as part of the island
-        
         // Recursively explore the neighboring cells (up, down, left, right)
         area += dfs(grid, row - 1, col);  // Up
         area += dfs(grid, row + 1, col);  // Down
         area += dfs(grid, row, col - 1);  // Left
         area += dfs(grid, row, col + 1);  // Right
-        
         return area;
     }
 };

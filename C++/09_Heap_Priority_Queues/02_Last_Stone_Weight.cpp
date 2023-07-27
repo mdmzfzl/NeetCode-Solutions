@@ -3,7 +3,7 @@ Problem: LeetCode 1046 - Last Stone Weight
 
 Description:
 You are given an array `stones` where `stones[i]` represents the weight of the ith stone.
-In each turn, you choose the two heaviest stones and smash them together. 
+In each turn, you choose the two heaviest stones and smash them together.
 If the stones have the same weight, they both get destroyed, and if they have different weights, the heavier stone gets destroyed and the lighter stone's weight is reduced by the difference.
 When only one stone remains, return its weight. If no stones remain, return 0.
 
@@ -34,7 +34,7 @@ Space Complexity:
 */
 
 class Solution {
-public:
+  public:
     int lastStoneWeight(vector<int>& stones) {
         priority_queue<int> maxHeap; // Max-heap to store the stone weights
 
@@ -48,7 +48,6 @@ public:
             maxHeap.pop();
             int stone2 = maxHeap.top(); // Get the second heaviest stone
             maxHeap.pop();
-
             int diff = stone1 - stone2; // Calculate the difference
 
             if (diff > 0) {

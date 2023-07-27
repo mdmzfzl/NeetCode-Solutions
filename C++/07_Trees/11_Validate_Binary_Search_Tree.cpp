@@ -5,7 +5,7 @@ Description:
 Given the root of a binary tree, determine if it is a valid binary search tree (BST).
 
 Intuition:
-A binary search tree (BST) is a binary tree in which the value of each node is greater than all the values in its left subtree and less than all the values in its right subtree. 
+A binary search tree (BST) is a binary tree in which the value of each node is greater than all the values in its left subtree and less than all the values in its right subtree.
 To validate a BST, we can perform an in-order traversal and check if the values are in ascending order.
 
 Approach:
@@ -39,13 +39,13 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
  */
 
 class Solution {
-public:
+  public:
     bool isValidBST(TreeNode* root) {
         long long prev = LLONG_MIN; // Use long long to handle edge case with INT_MIN
         return isValidBSTHelper(root, prev);
     }
 
-private:
+  private:
     bool isValidBSTHelper(TreeNode* node, long long& prev) {
         if (node == nullptr) {
             return true;
@@ -58,8 +58,8 @@ private:
         if (node->val <= prev) {
             return false;
         }
-        prev = node->val;
 
+        prev = node->val;
         return isValidBSTHelper(node->right, prev);
     }
 };

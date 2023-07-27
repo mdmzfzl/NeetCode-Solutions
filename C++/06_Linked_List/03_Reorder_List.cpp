@@ -26,9 +26,11 @@ The space complexity is O(1) as we are using constant extra space for the pointe
 */
 
 class Solution {
-public:
+  public:
     void reorderList(ListNode* head) {
-        if (!head || !head->next || !head->next->next) return;
+        if (!head || !head->next || !head->next->next) {
+            return;
+        }
 
         // Step 1: Find the middle of the list
         ListNode* slow = head;
@@ -58,10 +60,8 @@ public:
         while (second) {
             ListNode* nextFirst = first->next;
             ListNode* nextSecond = second->next;
-
             first->next = second;
             second->next = nextFirst;
-
             first = nextFirst;
             second = nextSecond;
         }

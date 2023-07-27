@@ -28,13 +28,14 @@ The space complexity is O(n) to store the card frequencies in the map.
 */
 
 class Solution {
-public:
+  public:
     bool isNStraightHand(vector<int>& hand, int W) {
         if (hand.size() % W != 0) {
             return false; // If the hand size is not divisible by W, can't form valid groups
         }
 
         map<int, int> cardFreq; // Map to store the frequency of each card
+
         for (int card : hand) {
             cardFreq[card]++;
         }
@@ -47,6 +48,7 @@ public:
                     if (cardFreq[card + i] == 0) {
                         return false; // Can't form a group of size W
                     }
+
                     cardFreq[card + i]--;
                 }
             }

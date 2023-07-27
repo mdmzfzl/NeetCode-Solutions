@@ -23,7 +23,7 @@ Approach:
 4. To find the median:
    - If the size of the max-heap is greater than the min-heap, return the root of the max-heap.
    - Otherwise, return the average of the roots of both heaps.
-   
+
 Time Complexity:
 Adding an element and finding the median both have a time complexity of O(log n), where n is the number of elements in the data stream. This is due to the heap operations.
 
@@ -32,18 +32,18 @@ The space complexity is O(n), where n is the number of elements in the data stre
 */
 
 class MedianFinder {
-private:
+  private:
     priority_queue<int> maxHeap;  // Max-heap to store the smaller half of the elements
     priority_queue<int, vector<int>, greater<int>> minHeap;  // Min-heap to store the larger half of the elements
 
-public:
+  public:
     void addNum(int num) {
         if (maxHeap.empty() || num <= maxHeap.top()) {
             maxHeap.push(num);
         } else {
             minHeap.push(num);
         }
-        
+
         // Balance the heaps
         if (maxHeap.size() > minHeap.size() + 1) {
             minHeap.push(maxHeap.top());
@@ -53,7 +53,7 @@ public:
             minHeap.pop();
         }
     }
-    
+
     double findMedian() {
         if (maxHeap.size() > minHeap.size()) {
             return maxHeap.top();

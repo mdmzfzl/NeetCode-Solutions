@@ -31,11 +31,11 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int coinChange(vector<int>& coins, int amount) {
         vector<int> dp(amount + 1, INT_MAX);  // DP array to store the minimum number of coins needed for each amount
         dp[0] = 0;  // Base case: zero coins are needed to make up an amount of zero
-        
+
         for (int coin : coins) {  // Iterate through each coin
             for (int j = coin; j <= amount; j++) {  // Iterate through each amount from coin to the target amount
                 if (dp[j - coin] != INT_MAX) {  // Check if there is a valid previous amount (j - coin) that can be made up with coins
@@ -43,20 +43,20 @@ public:
                 }
             }
         }
-        
+
         return dp[amount] != INT_MAX ? dp[amount] : -1;  // If dp[amount] is still INT_MAX, return -1 as the amount cannot be made with the given coins
     }
 };
 
 /**
- * ! Statement 1 - 
+ * ! Statement 1 -
  * * Since the coins array is sorted in ascending order, once we encounter a coin that is larger than i, we can safely break out of the loop.
- * 
+ *
  * ! Statement 2 -
  * * We are taking mimimum because there could be multiple ways of getting the current amount but we want the lowest amt of coins
  *     * Ex: coins = [1, 3, 4, 7], so while iterating through first denomination ie 1
  *     * DP[3] will be 3, min(dp[3], dp[2] + 1) => min(MAX_INT, 2 + 1) => 3
- *     * But next iteration we find that 3 denomination exists 
+ *     * But next iteration we find that 3 denomination exists
  *     * So,  min(DP[i], DP[i-coin] + 1) => min(3, 0 + 1) => DP[i] = 1
 */
 

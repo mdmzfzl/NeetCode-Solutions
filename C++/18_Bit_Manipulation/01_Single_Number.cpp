@@ -21,7 +21,7 @@ The space complexity is O(1) since we only use a constant amount of extra space 
 */
 
 class Solution {
-public:
+  public:
     int singleNumber(vector<int>& nums) {
         int result = 0;
 

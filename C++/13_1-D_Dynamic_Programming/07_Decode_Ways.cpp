@@ -34,28 +34,27 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int numDecodings(string s) {
         int n = s.length();
         vector<int> dp(n + 1, 0);
-        
         dp[0] = 1;  // Base case: empty string has one way to decode
-        
+
         for (int i = 1; i <= n; i++) {
             // Check if current character is not '0'
             if (s[i - 1] != '0') {
                 dp[i] += dp[i - 1];  // Add the number of ways for single-digit decoding
             }
-            
+
             // Check if current character and the previous character form a valid two-digit number
             if (i > 1 && isValidTwoDigit(s[i - 2], s[i - 1])) {
                 dp[i] += dp[i - 2];  // Add the number of ways for two-digit decoding
             }
         }
-        
+
         return dp[n];
     }
-    
+
     bool isValidTwoDigit(char c1, char c2) {
         int num = (c1 - '0') * 10 + (c2 - '0');
         return num >= 10 && num <= 26;
@@ -69,11 +68,11 @@ public:
 //         if (n == 0 || s[0] == '0') {
 //             return 0;
 //         }
-        
+
 //         vector<int> dp(n + 1);
 //         dp[0] = 1;
 //         dp[1] = 1;
-        
+
 //         for (int i = 2; i <= n; i++) {
 //             // Single digit
 //             int ones = stoi(s.substr(i - 1, 1));

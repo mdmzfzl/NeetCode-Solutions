@@ -39,17 +39,15 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     bool isMatch(string s, string p) {
         int m = s.length();
         int n = p.length();
-        
         // Create a 2D DP table and initialize base cases
         vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
-        
         // Base case: an empty pattern matches an empty string
         dp[0][0] = true;
-        
+
         // Initialize the first row for pattern p
         for (int j = 1; j <= n; j++) {
             if (p[j - 1] == '*') {
@@ -58,12 +56,12 @@ public:
                 dp[0][j] = dp[0][j - 2];
             }
         }
-        
+
         // Fill in the DP table row by row
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
-                    // If the current pattern character matches the current string character or it's a '.', 
+                    // If the current pattern character matches the current string character or it's a '.',
                     // we take the value from the diagonal (dp[i - 1][j - 1]) as the result for the current cell
                     dp[i][j] = dp[i - 1][j - 1];
                 } else if (p[j - 1] == '*') {
@@ -75,7 +73,7 @@ public:
                 }
             }
         }
-        
+
         return dp[m][n]; // The last cell (dp[m][n]) contains the result for the entire matching process
     }
 };
@@ -88,13 +86,13 @@ public:
     bool isMatch(string s, string p) {
         int m = s.length();
         int n = p.length();
-        
+
         // Create a 1D DP array to store the matching results
         vector<bool> dp(n + 1, false);
-        
+
         // Base case: an empty pattern matches an empty string
         dp[0] = true;
-        
+
         // Initialize the DP array for the first row (when i = 0)
         for (int j = 1; j <= n; j++) {
             if (p[j - 1] == '*') {
@@ -103,18 +101,18 @@ public:
                 dp[j] = dp[j - 2];
             }
         }
-        
+
         // Fill in the DP array row by row
         for (int i = 1; i <= m; i++) {
             bool prevDiagonal = dp[0]; // Store the value of the diagonal element (dp[i - 1][j - 1]) before updating it
             dp[0] = false; // Update the base case for each row, as a non-empty pattern cannot match an empty string
-            
+
             // Iterate through the pattern characters
             for (int j = 1; j <= n; j++) {
                 bool temp = dp[j]; // Store the current value of dp[i][j] before updating it
-                
+
                 if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {
-                    // If the current pattern character matches the current string character or it's a '.', 
+                    // If the current pattern character matches the current string character or it's a '.',
                     // we take the value from the diagonal (dp[i - 1][j - 1]) as the result for the current cell
                     dp[j] = prevDiagonal;
                 } else if (p[j - 1] == '*') {
@@ -126,11 +124,11 @@ public:
                     // If the characters don't match and there's no wildcard, update the cell to false
                     dp[j] = false;
                 }
-                
+
                 prevDiagonal = temp; // Update the diagonal element for the next iteration
             }
         }
-        
+
         return dp[n]; // The last cell (dp[m][n]) contains the result for the entire matching process
     }
 };

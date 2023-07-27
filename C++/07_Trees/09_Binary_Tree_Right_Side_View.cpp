@@ -43,9 +43,10 @@ The space complexity is O(m), where m is the maximum number of nodes at any leve
  */
 
 class Solution {
-public:
+  public:
     vector<int> rightSideView(TreeNode* root) {
         vector<int> result;
+
         if (root == nullptr) {
             return result;
         }
@@ -65,6 +66,7 @@ public:
                 if (node->left != nullptr) {
                     q.push(node->left);
                 }
+
                 if (node->right != nullptr) {
                     q.push(node->right);
                 }

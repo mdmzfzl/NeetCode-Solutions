@@ -33,16 +33,16 @@ The space complexity is determined by the recursion stack and the `result` vecto
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         vector<vector<int>> result;
         vector<int> combination;
         sort(candidates.begin(), candidates.end());  // Sort the candidates in ascending order
         backtrack(candidates, target, 0, combination, result);  // Call the backtrack function
-        return result;  
+        return result;
     }
-    
-private:
+
+  private:
     // Backtracking function to find combinations that sum up to the target
     void backtrack(const vector<int>& candidates, int target, int index, vector<int>& combination, vector<vector<int>>& result) {
         // Base case: if the target is reached, add the current combination to the result
@@ -50,20 +50,18 @@ private:
             result.push_back(combination);
             return;
         }
-        
+
         // Iterate through the candidates starting from the given index
         for (int i = index; i < candidates.size(); ++i) {
             // If the current candidate is greater than the target, skip the remaining candidates
             if (candidates[i] > target) {
                 break;
             }
-            
+
             // Include the current candidate in the combination
             combination.push_back(candidates[i]);
-            
             // Recursively call the backtrack function with the updated target and the same index
             backtrack(candidates, target - candidates[i], i, combination, result);
-            
             // Exclude the current candidate from the combination (backtrack)
             combination.pop_back();
         }

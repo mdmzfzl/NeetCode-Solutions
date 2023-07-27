@@ -28,13 +28,13 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
         vector<vector<int>> dp(m, vector<int>(n, 0)); // dp[i][j] stores the longest increasing path starting at position (i, j)
         int longestPath = 0;
-        
+
         // Iterate through each element in the matrix
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -42,30 +42,32 @@ public:
                 longestPath = max(longestPath, dfs(matrix, dp, i, j));
             }
         }
-        
+
         return longestPath; // Return the overall longest increasing path
     }
-    
+
     // Helper function to find the longest increasing path starting at position (i, j)
     int dfs(vector<vector<int>>& matrix, vector<vector<int>>& dp, int i, int j) {
-        if (dp[i][j] > 0)
-            return dp[i][j]; // If the result is already calculated, return it from the dp array
-        
+        if (dp[i][j] > 0) {
+            return dp[i][j];    // If the result is already calculated, return it from the dp array
+        }
+
         int m = matrix.size();
         int n = matrix[0].size();
         int longest = 1; // The minimum length is 1, considering the current element
-        
         // Check the four neighbors
         vector<pair<int, int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
         for (const auto& dir : directions) {
             int x = i + dir.first;
             int y = j + dir.second;
+
             if (x >= 0 && x < m && y >= 0 && y < n && matrix[x][y] > matrix[i][j]) {
                 // If the neighbor is within the matrix bounds and has a greater value, calculate the longest path recursively
                 longest = max(longest, 1 + dfs(matrix, dp, x, y));
             }
         }
-        
+
         dp[i][j] = longest; // Save the result in the dp array to avoid redundant computations
         return longest;
     }

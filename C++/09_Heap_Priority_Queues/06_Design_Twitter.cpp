@@ -31,7 +31,7 @@ Approach:
    - Iterate over the tweets in the user's timeline and add them to the priority queue.
    - Iterate over the followees of the user and add their tweets to the priority queue.
    - Pop the top 10 tweets from the priority queue and return them in reverse order.
-   
+
 Time Complexity:
 The time complexity of posting a tweet, following/unfollowing a user, and retrieving the news feed is O(log n), where n is the number of tweets. This is because we use a priority queue to retrieve the top 10 tweets in the news feed.
 
@@ -40,7 +40,7 @@ The space complexity is O(m + n), where m is the number of users and n is the nu
 */
 
 class Twitter {
-private:
+  private:
     struct Tweet {
         int tweetId;
         int timestamp;
@@ -51,7 +51,7 @@ private:
     unordered_map<int, unordered_set<int>> userFollowees;  // Store followees of each user
     int time;  // Keep track of the timestamp
 
-public:
+  public:
     Twitter() {
         time = 0;
     }

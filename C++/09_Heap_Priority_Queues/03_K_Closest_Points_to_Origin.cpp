@@ -33,7 +33,7 @@ The space complexity is O(N), where N is the number of points. We use the distan
 */
 
 class Solution {
-public:
+  public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
         // Create a vector to store the distances and indices of points
         vector<pair<int, int>> distances(points.size());
@@ -46,7 +46,6 @@ public:
 
         // Find the k-th smallest distance using nth_element
         nth_element(distances.begin(), distances.begin() + k - 1, distances.end());
-
         // Create a result vector to store the k closest points
         vector<vector<int>> result(k);
 

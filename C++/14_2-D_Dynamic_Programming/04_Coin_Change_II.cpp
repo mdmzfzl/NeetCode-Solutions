@@ -29,19 +29,17 @@ Dynamic Programming:
 - Subproblem: The subproblem is finding the number of combinations for each amount up to the target amount.
 - Recurrence Relation: dp[j] = dp[j] + dp[j - coin], where dp[j] represents the number of combinations for the amount j.
 - Base Case: Initialize dp[0] = 1, representing one way to make up an amount of 0.
-
 */
 
 class Solution {
-public:
+  public:
     int change(int amount, vector<int>& coins) {
         // Create a DP array to store the number of combinations
         // dp[i] represents the number of combinations to make amount i
         vector<int> dp(amount + 1, 0);
-        
         // Base case: There is one combination to make amount 0, using no coins
         dp[0] = 1;
-        
+
         // Iterate over the coins
         for (int coin : coins) {
             // For each coin, iterate over the amounts starting from the coin value
@@ -52,7 +50,7 @@ public:
                 dp[i] += dp[i - coin];
             }
         }
-        
+
         // Return the number of combinations to make the given amount using the coins
         return dp[amount];
     }
@@ -64,15 +62,15 @@ public:
 //         // Create a 2D DP array to store the number of combinations
 //         // dp[i][j] represents the number of combinations to make amount j using coins up to the ith index
 //         vector<vector<int>> dp(coins.size() + 1, vector<int>(amount + 1, 0));
-        
+
 //         // Base case: There is one combination to make amount 0, using no coins
 //         dp[0][0] = 1;
-        
+
 //         // Iterate over the coins
 //         for (int i = 1; i <= coins.size(); ++i) {
 //             // For the first column (amount = 0), there is one combination for each coin, i.e., not selecting the coin
 //             dp[i][0] = 1;
-            
+
 //             for (int j = 1; j <= amount; ++j) {
 //                 // If the current coin value is less than or equal to the current amount, we have two options:
 //                 // 1. Use the current coin by subtracting its value from the amount (j) and considering the number of combinations from the same row (coin)
@@ -87,7 +85,7 @@ public:
 //                 }
 //             }
 //         }
-        
+
 //         // Return the number of combinations to make the given amount using all the coins
 //         return dp[coins.size()][amount];
 //     }

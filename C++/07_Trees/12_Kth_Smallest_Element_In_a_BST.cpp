@@ -40,24 +40,26 @@ The space complexity is O(h), where h is the height of the binary search tree. T
  */
 
 class Solution {
-public:
+  public:
     int kthSmallest(TreeNode* root, int k) {
         int count = 0;
         return kthSmallestHelper(root, k, count);
     }
 
-private:
+  private:
     int kthSmallestHelper(TreeNode* node, int k, int& count) {
         if (node == nullptr) {
             return -1;
         }
 
         int result = kthSmallestHelper(node->left, k, count);
+
         if (result != -1) {
             return result;
         }
 
         count++;
+
         if (count == k) {
             return node->val;
         }

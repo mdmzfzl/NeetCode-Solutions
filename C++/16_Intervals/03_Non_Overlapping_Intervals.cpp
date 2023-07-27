@@ -24,15 +24,16 @@ The space complexity is O(1) as we only use a constant amount of additional spac
 */
 
 class Solution {
-public:
+  public:
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
-        if (intervals.empty()) return 0;
+        if (intervals.empty()) {
+            return 0;
+        }
 
         // Sort the intervals based on their end times in ascending order
         sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
             return a[1] < b[1];
         });
-
         int end = intervals[0][1]; // End time of the last non-overlapping interval
         int count = 0; // Number of intervals to remove
 

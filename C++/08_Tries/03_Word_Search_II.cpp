@@ -41,7 +41,7 @@ Space Complexity:
 */
 
 class TrieNode {
-public:
+  public:
     bool isWord;
     unordered_map<char, TrieNode*> children; // Map to store the child nodes
 
@@ -51,10 +51,9 @@ public:
 };
 
 class Solution {
-public:
+  public:
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
         TrieNode* root = buildTrie(words); // Build the Trie
-
         int rows = board.size();
         int cols = board[0].size();
         vector<string> result;
@@ -69,18 +68,21 @@ public:
         return result;
     }
 
-private:
+  private:
     TrieNode* buildTrie(vector<string>& words) {
         TrieNode* root = new TrieNode();
 
         for (string& word : words) {
             TrieNode* node = root;
+
             for (char c : word) {
                 if (node->children.find(c) == node->children.end()) {
                     node->children[c] = new TrieNode();
                 }
+
                 node = node->children[c];
             }
+
             node->isWord = true;
         }
 
@@ -93,6 +95,7 @@ private:
         }
 
         char c = board[row][col];
+
         if (node->children.find(c) == node->children.end()) {
             return;
         }
@@ -106,15 +109,12 @@ private:
         }
 
         board[row][col] = '#'; // Mark the current cell as visited
-
         // Explore the neighboring cells (up, down, left, right)
         dfs(board, row - 1, col, node, currentWord, result);
         dfs(board, row + 1, col, node, currentWord, result);
         dfs(board, row, col - 1, node, currentWord, result);
         dfs(board, row, col + 1, node, currentWord, result);
-
         board[row][col] = c; // Backtrack: unmark the current cell
-
         currentWord.pop_back(); // Remove the current character from the current word
     }
 };

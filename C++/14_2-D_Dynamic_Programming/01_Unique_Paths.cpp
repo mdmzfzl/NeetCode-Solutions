@@ -32,16 +32,16 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int uniquePaths(int m, int n) {
         vector<vector<int>> dp(m, vector<int>(n, 1)); // Number of unique paths to reach each position
-        
+
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
-                dp[i][j] = dp[i-1][j] + dp[i][j-1]; // Number of unique paths = paths from above + paths from left
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]; // Number of unique paths = paths from above + paths from left
             }
         }
-        
-        return dp[m-1][n-1]; // Number of unique paths to reach the bottom-right corner
+
+        return dp[m - 1][n - 1]; // Number of unique paths to reach the bottom-right corner
     }
 };

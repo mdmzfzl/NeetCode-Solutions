@@ -24,29 +24,28 @@ The space complexity is O(1) as we are modifying the input array in place and no
 */
 
 class Solution {
-public:
+  public:
     vector<int> plusOne(vector<int>& digits) {
         int n = digits.size();
-        
         // Start from the end and add one to the last digit
-        digits[n-1] += 1;
-        
+        digits[n - 1] += 1;
+
         // Handle any carry
         for (int i = n - 1; i > 0; i--) {
             if (digits[i] == 10) {
                 digits[i] = 0;
-                digits[i-1] += 1;
+                digits[i - 1] += 1;
             } else {
                 break; // No more carry, exit the loop
             }
         }
-        
+
         // If there is still a carry, add a new digit at the beginning of the array
         if (digits[0] == 10) {
             digits[0] = 0;
             digits.insert(digits.begin(), 1);
         }
-        
+
         return digits;
     }
 };

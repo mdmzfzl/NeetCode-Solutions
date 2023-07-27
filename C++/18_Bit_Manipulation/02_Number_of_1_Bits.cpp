@@ -24,20 +24,21 @@ The space complexity is O(1) since we only use a constant amount of extra space 
 */
 
 class Solution {
-public:
+  public:
     int hammingWeight(uint32_t n) {
         int count = 0;
-        
+
         // Iterate while n is not 0
         while (n != 0) {
             // Check if the least significant bit is 1
             if (n & 1) {
                 count++;
             }
+
             // Right-shift n to move to the next bit
             n >>= 1;
         }
-        
+
         return count;
     }
 };

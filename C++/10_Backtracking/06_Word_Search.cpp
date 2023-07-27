@@ -7,7 +7,7 @@ The word can be constructed from letters of sequentially adjacent cells, where a
 The same letter cell may not be used more than once.
 
 Intuition:
-To determine if a given word exists in the grid, we can use a backtracking approach. We start from each cell and explore all possible paths to find the word. 
+To determine if a given word exists in the grid, we can use a backtracking approach. We start from each cell and explore all possible paths to find the word.
 At each step, we check if the current cell matches the current character of the word. If it does, we continue the search in the neighboring cells until the word is found or all paths have been explored.
 
 Approach:
@@ -29,11 +29,11 @@ The space complexity is O(L), where L is the length of the word. This is the max
 */
 
 class Solution {
-public:
+  public:
     bool exist(vector<vector<char>>& board, string word) {
         int m = board.size();
         int n = board[0].size();
-        
+
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
                 if (board[i][j] == word[0] && backtrack(board, word, i, j, 0)) {
@@ -41,34 +41,31 @@ public:
                 }
             }
         }
-        
+
         return false;
     }
-    
-private:
+
+  private:
     bool backtrack(vector<vector<char>>& board, const string& word, int row, int col, int index) {
         if (index == word.length()) {
             return true;  // The entire word has been found
         }
-        
+
         int m = board.size();
         int n = board[0].size();
-        
+
         if (row < 0 || row >= m || col < 0 || col >= n || board[row][col] != word[index]) {
             return false;  // Out of bounds or the current cell does not match the current character
         }
-        
+
         char temp = board[row][col];
         board[row][col] = '#';  // Mark the current cell as visited
-        
         // Recursively call for the neighboring cells
         bool found = backtrack(board, word, row - 1, col, index + 1) ||
                      backtrack(board, word, row + 1, col, index + 1) ||
                      backtrack(board, word, row, col - 1, index + 1) ||
                      backtrack(board, word, row, col + 1, index + 1);
-        
         board[row][col] = temp;  // Mark the current cell as unvisited (backtrack)
-        
         return found;
     }
 };

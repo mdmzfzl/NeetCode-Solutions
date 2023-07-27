@@ -2,7 +2,7 @@
 Problem: LeetCode 70 - Climbing Stairs
 
 Description:
-You are climbing a staircase that has n steps. You can either climb 1 or 2 steps at a time. 
+You are climbing a staircase that has n steps. You can either climb 1 or 2 steps at a time.
 Return the number of distinct ways to climb to the top.
 
 Intuition:
@@ -29,20 +29,20 @@ Dynamic Programming:
 */
 
 class Solution {
-public:
+  public:
     int climbStairs(int n) {
         if (n <= 2) {
             return n;  // Base cases
         }
-        
+
         vector<int> dp(n + 1);
         dp[0] = 1;
         dp[1] = 1;
-        
+
         for (int i = 2; i <= n; ++i) {
             dp[i] = dp[i - 1] + dp[i - 2];  // Recurrence relation
         }
-        
+
         return dp[n];
     }
 };
