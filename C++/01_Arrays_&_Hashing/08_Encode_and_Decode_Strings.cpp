@@ -1,5 +1,5 @@
 /*
-Problem: LeetCode Encode and Decode Strings
+Problem: LeetCode 271 - Encode and Decode Strings
 
 Description:
 Design an algorithm to encode a list of strings to a string and decode the string to the original list of strings. The encoded string should be as compact as possible.
