@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 217 - Contains Duplicate
+
 Key Idea:
 To check if there are any duplicates in the given list, we can use a hash set (set in Python) to store the unique elements as we traverse the list. For each element, we check if it is already present in the set. If it is, then we have found a duplicate, and we return True. If we traverse the entire list without finding any duplicates, we return False.
 
