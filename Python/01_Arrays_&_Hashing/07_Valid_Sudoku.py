@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 36 - Valid Sudoku
+
 Key Idea:
 To determine if a given Sudoku board is valid, we need to check three conditions:
 1. Each row must have distinct digits from 1 to 9.

@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 238 - Product of Array Except Self
+
 Key Idea:
 To solve this problem, we can first calculate the product of all elements to the left of each index and store it in a list. Then, we calculate the product of all elements to the right of each index and update the result list accordingly by multiplying it with the previously calculated left product. In this way, each element in the result list will contain the product of all elements except the one at that index.
 

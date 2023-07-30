@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 242 - Valid Anagram 
+
 Key Idea:
 To determine if two given strings are anagrams of each other, we can compare their character frequencies. An anagram of a string contains the same characters with the same frequency, just arranged differently. We can use a hash map (dictionary in Python) to keep track of the character frequencies for each string. If the character frequencies of both strings match, then they are anagrams.
 

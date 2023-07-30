@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 128 -Longest Consecutive Sequence
+
 Key Idea:
 To find the longest consecutive subsequence, we first create a set of all the elements in the input array 'nums'. Then, for each element in the array, we check if it is the starting element of a consecutive subsequence. To do this, we check if the element before the current element (i.e., nums[i] - 1) exists in the set. If it doesn't, it means nums[i] is the starting element of a consecutive subsequence. From here, we keep incrementing the current element until the consecutive subsequence ends (i.e., the next element does not exist in the set). We keep track of the length of the consecutive subsequence and update the maximum length found so far.
 

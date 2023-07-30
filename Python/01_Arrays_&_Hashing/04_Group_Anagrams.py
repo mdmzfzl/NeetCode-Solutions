@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 49 - Group Anagrams
+
 Key Idea:
 To group anagrams together, we can use a hash map (dictionary in Python) where the key is a sorted version of each word, and the value is a list of words that are anagrams of each other. By iterating through the list of words, we can group them into the hash map based on their sorted versions.
 

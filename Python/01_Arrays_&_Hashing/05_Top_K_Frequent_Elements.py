@@ -1,4 +1,6 @@
 '''
+Problem: LeetCode 347 - Top K Frequent Elements
+
 Key Idea:
 To find the k most frequent elements in the given list, we can use a hash map (dictionary in Python) to keep track of the frequency of each element. We then use a min-heap (priority queue) to keep the k most frequent elements at the top. We traverse the list once to build the frequency map, and then we traverse the map to keep the k most frequent elements in the min-heap.
 
