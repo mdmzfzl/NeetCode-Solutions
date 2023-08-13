@@ -43,7 +43,8 @@ class WordDictionary:
             return node.is_end
         
         return search_in_node(self.root, word)
-    
+
+
 # Your WordDictionary object will be instantiated and called as such:
 # obj = WordDictionary()
 # obj.addWord(word)

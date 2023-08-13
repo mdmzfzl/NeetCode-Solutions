@@ -19,10 +19,10 @@ from typing import List
 
 class TrieNode:
     def __init__(self):
-        self.children = {}  # Store child nodes for each character
-        self.refcnt = 0     # Count of references to this node
+        self.children = {}    # Store child nodes for each character
+        self.refcnt = 0       # Count of references to this node
         self.is_word = False  # Flag to indicate if a complete word ends at this node
-        self.is_rev = False  # Flag to indicate if a word should be reversed
+        self.is_rev = False   # Flag to indicate if a word should be reversed
 
 class Trie:
     def __init__(self):
