@@ -1,10 +1,4 @@
 /*
-* Syntax for PQ: priority_queue<data_type, container, comparator> ds;
-* Data_type(mandatory) : datatype that we are going to store in priority_queue. (int, float, or even any custom datatype)
-* Container(optional) : Container is passed as an underlying container to store the elements. It needs to satisfy some properties, therefore it can be either vector<datatype> or deque<datatype>.
-* Comparator(optional) : Comparator decides the ordering of elements.
-*/
-/*
 Problem: K Closest Points to Origin
 
 Description:
@@ -30,6 +24,13 @@ The time complexity of this approach is O(N log k), where N is the number of poi
 
 Space Complexity:
 The space complexity is O(N), where N is the number of points. We use the distances vector to store the distances and indices of points
+*/
+
+/*
+* Syntax for PQ: priority_queue<data_type, container, comparator> ds;
+* Data_type(mandatory) : datatype that we are going to store in priority_queue. (int, float, or even any custom datatype)
+* Container(optional) : Container is passed as an underlying container to store the elements. It needs to satisfy some properties, therefore it can be either vector<datatype> or deque<datatype>.
+* Comparator(optional) : Comparator decides the ordering of elements.
 */
 
 class Solution {
