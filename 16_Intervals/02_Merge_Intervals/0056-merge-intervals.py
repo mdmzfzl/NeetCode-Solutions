@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 56 - Merge Intervals
 
 Key Idea:
@@ -9,20 +9,21 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), as we store the merged intervals in the result list.
-'''
+"""
+
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         if not intervals:
             return []
-        
+
         intervals.sort(key=lambda x: x[0])
         result = [intervals[0]]
-        
+
         for interval in intervals[1:]:
             if interval[0] <= result[-1][1]:
                 result[-1][1] = max(result[-1][1], interval[1])
             else:
                 result.append(interval)
-        
+
         return result

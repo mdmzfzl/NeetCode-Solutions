@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 416 - Partition Equal Subset Sum
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity is O(n * sum(nums)), where 'n' is the length of the input nu
 
 Space Complexity:
 The space complexity is O(n * sum(nums)) because we use a 2D dp array of size (n+1) x (sum(nums)+1) to store the results.
-'''
+"""
+
 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:

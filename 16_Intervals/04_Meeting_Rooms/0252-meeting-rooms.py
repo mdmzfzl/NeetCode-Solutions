@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 252 - Meeting Rooms
 
 Key Idea:
@@ -9,17 +9,18 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we use only a constant amount of extra space.
-'''
+"""
+
 
 class Solution:
     def canAttendMeetings(self, intervals: List[List[int]]) -> bool:
         if not intervals:
             return True
-        
+
         intervals.sort(key=lambda x: x[0])
-        
+
         for i in range(1, len(intervals)):
-            if intervals[i][0] < intervals[i-1][1]:
+            if intervals[i][0] < intervals[i - 1][1]:
                 return False
-        
+
         return True

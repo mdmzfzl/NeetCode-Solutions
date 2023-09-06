@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 66 - Plus One
 
 Key Idea:
@@ -9,16 +9,17 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we perform the addition in-place without using any additional space.
-'''
+"""
+
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         n = len(digits)
-        
+
         for i in range(n - 1, -1, -1):
             if digits[i] < 9:
                 digits[i] += 1
                 return digits
             digits[i] = 0
-        
+
         return [1] + digits

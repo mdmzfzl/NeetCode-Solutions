@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 131 - Palindrome Partitioning
 
 Key Idea:
@@ -9,25 +9,26 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), where n is the length of the string. This is due to the space required for the recursive call stack and the space for storing the current partition.
-'''
+"""
+
 
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         def is_palindrome(sub):
             return sub == sub[::-1]
-        
+
         def backtrack(start, partition):
             if start == len(s):
                 result.append(partition[:])  # Append a copy of the current partition
                 return
-            
+
             for end in range(start + 1, len(s) + 1):
                 sub = s[start:end]
                 if is_palindrome(sub):
                     partition.append(sub)
                     backtrack(end, partition)
                     partition.pop()  # Backtrack
-        
+
         result = []
         backtrack(0, [])
         return result

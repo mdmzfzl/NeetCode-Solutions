@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 226 - Invert Binary Tree
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,16 +18,17 @@ The space complexity is O(h), where h is the height of the binary tree. In the w
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
         if not root:
             return None
-        
+
         # Swap left and right subtrees
         root.left, root.right = root.right, root.left
-        
+
         # Recursively invert left and right subtrees
         self.invertTree(root.left)
         self.invertTree(root.right)
-        
+
         return root

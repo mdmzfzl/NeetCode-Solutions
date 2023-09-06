@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 127 - Word Ladder
 
 Key Idea:
@@ -12,29 +12,30 @@ Time Complexity:
 Space Complexity:
 - The space complexity is O(n), where we store the word list and the visited set.
 - The queue can temporarily hold up to O(n) elements in the worst case.
-'''
+"""
 
 from collections import deque
+
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordSet = set(wordList)
         if endWord not in wordSet:
             return 0
-        
+
         queue = deque([(beginWord, 1)])  # Start from the beginWord with level 1
         visited = set()
-        
+
         while queue:
             word, level = queue.popleft()
             if word == endWord:
                 return level
-            
+
             for i in range(len(word)):
-                for c in 'abcdefghijklmnopqrstuvwxyz':
-                    new_word = word[:i] + c + word[i+1:]
+                for c in "abcdefghijklmnopqrstuvwxyz":
+                    new_word = word[:i] + c + word[i + 1 :]
                     if new_word in wordSet and new_word not in visited:
                         visited.add(new_word)
                         queue.append((new_word, level + 1))
-        
+
         return 0

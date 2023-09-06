@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 213 - House Robber II
 
 Key Idea:
@@ -13,7 +13,8 @@ The time complexity is O(n) because we use the House Robber I algorithm twice, o
 
 Space Complexity:
 The space complexity is O(1) because we use a constant amount of extra space to store variables.
-'''
+"""
+
 
 class Solution:
     def rob(self, nums: List[int]) -> int:

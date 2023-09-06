@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 3 - Longest Substring Without Repeating Characters
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the length of the input
 
 Space Complexity:
 The space complexity is O(k), where k is the number of unique characters in the input string 's'. In the worst case, the entire string can be composed of unique characters, so the set storing the characters in the window would have k elements.
-'''
+"""
+
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:

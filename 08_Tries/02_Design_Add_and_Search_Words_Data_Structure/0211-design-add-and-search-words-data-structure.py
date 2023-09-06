@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 211 - Design Add and Search Words Data Structure
 
 Key Idea:
@@ -10,12 +10,14 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity of the Trie is O(n * m), where n is the number of words in the Trie and m is the average length of the words. This is due to the space required to store the Trie nodes and the characters in the words.
-'''
+"""
+
 
 class TrieNode:
     def __init__(self):
         self.children = {}
         self.is_end = False
+
 
 class WordDictionary:
     def __init__(self):
@@ -33,15 +35,15 @@ class WordDictionary:
         def search_in_node(node, word):
             for i, char in enumerate(word):
                 if char not in node.children:
-                    if char == '.':
+                    if char == ".":
                         for child in node.children:
-                            if search_in_node(node.children[child], word[i + 1:]):
+                            if search_in_node(node.children[child], word[i + 1 :]):
                                 return True
                     return False
                 else:
                     node = node.children[char]
             return node.is_end
-        
+
         return search_in_node(self.root, word)
 
 
@@ -64,18 +66,18 @@ class WordDictionary:
 #     def search(self, word: str) -> bool:
 #         if word in self.word_set:
 #             return True
-        
+
 #         # Check if the word contains a '.'
 #         if '.' not in word:
 #             return False
-        
+
 #         # Split the word into two parts at the first occurrence of '.'
 #         first_part, rest_part = word.split('.', 1)
-        
+
 #         # Iterate over lowercase letters and create variations to search
 #         for char in 'abcdefghijklmnopqrstuvwxyz':
 #             new_word = first_part + char + rest_part
 #             if new_word in self.word_set:
 #                 return True
-        
+
 #         return False

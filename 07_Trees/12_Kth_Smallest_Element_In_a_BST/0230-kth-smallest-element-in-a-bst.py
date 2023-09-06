@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 230 - Kth Smallest Element in a BST
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(h + k), where h is the height of the b
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,16 +18,17 @@ The space complexity is O(h), where h is the height of the binary tree. In the w
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         def inorder_traversal(node):
             if not node:
                 return []
-            
+
             left = inorder_traversal(node.left)
             right = inorder_traversal(node.right)
-            
+
             return left + [node.val] + right
-        
+
         inorder_values = inorder_traversal(root)
         return inorder_values[k - 1]

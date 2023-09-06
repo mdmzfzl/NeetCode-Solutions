@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 105 - Construct Binary Tree from Preorder and Inorder Traversal
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(n), where n is the number of nodes in the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,16 +18,17 @@ The space complexity is O(n), where n is the number of nodes in the binary tree.
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
         if not preorder or not inorder:
             return None
-        
+
         root_val = preorder.pop(0)
         root = TreeNode(root_val)
         root_index = inorder.index(root_val)
-        
+
         root.left = self.buildTree(preorder, inorder[:root_index])
-        root.right = self.buildTree(preorder, inorder[root_index + 1:])
-        
+        root.right = self.buildTree(preorder, inorder[root_index + 1 :])
+
         return root

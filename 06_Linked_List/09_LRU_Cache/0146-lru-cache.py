@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 146 - LRU Cache
 
 Key Idea:
@@ -10,20 +10,21 @@ Time Complexity:
 
 Space Complexity:
 The space complexity is O(capacity), as we store key-value pairs in the dictionary and maintain a doubly linked list for the same number of elements.
-'''
+"""
+
 
 class LRUCache:
     def __init__(self, capacity: int):
         self.capacity = capacity
         self.cache = {}
         self.order = DoublyLinkedList()
-        
+
     def get(self, key: int) -> int:
         if key in self.cache:
             self.order.move_to_front(key)
             return self.cache[key]
         return -1
-        
+
     def put(self, key: int, value: int) -> None:
         if key in self.cache:
             self.cache[key] = value
@@ -34,6 +35,7 @@ class LRUCache:
                 del self.cache[removed_key]
             self.cache[key] = value
             self.order.add_to_front(key)
+
 
 class DoublyLinkedList:
     def __init__(self):
@@ -64,6 +66,7 @@ class DoublyLinkedList:
         del self.nodes[node.key]
         return node.key
 
+
 class ListNode:
     def __init__(self, key=None):
         self.key = key
@@ -71,7 +74,7 @@ class ListNode:
         self.next = None
 
 
-'''
+"""
 from collections import OrderedDict
 
 class LRUCache:
@@ -95,7 +98,7 @@ class LRUCache:
         else:
             self.capacity = max(0, self.capacity - 1)
         self.cache[key] = value
-'''
+"""
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)

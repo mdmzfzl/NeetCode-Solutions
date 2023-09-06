@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 212 - Word Search II
 
 Key Idea:
@@ -11,23 +11,25 @@ Time Complexity:
 Space Complexity:
 - The space complexity of the Trie is O(n * m), where n is the number of words in the list and m is the average length of the words.
 - The space complexity of the DFS recursion stack is O(n * m) as well, due to the potential depth of the recursion.
-'''
+"""
 
 from collections import Counter
 from itertools import chain, product
 from typing import List
 
+
 class TrieNode:
     def __init__(self):
-        self.children = {}    # Store child nodes for each character
-        self.refcnt = 0       # Count of references to this node
+        self.children = {}  # Store child nodes for each character
+        self.refcnt = 0  # Count of references to this node
         self.is_word = False  # Flag to indicate if a complete word ends at this node
-        self.is_rev = False   # Flag to indicate if a word should be reversed
+        self.is_rev = False  # Flag to indicate if a word should be reversed
+
 
 class Trie:
     def __init__(self):
         self.root = TrieNode()  # Initialize the root of the trie
-    
+
     def insert(self, word, rev):
         node = self.root
         for c in word:
@@ -44,7 +46,7 @@ class Trie:
 
             if node.refcnt == 1:
                 path = [(parent, c)]
-                for c in word[i + 1:]:
+                for c in word[i + 1 :]:
                     path.append((node, c))
                     node = node.children[c]
                 for parent, c in path:
@@ -52,6 +54,7 @@ class Trie:
                 return
             node.refcnt -= 1
         node.is_word = False
+
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
@@ -61,7 +64,7 @@ class Solution:
 
         # Count characters on the board
         boardcnt = Counter(chain(*board))
-        
+
         # Insert words into trie with appropriate orientation
         for w, wrdcnt in ((w, Counter(w)) for w in words):
             if any(wrdcnt[c] > boardcnt[c] for c in wrdcnt):

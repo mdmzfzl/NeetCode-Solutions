@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 5 - Longest Palindromic Substring
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity is O(n^2) because in the worst case, we might expand around 
 
 Space Complexity:
 The space complexity is O(1) because we use a constant amount of extra space to store variables.
-'''
+"""
+
 
 class Solution:
     def longestPalindrome(self, s: str) -> str:
@@ -19,7 +20,7 @@ class Solution:
                 left -= 1
                 right += 1
             # Return the palindrome substring.
-            return s[left + 1:right]
+            return s[left + 1 : right]
 
         if len(s) < 2:
             return s

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 846 - Hand of Straights
 
 Key Idea:
@@ -9,23 +9,24 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), as we use a Counter to store the frequencies of the cards.
-'''
+"""
 
 from collections import Counter
+
 
 class Solution:
     def isNStraightHand(self, hand: List[int], W: int) -> bool:
         if len(hand) % W != 0:
             return False
-        
+
         counter = Counter(hand)
         hand.sort()
-        
+
         for card in hand:
             if counter[card] > 0:
                 for i in range(W):
                     if counter[card + i] <= 0:
                         return False
                     counter[card + i] -= 1
-        
+
         return True

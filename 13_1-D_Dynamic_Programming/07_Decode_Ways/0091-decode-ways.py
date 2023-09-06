@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 91 - Decode Ways
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity is O(n), where n is the length of the input string s. We ite
 
 Space Complexity:
 The space complexity is O(n) because we use an additional DP array of the same length as the input string.
-'''
+"""
+
 
 class Solution:
     def numDecodings(self, s: str) -> int:
@@ -20,13 +21,15 @@ class Solution:
 
         # Base cases:
         dp[0] = 1  # An empty string can be decoded in one way.
-        dp[1] = 1 if s[0] != "0" else 0  # The first character can be decoded in one way if it's not '0'.
+        dp[1] = (
+            1 if s[0] != "0" else 0
+        )  # The first character can be decoded in one way if it's not '0'.
 
         # Fill in the DP array.
         for i in range(2, n + 1):
             # Check the one-digit and two-digit possibilities.
             one_digit = int(s[i - 1])
-            two_digits = int(s[i - 2:i])
+            two_digits = int(s[i - 2 : i])
 
             # If the one-digit is not '0', it can be decoded in the same way as dp[i-1].
             if one_digit != 0:

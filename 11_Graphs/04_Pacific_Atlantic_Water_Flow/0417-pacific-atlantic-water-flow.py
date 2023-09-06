@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 417 - Pacific Atlantic Water Flow
 
 Key Idea:
@@ -10,7 +10,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(m * n), where m is the number of rows and n is the number of columns in the matrix. This is the maximum space required for the recursive call stack during DFS traversal.
-'''
+"""
+
 
 class Solution:
     def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
@@ -25,7 +26,12 @@ class Solution:
             reachable.add((r, c))
             for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
                 nr, nc = r + dr, c + dc
-                if 0 <= nr < rows and 0 <= nc < cols and (nr, nc) not in reachable and heights[nr][nc] >= heights[r][c]:
+                if (
+                    0 <= nr < rows
+                    and 0 <= nc < cols
+                    and (nr, nc) not in reachable
+                    and heights[nr][nc] >= heights[r][c]
+                ):
                     dfs(nr, nc, reachable)
 
         for r in range(rows):

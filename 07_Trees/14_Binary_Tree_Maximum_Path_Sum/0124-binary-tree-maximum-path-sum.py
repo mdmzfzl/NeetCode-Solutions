@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 124 - Binary Tree Maximum Path Sum
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,20 +18,21 @@ The space complexity is O(h), where h is the height of the binary tree. In the w
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def maxPathSum(self, root: TreeNode) -> int:
         def maxPathSumHelper(node):
             if not node:
                 return 0
-            
+
             left_sum = max(0, maxPathSumHelper(node.left))
             right_sum = max(0, maxPathSumHelper(node.right))
-            
+
             self.max_sum = max(self.max_sum, left_sum + right_sum + node.val)
-            
+
             return max(left_sum, right_sum) + node.val
-        
-        self.max_sum = float('-inf')
+
+        self.max_sum = float("-inf")
         maxPathSumHelper(root)
-        
+
         return self.max_sum

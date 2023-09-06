@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 22 - Generate Parentheses
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(4^n / sqrt(n)), where n is the number 
 
 Space Complexity:
 The space complexity is O(4^n / sqrt(n)) as well, as this is the maximum number of valid combinations that can be generated.
-'''
+"""
+
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
@@ -17,12 +18,12 @@ class Solution:
             if len(s) == 2 * n:
                 result.append(s)
                 return
-            
+
             if open_count < n:
-                backtrack(s + '(', open_count + 1, close_count)
+                backtrack(s + "(", open_count + 1, close_count)
             if close_count < open_count:
-                backtrack(s + ')', open_count, close_count + 1)
-        
+                backtrack(s + ")", open_count, close_count + 1)
+
         result = []
-        backtrack('', 0, 0)
+        backtrack("", 0, 0)
         return result

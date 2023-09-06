@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 51 - N-Queens
 
 Key Idea:
@@ -9,37 +9,43 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(N^2), as we need to store the board state and the positions of the queens.
-'''
+"""
+
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         def is_safe(row, col):
             # Check for conflicts with previous rows
             for prev_row in range(row):
-                if board[prev_row][col] == 'Q':
+                if board[prev_row][col] == "Q":
                     return False
-                if col - (row - prev_row) >= 0 and board[prev_row][col - (row - prev_row)] == 'Q':
+                if (
+                    col - (row - prev_row) >= 0
+                    and board[prev_row][col - (row - prev_row)] == "Q"
+                ):
                     return False
-                if col + (row - prev_row) < n and board[prev_row][col + (row - prev_row)] == 'Q':
+                if (
+                    col + (row - prev_row) < n
+                    and board[prev_row][col + (row - prev_row)] == "Q"
+                ):
                     return False
             return True
-        
+
         def place_queen(row):
             if row == n:
-                result.append([''.join(row) for row in board])
+                result.append(["".join(row) for row in board])
                 return
-            
+
             for col in range(n):
                 if is_safe(row, col):
-                    board[row][col] = 'Q'
+                    board[row][col] = "Q"
                     place_queen(row + 1)
-                    board[row][col] = '.'
-        
-        board = [['.' for _ in range(n)] for _ in range(n)]
+                    board[row][col] = "."
+
+        board = [["." for _ in range(n)] for _ in range(n)]
         result = []
         place_queen(0)
         return result
-
 
 
 # class Solution:

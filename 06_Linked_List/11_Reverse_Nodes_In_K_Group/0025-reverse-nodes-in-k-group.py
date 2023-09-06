@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 25 - Reverse Nodes in k-Group
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(k), as we use a constant amount of extra space for the pointers and variables during the recursion.
-'''
+"""
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -17,21 +17,22 @@ The space complexity is O(k), as we use a constant amount of extra space for the
 #         self.val = val
 #         self.next = next
 
+
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
         if not head or k == 1:
             return head
-        
+
         # Count the number of nodes in the list
         count = 0
         current = head
         while current:
             count += 1
             current = current.next
-        
+
         if count < k:
             return head
-        
+
         # Reverse the first k nodes
         prev, current = None, head
         for _ in range(k):
@@ -39,8 +40,8 @@ class Solution:
             current.next = prev
             prev = current
             current = next_node
-        
+
         # Recursively reverse the remaining part of the list
         head.next = self.reverseKGroup(current, k)
-        
+
         return prev

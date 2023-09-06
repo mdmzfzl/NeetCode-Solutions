@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 684 - Redundant Connection
 
 Key Idea:
@@ -12,25 +12,26 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), where we store the parent array and the result array.
-'''
+"""
+
 
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
         n = len(edges)
         parent = list(range(n + 1))  # Initialize each node as its own parent
-        
+
         def find(x):
             if parent[x] != x:
                 parent[x] = find(parent[x])  # Path compression
             return parent[x]
-        
+
         def union(x, y):
             parent[find(x)] = find(y)
-        
+
         for edge in edges:
             u, v = edge
             if find(u) == find(v):
                 return edge
             union(u, v)
-        
+
         return []

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 55 - Jump Game
 
 Key Idea:
@@ -9,15 +9,16 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we only use a constant amount of additional space for variables.
-'''
+"""
+
 
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         max_reachable = 0
-        
+
         for i, jump_length in enumerate(nums):
             if i > max_reachable:
                 return False
             max_reachable = max(max_reachable, i + jump_length)
-        
+
         return True

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 150 - Evaluate Reverse Polish Notation
 
 Key Idea:
@@ -9,25 +9,26 @@ The time complexity of this solution is O(n), where n is the number of tokens in
 
 Space Complexity:
 The space complexity is O(n), where n is the number of tokens in the expression. In the worst case, the stack could store all tokens from the input expression.
-'''
+"""
+
 
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         stack = []
 
         for token in tokens:
-            if token.isdigit() or (token[0] == '-' and token[1:].isdigit()):
+            if token.isdigit() or (token[0] == "-" and token[1:].isdigit()):
                 stack.append(int(token))
             else:
                 num2 = stack.pop()
                 num1 = stack.pop()
-                if token == '+':
+                if token == "+":
                     stack.append(num1 + num2)
-                elif token == '-':
+                elif token == "-":
                     stack.append(num1 - num2)
-                elif token == '*':
+                elif token == "*":
                     stack.append(num1 * num2)
-                elif token == '/':
+                elif token == "/":
                     stack.append(int(num1 / num2))
 
         return stack[0]

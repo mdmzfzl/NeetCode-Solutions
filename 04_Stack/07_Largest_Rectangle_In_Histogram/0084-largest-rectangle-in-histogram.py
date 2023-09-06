@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 84 - Largest Rectangle in Histogram
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(n), where n is the number of elements in the input list 'heights'. In the worst case, all elements could be pushed onto the stack.
-'''
+"""
+
 
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:

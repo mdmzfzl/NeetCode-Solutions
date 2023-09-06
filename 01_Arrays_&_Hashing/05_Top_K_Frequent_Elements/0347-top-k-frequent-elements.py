@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 347 - Top K Frequent Elements
 
 Key Idea:
@@ -9,9 +9,10 @@ The time complexity of this approach is O(n + k*log(n)), where n is the number o
 
 Space Complexity:
 The space complexity is O(n) because we need to store the frequency map of all elements in the input list. Additionally, the min-heap will also have a space complexity of O(n) in the worst case if all elements are unique.
-'''
+"""
 
 import heapq
+
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 338 - Counting Bits
 
 Key Idea:
@@ -9,13 +9,14 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), as we use an array of size 'num + 1' to store the count of 1 bits for each number in the range.
-'''
+"""
+
 
 class Solution:
     def countBits(self, num: int) -> List[int]:
         bits_count = [0] * (num + 1)
-        
+
         for i in range(1, num + 1):
             bits_count[i] = bits_count[i // 2] + (i % 2)
-        
+
         return bits_count

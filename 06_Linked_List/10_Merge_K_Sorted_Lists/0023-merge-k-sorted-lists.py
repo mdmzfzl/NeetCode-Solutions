@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 121 - Merge k Sorted Lists
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(N log k), where N is the total number 
 
 Space Complexity:
 The space complexity is O(k), as the heap can store at most k elements at a time.
-'''
+"""
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -19,16 +19,17 @@ The space complexity is O(k), as the heap can store at most k elements at a time
 
 import heapq
 
+
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         min_heap = []
         for i, l in enumerate(lists):
             if l:
                 heapq.heappush(min_heap, (l.val, i))
-        
+
         dummy = ListNode()
         current = dummy
-        
+
         while min_heap:
             val, idx = heapq.heappop(min_heap)
             current.next = ListNode(val)
@@ -36,5 +37,5 @@ class Solution:
             if lists[idx].next:
                 heapq.heappush(min_heap, (lists[idx].next.val, idx))
                 lists[idx] = lists[idx].next
-        
+
         return dummy.next

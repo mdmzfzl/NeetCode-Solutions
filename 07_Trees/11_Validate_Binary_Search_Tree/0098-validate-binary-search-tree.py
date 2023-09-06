@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 98 - Validate Binary Search Tree
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,20 +18,21 @@ The space complexity is O(h), where h is the height of the binary tree. In the w
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         def inorder_traversal(node, prev):
             if not node:
                 return True
-            
+
             if not inorder_traversal(node.left, prev):
                 return False
-            
+
             if prev[0] is not None and node.val <= prev[0]:
                 return False
             prev[0] = node.val
-            
+
             return inorder_traversal(node.right, prev)
-        
+
         prev = [None]
         return inorder_traversal(root, prev)

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 50 - Pow(x, n)
 
 Key Idea:
@@ -9,7 +9,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(log n), as we use the call stack for the recursive calculations.
-'''
+"""
+
 
 class Solution:
     def myPow(self, x: float, n: int) -> float:
@@ -21,9 +22,9 @@ class Solution:
                 return temp * temp
             else:
                 return base * temp * temp
-        
+
         if n < 0:
             x = 1 / x
             n = -n
-        
+
         return helper(x, n)

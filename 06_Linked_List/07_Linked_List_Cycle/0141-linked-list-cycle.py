@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 141 - Linked List Cycle
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(1), as no extra space is used other than a few variables to keep track of nodes and pointers.
-'''
+"""
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -17,18 +17,19 @@ The space complexity is O(1), as no extra space is used other than a few variabl
 #         self.val = x
 #         self.next = None
 
+
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
         if not head or not head.next:
             return False
-        
+
         slow = head
         fast = head.next
-        
+
         while slow != fast:
             if not fast or not fast.next:
                 return False
             slow = slow.next
             fast = fast.next.next
-        
+
         return True

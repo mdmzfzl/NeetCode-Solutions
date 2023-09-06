@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 70 - Climbing Stairs
 
 Key Idea:
@@ -13,18 +13,19 @@ The time complexity is O(n) because we iterate from 1 to n to calculate the numb
 
 Space Complexity:
 The space complexity is O(1) because we only need two variables to keep track of the previous two results and a temporary variable to calculate the current result.
-'''
+"""
+
 
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n <= 2:
             return n
-        
+
         prev1 = 1  # Number of ways to reach the 1st stair
         prev2 = 2  # Number of ways to reach the 2nd stair
-        
+
         for i in range(3, n + 1):
             current = prev1 + prev2
             prev1, prev2 = prev2, current  # Update for the next iteration
-        
+
         return prev2  # Number of ways to reach the n-th stair

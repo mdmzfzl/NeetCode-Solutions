@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 102 - Binary Tree Level Order Traversal
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(w), where w is the maximum width of the binary tree (number of nodes in the widest level). In the worst case, the queue can hold all nodes in a single level.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,26 +18,27 @@ The space complexity is O(w), where w is the maximum width of the binary tree (n
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
             return []
-        
+
         result = []
         queue = [root]
-        
+
         while queue:
             level = []
             next_level = []
-            
+
             for node in queue:
                 level.append(node.val)
                 if node.left:
                     next_level.append(node.left)
                 if node.right:
                     next_level.append(node.right)
-            
+
             result.append(level)
             queue = next_level
-        
+
         return result

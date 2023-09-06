@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 121 - Best Time to Buy and Sell Stock
 
 Key Idea:
@@ -9,14 +9,15 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(1) since we are not using any additional data structures that depend on the input size. We only use a constant amount of extra space for the variables to store the minimum price and maximum profit.
-'''
+"""
+
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         if not prices:
             return 0
 
-        min_price = float('inf')
+        min_price = float("inf")
         max_profit = 0
 
         for price in prices:

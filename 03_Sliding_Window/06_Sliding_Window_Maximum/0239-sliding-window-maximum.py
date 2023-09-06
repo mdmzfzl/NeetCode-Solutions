@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 239 - Sliding Window Maximum
 
 Key Idea:
@@ -9,9 +9,10 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(k), where k is the size of the sliding window. The deque will store at most 'k' elements at any point during the traversal, representing the maximum window size.
-'''
+"""
 
 from collections import deque
+
 
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:

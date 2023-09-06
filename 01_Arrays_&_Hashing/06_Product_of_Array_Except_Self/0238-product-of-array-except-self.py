@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 238 - Product of Array Except Self
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this approach is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(1) for the output list since we are allowed to return the result in the same list. Therefore, the space complexity is constant, as it does not depend on the size of the input list.
-'''
+"""
+
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:

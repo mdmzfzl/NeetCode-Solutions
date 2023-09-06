@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 981 - Time Based Key-Value Store
 
 Key Idea:
@@ -10,10 +10,10 @@ Time Complexity:
 
 Space Complexity:
 The space complexity is O(n), where n is the number of keys. We need to store values and timestamps for each key in the dictionary.
-'''
+"""
+
 
 class TimeMap:
-
     def __init__(self):
         self.data = defaultdict(list)
 

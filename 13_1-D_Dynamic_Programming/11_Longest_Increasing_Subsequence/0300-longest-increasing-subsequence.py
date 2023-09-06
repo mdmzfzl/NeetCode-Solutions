@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 300 - Longest Increasing Subsequence
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity is O(n^2), where 'n' is the length of the input nums. We use
 
 Space Complexity:
 The space complexity is O(n) because we use an additional dp array of length 'n' to store the results.
-'''
+"""
+
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 355 - Design Twitter
 
 Key Idea:
@@ -10,14 +10,16 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(u + t), where u is the number of users and t is the total number of tweets.
-'''
+"""
 
 import heapq
+
 
 class Tweet:
     def __init__(self, tweet_id, timestamp):
         self.tweet_id = tweet_id
         self.timestamp = timestamp
+
 
 class Twitter:
     def __init__(self):
@@ -33,15 +35,15 @@ class Twitter:
 
     def getNewsFeed(self, userId: int) -> List[int]:
         tweets = []
-        
+
         if userId in self.user_tweets:
             tweets.extend(self.user_tweets[userId])
-        
+
         if userId in self.user_followees:
             for followee in self.user_followees[userId]:
                 if followee in self.user_tweets:
                     tweets.extend(self.user_tweets[followee])
-        
+
         tweets.sort(key=lambda x: x.timestamp, reverse=True)
         return [tweet.tweet_id for tweet in tweets[:10]]
 
@@ -52,9 +54,12 @@ class Twitter:
             self.user_followees[followerId].add(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        if followerId in self.user_followees and followeeId in self.user_followees[followerId]:
+        if (
+            followerId in self.user_followees
+            and followeeId in self.user_followees[followerId]
+        ):
             self.user_followees[followerId].remove(followeeId)
-            
+
 
 # Your Twitter object will be instantiated and called as such:
 # obj = Twitter()

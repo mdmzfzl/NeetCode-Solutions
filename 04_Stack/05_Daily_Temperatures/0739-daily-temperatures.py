@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 739 - Daily Temperatures
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(n), where n is the number of elements in the input array 'temperatures'. In the worst case, all temperatures could be strictly increasing, leading to all elements being pushed onto the stack.
-'''
+"""
+
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 36 - Valid Sudoku
 
 Key Idea:
@@ -14,7 +14,8 @@ The time complexity of this approach is O(1), as the Sudoku board is always a fi
 
 Space Complexity:
 The space complexity is O(1) as well because we are using a fixed amount of additional space (sets) that does not depend on the size of the input grid.
-'''
+"""
+
 
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
@@ -24,7 +25,11 @@ class Solution:
             for j in range(9):
                 if board[i][j] != ".":
                     num = board[i][j]
-                    if (i, num) in seen or (num, j) in seen or (i // 3, j // 3, num) in seen:
+                    if (
+                        (i, num) in seen
+                        or (num, j) in seen
+                        or (i // 3, j // 3, num) in seen
+                    ):
                         return False
                     seen.add((i, num))
                     seen.add((num, j))

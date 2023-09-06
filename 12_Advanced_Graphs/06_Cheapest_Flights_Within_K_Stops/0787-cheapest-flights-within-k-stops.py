@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 787 - Cheapest Flights Within K Stops
 
 Key Idea:
@@ -14,16 +14,21 @@ Space Complexity:
 - The space for the priority queue is O(V).
 - Other data structures used take constant space.
 - Therefore, the space complexity is O(V + E).
-'''
+"""
 
 import heapq
 import math
 from typing import List
 
+
 class Solution:
-    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, max_stops: int) -> int:
+    def findCheapestPrice(
+        self, n: int, flights: List[List[int]], src: int, dst: int, max_stops: int
+    ) -> int:
         graph = [[] for _ in range(n)]
-        min_heap = [(0, src, max_stops + 1)]  # (total_cost, current_city, remaining_stops)
+        min_heap = [
+            (0, src, max_stops + 1)
+        ]  # (total_cost, current_city, remaining_stops)
         distances = [[math.inf] * (max_stops + 2) for _ in range(n)]
 
         for u, v, w in flights:
@@ -38,6 +43,8 @@ class Solution:
                     new_cost = total_cost + cost
                     if new_cost < distances[neighbor][remaining_stops - 1]:
                         distances[neighbor][remaining_stops - 1] = new_cost
-                        heapq.heappush(min_heap, (new_cost, neighbor, remaining_stops - 1))
+                        heapq.heappush(
+                            min_heap, (new_cost, neighbor, remaining_stops - 1)
+                        )
 
         return -1

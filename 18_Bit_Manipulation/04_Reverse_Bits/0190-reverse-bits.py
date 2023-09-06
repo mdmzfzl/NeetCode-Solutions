@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 190 - Reverse Bits
 
 Key Idea:
@@ -9,7 +9,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we use a constant amount of space.
-'''
+"""
+
 
 class Solution:
     def reverseBits(self, n: int) -> int:

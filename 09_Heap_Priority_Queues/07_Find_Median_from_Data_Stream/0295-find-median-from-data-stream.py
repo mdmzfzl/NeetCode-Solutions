@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 295 - Find Median from Data Stream
 
 Key Idea:
@@ -10,12 +10,12 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), where n is the number of elements in the data stream.
-'''
+"""
 
 import heapq
 
-class MedianFinder:
 
+class MedianFinder:
     def __init__(self):
         self.min_heap = []  # To store larger elements
         self.max_heap = []  # To store smaller elements
@@ -25,7 +25,7 @@ class MedianFinder:
             heapq.heappush(self.max_heap, -num)
         else:
             heapq.heappush(self.min_heap, num)
-        
+
         # Balance the heaps
         if len(self.max_heap) > len(self.min_heap) + 1:
             heapq.heappush(self.min_heap, -heapq.heappop(self.max_heap))

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 155 - Min Stack
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of push, pop, top, and getMin operations is O(1). All these 
 
 Space Complexity:
 The space complexity is O(n), where n is the number of elements in the stack. Both the stack and min_stack can potentially store all elements from the input.
-'''
+"""
+
 
 class MinStack:
     def __init__(self):

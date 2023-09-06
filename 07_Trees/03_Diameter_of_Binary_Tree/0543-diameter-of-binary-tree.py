@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 543 - Diameter of Binary Tree
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the binary tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -17,6 +17,7 @@ The space complexity is O(h), where h is the height of the binary tree. In the w
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 
 class Solution:
     def diameterOfBinaryTree(self, root: TreeNode) -> int:
@@ -27,7 +28,7 @@ class Solution:
             right_height = height(node.right)
             self.diameter = max(self.diameter, left_height + right_height)
             return max(left_height, right_height) + 1
-        
+
         self.diameter = 0
         height(root)
         return self.diameter

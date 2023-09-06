@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 704 - Binary Search
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of binary search is O(log n), where n is the number of eleme
 
 Space Complexity:
 The space complexity is O(1), as no extra space is used other than a few variables to keep track of indices and values.
-'''
+"""
+
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -17,7 +18,7 @@ class Solution:
 
         while left <= right:
             mid = left + (right - left) // 2
-            
+
             if nums[mid] == target:
                 return mid
             elif nums[mid] < target:

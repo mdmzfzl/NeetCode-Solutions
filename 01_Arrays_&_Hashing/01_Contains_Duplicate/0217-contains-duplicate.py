@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 217 - Contains Duplicate
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this approach is O(n), where n is the size of the input l
 
 Space Complexity:
 The space complexity is O(n), as the hash set can potentially store all elements of the input list if they are all distinct.
-'''
+"""
+
 
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:

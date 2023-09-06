@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 875 - Koko Eating Bananas
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n * log(max_pile)), where n is the num
 
 Space Complexity:
 The space complexity is O(1), as no extra space is used other than a few variables to keep track of indices and values.
-'''
+"""
+
 
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:

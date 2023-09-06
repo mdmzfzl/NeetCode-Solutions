@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 167 - Two Sum II
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(1) since we are not using any additional data structures that depend on the input size. We only use a constant amount of extra space for the two pointers and other variables.
-'''
+"""
+
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
@@ -17,7 +18,7 @@ class Solution:
 
         while left < right:
             current_sum = numbers[left] + numbers[right]
-            
+
             if current_sum == target:
                 return [left + 1, right + 1]
             elif current_sum < target:

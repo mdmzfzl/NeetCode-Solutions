@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 206 - Reverse Linked List
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(1), as no extra space is used other than a few variables to keep track of nodes and pointers.
-'''
+"""
 
 # Definition for singly-linked list.
 # class ListNode:
@@ -17,15 +17,16 @@ The space complexity is O(1), as no extra space is used other than a few variabl
 #         self.val = val
 #         self.next = next
 
+
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         prev = None
         current = head
-        
+
         while current:
             next_node = current.next
             current.next = prev
             prev = current
             current = next_node
-        
+
         return prev

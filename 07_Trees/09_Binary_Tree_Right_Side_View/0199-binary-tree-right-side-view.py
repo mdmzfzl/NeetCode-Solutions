@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 199 - Binary Tree Right Side View
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(n), where n is the number of nodes in 
 
 Space Complexity:
 The space complexity is O(w), where w is the maximum width of the binary tree (number of nodes in the widest level). In the worst case, the queue can hold all nodes in a single level.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,17 +18,18 @@ The space complexity is O(w), where w is the maximum width of the binary tree (n
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def rightSideView(self, root: TreeNode) -> List[int]:
         if not root:
             return []
-        
+
         result = []
         queue = [root]
-        
+
         while queue:
             level_size = len(queue)
-            
+
             for i in range(level_size):
                 node = queue.pop(0)
                 if i == level_size - 1:
@@ -37,5 +38,5 @@ class Solution:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-        
+
         return result

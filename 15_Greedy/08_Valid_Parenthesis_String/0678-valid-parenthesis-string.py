@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 678 - Valid Parenthesis String
 
 Key Idea:
@@ -9,24 +9,25 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we only use a constant amount of additional space for variables.
-'''
+"""
+
 
 class Solution:
     def checkValidString(self, s: str) -> bool:
         lower = upper = 0
-        
+
         for char in s:
-            if char == '(':
+            if char == "(":
                 lower += 1
                 upper += 1
-            elif char == ')':
+            elif char == ")":
                 lower = max(lower - 1, 0)
                 upper -= 1
             else:  # char == '*'
                 lower = max(lower - 1, 0)
                 upper += 1
-            
+
             if upper < 0:
                 return False
-        
+
         return lower == 0

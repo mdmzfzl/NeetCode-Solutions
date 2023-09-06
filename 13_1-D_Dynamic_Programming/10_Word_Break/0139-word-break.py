@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 139 - Word Break
 
 Key Idea:
@@ -9,17 +9,18 @@ The time complexity is O(n^2), where 'n' is the length of the input string. We i
 
 Space Complexity:
 The space complexity is O(n) because we use a boolean array dp of length 'n' to store the results.
-'''
+"""
+
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # Create a set for faster word lookup.
         wordSet = set(wordDict)
-        
+
         # Initialize a boolean array dp where dp[i] is True if s[0:i] can be broken into words.
         dp = [False] * (len(s) + 1)
         dp[0] = True  # An empty string can always be broken.
-        
+
         # Iterate through the string.
         for i in range(1, len(s) + 1):
             for j in range(i):
@@ -27,5 +28,5 @@ class Solution:
                 if dp[j] and s[j:i] in wordSet:
                     dp[i] = True
                     break  # No need to continue checking.
-        
+
         return dp[len(s)]

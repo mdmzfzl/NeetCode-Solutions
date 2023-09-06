@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 647 - Palindromic Substrings
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity is O(n^2) because in the worst case, we might expand around 
 
 Space Complexity:
 The space complexity is O(1) because we use a constant amount of extra space to store variables.
-'''
+"""
+
 
 class Solution:
     def countSubstrings(self, s: str) -> int:

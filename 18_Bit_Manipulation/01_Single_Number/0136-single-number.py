@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 136 - Single Number
 
 Key Idea:
@@ -9,7 +9,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we only need a constant amount of space to store the XOR result.
-'''
+"""
+
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:

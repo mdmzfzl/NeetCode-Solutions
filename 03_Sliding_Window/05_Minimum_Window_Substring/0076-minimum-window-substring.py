@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 76 - Minimum Window Substring
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the length of 's'. The 
 
 Space Complexity:
 The space complexity is O(k), where k is the number of unique characters in 't'. In the worst case, the frequency dictionaries can have k elements, one for each unique character in 't'.
-'''
+"""
+
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
@@ -24,22 +25,28 @@ class Solution:
         char_freq_temp = {}
         required_chars = len(char_freq_t)
         formed_chars = 0
-        min_length = float('inf')
+        min_length = float("inf")
         min_window = ""
 
         while right < len(s):
             char_freq_temp[s[right]] = char_freq_temp.get(s[right], 0) + 1
 
-            if s[right] in char_freq_t and char_freq_temp[s[right]] == char_freq_t[s[right]]:
+            if (
+                s[right] in char_freq_t
+                and char_freq_temp[s[right]] == char_freq_t[s[right]]
+            ):
                 formed_chars += 1
 
             while left <= right and formed_chars == required_chars:
                 if right - left + 1 < min_length:
                     min_length = right - left + 1
-                    min_window = s[left:right + 1]
+                    min_window = s[left : right + 1]
 
                 char_freq_temp[s[left]] -= 1
-                if s[left] in char_freq_t and char_freq_temp[s[left]] < char_freq_t[s[left]]:
+                if (
+                    s[left] in char_freq_t
+                    and char_freq_temp[s[left]] < char_freq_t[s[left]]
+                ):
                     formed_chars -= 1
 
                 left += 1

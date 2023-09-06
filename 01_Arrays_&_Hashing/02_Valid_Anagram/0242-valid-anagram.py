@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 242 - Valid Anagram 
 
 Key Idea:
@@ -9,13 +9,14 @@ The time complexity of this approach is O(n), where n is the length of the input
 
 Space Complexity:
 The space complexity is O(1) because the hash map will have at most 26 entries (one for each lowercase English letter) regardless of the input string lengths. Therefore, the space complexity is constant.
-'''
+"""
+
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
-        
+
         char_frequency = {}
 
         # Build character frequency map for string s

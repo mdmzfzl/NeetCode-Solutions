@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 191 - Number of 1 Bits
 
 Key Idea:
@@ -9,7 +9,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we use a constant amount of space.
-'''
+"""
+
 
 class Solution:
     def hammingWeight(self, n: int) -> int:

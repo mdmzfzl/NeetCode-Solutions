@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 1 - Two Sum
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the size of the input a
 
 Space Complexity:
 The space complexity is O(n), as the hash map can potentially store all elements of the input array 'nums' if they are all unique. In the best case, where the target sum is achieved with the first two elements, the space complexity would be O(1). However, in the worst case, if all elements are distinct, the hash map will store all elements, leading to O(n) space complexity.
-'''
+"""
+
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:

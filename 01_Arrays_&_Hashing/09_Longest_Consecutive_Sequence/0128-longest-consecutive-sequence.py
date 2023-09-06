@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 128 -Longest Consecutive Sequence
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the number of elements 
 
 Space Complexity:
 The space complexity is O(n), where n is the number of elements in the input array 'nums'. In the worst case, the set will store all elements from the input array if they are all distinct.
-'''
+"""
+
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:

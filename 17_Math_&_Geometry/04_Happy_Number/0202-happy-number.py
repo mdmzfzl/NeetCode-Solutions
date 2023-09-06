@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 202 - Happy Number
 
 Key Idea:
@@ -9,7 +9,8 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we use a constant amount of space.
-'''
+"""
+
 
 class Solution:
     def isHappy(self, n: int) -> bool:
@@ -17,13 +18,13 @@ class Solution:
             next_num = 0
             while num > 0:
                 num, digit = divmod(num, 10)
-                next_num += digit ** 2
+                next_num += digit**2
             return next_num
-        
+
         slow, fast = n, get_next(n)
-        
+
         while fast != 1 and slow != fast:
             slow = get_next(slow)
             fast = get_next(get_next(fast))
-        
+
         return fast == 1

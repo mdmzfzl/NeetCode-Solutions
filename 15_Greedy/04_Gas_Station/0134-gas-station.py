@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 134 - Gas Station
 
 Key Idea:
@@ -9,20 +9,21 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we only use a constant amount of additional space for variables.
-'''
+"""
+
 
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         total_gas = 0
         current_gas = 0
         start_station = 0
-        
+
         for i in range(len(gas)):
             total_gas += gas[i] - cost[i]
             current_gas += gas[i] - cost[i]
-            
+
             if current_gas < 0:
                 start_station = i + 1
                 current_gas = 0
-        
+
         return start_station if total_gas >= 0 else -1

@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 312 - Burst Balloons
 
 Key Idea:
@@ -9,25 +9,28 @@ The time complexity is O(n^3), where 'n' is the number of balloons. We have thre
 
 Space Complexity:
 The space complexity is O(n^2) as we use a 2D table 'dp' of size n x n to store the results of subproblems.
-'''
+"""
+
 
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
         n = len(nums)
-        
+
         # Add virtual balloons at the beginning and end with a value of 1.
         nums = [1] + nums + [1]
-        
+
         # Create a 2D table dp to store the maximum coins.
         dp = [[0] * (n + 2) for _ in range(n + 2)]
-        
+
         # Iterate through different balloon ranges.
         for length in range(2, n + 2):
             for left in range(0, n + 2 - length):
                 right = left + length
                 for k in range(left + 1, right):
                     # Choose the best order to burst balloons in the range [left, right].
-                    dp[left][right] = max(dp[left][right], 
-                                         nums[left] * nums[k] * nums[right] + dp[left][k] + dp[k][right])
-        
+                    dp[left][right] = max(
+                        dp[left][right],
+                        nums[left] * nums[k] * nums[right] + dp[left][k] + dp[k][right],
+                    )
+
         return dp[0][n + 1]

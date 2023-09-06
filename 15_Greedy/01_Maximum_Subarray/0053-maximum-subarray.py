@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 53 - Maximum Subarray
 
 Key Idea:
@@ -9,15 +9,16 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we only use a constant amount of additional space for variables.
-'''
+"""
+
 
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        max_sum = float('-inf')
+        max_sum = float("-inf")
         current_sum = 0
-        
+
         for num in nums:
             current_sum = max(num, current_sum + num)
             max_sum = max(max_sum, current_sum)
-        
+
         return max_sum

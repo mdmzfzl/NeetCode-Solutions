@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 235 - Lowest Common Ancestor of a Binary Search Tree
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(h), where h is the height of the BST. 
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the BST. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,8 +18,11 @@ The space complexity is O(h), where h is the height of the BST. In the worst cas
 #         self.left = None
 #         self.right = None
 
+
 class Solution:
-    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def lowestCommonAncestor(
+        self, root: TreeNode, p: TreeNode, q: TreeNode
+    ) -> TreeNode:
         if root.val > p.val and root.val > q.val:
             return self.lowestCommonAncestor(root.left, p, q)
         elif root.val < p.val and root.val < q.val:

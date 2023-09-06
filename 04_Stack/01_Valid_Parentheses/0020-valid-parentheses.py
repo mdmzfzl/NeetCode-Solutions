@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 20 - Valid Parentheses
 
 Key Idea:
@@ -9,12 +9,13 @@ The time complexity of this solution is O(n), where n is the length of the input
 
 Space Complexity:
 The space complexity is O(n), where n is the length of the input string 's'. In the worst case, the stack could store all characters of the input string.
-'''
+"""
+
 
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        parentheses_map = {')': '(', '}': '{', ']': '['}
+        parentheses_map = {")": "(", "}": "{", "]": "["}
 
         for char in s:
             if char in parentheses_map.values():

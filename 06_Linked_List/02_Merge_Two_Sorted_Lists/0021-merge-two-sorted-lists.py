@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 21 - Merge Two Sorted Lists
 
 Key Idea:
@@ -9,13 +9,14 @@ The time complexity of this solution is O(n), where n is the total number of nod
 
 Space Complexity:
 The space complexity is O(1), as no extra space is used other than a few variables to keep track of nodes and pointers.
-'''
+"""
 
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:

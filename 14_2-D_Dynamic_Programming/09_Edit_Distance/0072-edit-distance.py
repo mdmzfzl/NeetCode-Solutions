@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 72 - Edit Distance
 
 Key Idea:
@@ -9,21 +9,22 @@ The time complexity is O(m * n), where 'm' is the length of string 'word1' and '
 
 Space Complexity:
 The space complexity is O(m * n) as we use a 2D table 'dp' of the same size to store the results of subproblems.
-'''
+"""
+
 
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         m, n = len(word1), len(word2)
-        
+
         # Create a 2D table dp to store the minimum edit distance.
         dp = [[0] * (n + 1) for _ in range(m + 1)]
-        
+
         # Initialize the first row and first column of dp.
         for i in range(m + 1):
             dp[i][0] = i
         for j in range(n + 1):
             dp[0][j] = j
-        
+
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 # If the characters match, no additional operation is needed.
@@ -35,5 +36,5 @@ class Solution:
                     # 2. Delete a character (dp[i - 1][j] + 1)
                     # 3. Replace a character (dp[i - 1][j - 1] + 1)
                     dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1
-        
+
         return dp[m][n]

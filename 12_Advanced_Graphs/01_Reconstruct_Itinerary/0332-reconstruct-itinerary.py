@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 332 - Reconstruct Itinerary
 
 Key Idea:
@@ -13,22 +13,23 @@ Space Complexity:
 - We use a dictionary to store the graph, which takes O(n) space.
 - The recursive stack for DFS can go as deep as the number of tickets, which is O(n).
 - Therefore, the space complexity is O(n).
-'''
+"""
+
 
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
         graph = collections.defaultdict(list)
-        
+
         for start, end in sorted(tickets, reverse=True):
             graph[start].append(end)
-        
+
         route = []
-        
+
         def dfs(node):
             while graph[node]:
                 dfs(graph[node].pop())
             route.append(node)
-        
+
         dfs("JFK")
-        
+
         return route[::-1]

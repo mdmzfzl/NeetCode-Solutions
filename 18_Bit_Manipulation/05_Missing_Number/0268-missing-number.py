@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 268 - Missing Number
 
 Key Idea:
@@ -9,14 +9,15 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(1), as we use a constant amount of space.
-'''
+"""
+
 
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
         n = len(nums)
         missing_num = n
-        
+
         for i in range(n):
             missing_num ^= i ^ nums[i]
-        
+
         return missing_num

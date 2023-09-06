@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 90 - Subsets II
 
 Key Idea:
@@ -9,20 +9,21 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(n), where n is the number of elements in the input list. This is due to the space required for the recursive call stack.
-'''
+"""
+
 
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         def backtrack(start, subset):
             subsets.append(subset[:])  # Append a copy of the current subset
-            
+
             for i in range(start, len(nums)):
                 if i > start and nums[i] == nums[i - 1]:
                     continue  # Skip duplicates at the same depth level
                 subset.append(nums[i])
                 backtrack(i + 1, subset)
                 subset.pop()  # Backtrack
-        
+
         nums.sort()  # Sort the input to handle duplicates
         subsets = []
         backtrack(0, [])

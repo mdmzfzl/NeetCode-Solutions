@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 208 - Implement Trie (Prefix Tree)
 
 Key Idea:
@@ -11,12 +11,14 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity of the trie is O(n * m), where n is the number of words in the trie and m is the average length of the words. This is due to the space required to store the trie nodes and the characters in the words.
-'''
+"""
+
 
 class TrieNode:
     def __init__(self):
         self.children = {}
         self.is_end = False
+
 
 class Trie:
     def __init__(self):

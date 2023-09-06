@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 567 - Permutation in String
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the length of 's2'. The
 
 Space Complexity:
 The space complexity is O(1) since the frequency dictionaries have a constant number of elements (the number of unique characters in 's1' or the alphabet size) regardless of the size of the input strings 's1' and 's2'.
-'''
+"""
+
 
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:

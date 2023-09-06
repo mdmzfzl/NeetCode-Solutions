@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 49 - Group Anagrams
 
 Key Idea:
@@ -9,14 +9,15 @@ The time complexity of this approach depends on the number of words (n) and the 
 
 Space Complexity:
 The space complexity is O(n * m), where n is the number of words, and m is the maximum length of a word. In the worst case, all words are unique, and the hash map will contain n entries, each with a list of words of length m.
-'''
+"""
+
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagrams_map = {}
 
         for word in strs:
-            sorted_word = ''.join(sorted(word))
+            sorted_word = "".join(sorted(word))
             if sorted_word in anagrams_map:
                 anagrams_map[sorted_word].append(word)
             else:

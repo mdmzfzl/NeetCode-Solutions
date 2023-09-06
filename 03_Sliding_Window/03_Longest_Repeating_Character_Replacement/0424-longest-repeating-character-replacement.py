@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 424 - Longest Repeating Character Replacement
 
 Key Idea:
@@ -9,7 +9,8 @@ The time complexity of this solution is O(n), where n is the length of the input
 
 Space Complexity:
 The space complexity is O(k), where k is the maximum number of distinct characters allowed in the input string 's'. In the worst case, the entire string can have k distinct characters, so the dictionary storing the character frequencies in the window would have k elements.
-'''
+"""
+
 
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
@@ -21,11 +22,11 @@ class Solution:
         while right < len(s):
             char_freq[s[right]] = char_freq.get(s[right], 0) + 1
             max_freq = max(max_freq, char_freq[s[right]])
-            
+
             if (right - left + 1) - max_freq > k:
                 char_freq[s[left]] -= 1
                 left += 1
-                
+
             max_length = max(max_length, right - left + 1)
             right += 1
 

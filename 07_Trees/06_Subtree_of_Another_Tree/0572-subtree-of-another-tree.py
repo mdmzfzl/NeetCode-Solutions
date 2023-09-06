@@ -1,4 +1,4 @@
-'''
+"""
 Problem: LeetCode 57 - Subtree of Another Tree
 
 Key Idea:
@@ -9,7 +9,7 @@ The time complexity of this solution is O(m * n), where m is the number of nodes
 
 Space Complexity:
 The space complexity is O(h), where h is the height of the main tree. In the worst case, the recursion stack can go as deep as the height of the tree.
-'''
+"""
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -18,6 +18,7 @@ The space complexity is O(h), where h is the height of the main tree. In the wor
 #         self.left = left
 #         self.right = right
 
+
 class Solution:
     def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
         if not s:
@@ -25,7 +26,7 @@ class Solution:
         if self.isSameTree(s, t):
             return True
         return self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
-    
+
     def isSameTree(self, p, q):
         if not p and not q:
             return True
