@@ -7,7 +7,6 @@ source_directory = "path/to/this/repo"
 # Define a regular expression pattern to extract the problem number and name
 pattern = r"Problem: LeetCode (\d+) - (.+)\n"
 
-
 # Function to rename C++ files based on problem number and name
 def rename_cpp_files(root, subdirs):
     for subdir in subdirs:
@@ -28,7 +27,6 @@ def rename_cpp_files(root, subdirs):
                             new_path = os.path.join(sub_path, new_filename)
                             os.rename(file_path, new_path)
                             print(f"Renamed {filename} to {new_filename}")
-
 
 # Recursively walk through the source directory and its subdirectories
 for root, dirs, _ in os.walk(source_directory):
