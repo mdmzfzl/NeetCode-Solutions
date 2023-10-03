@@ -23,10 +23,6 @@ Time Complexity:
 Space Complexity:
 - The space complexity of the Trie structure is O(W*L), where W is the total number of characters in all words, and L is the average word length.
 - The space complexity of the DFS stack is O(L), where L is the maximum word length.
-- The space complexity of the result vector `ans` is O(K*L), where K is the number of found words and L is the average word length.
-- Overall, the space complexity is dominated by the Trie structure and is O(W*L).
-
-The approach efficiently searches for words on the board while leveraging the Trie structure to speed up the search process. It has a time complexity that depends on the dimensions of the board, the number of words, and their lengths.
 */
 
 struct Trie {
