@@ -1,5 +1,3 @@
 .vscode/
-paths.txt
-TODO.txt
-Directories.txt
 .pylintrc
+*.txt
