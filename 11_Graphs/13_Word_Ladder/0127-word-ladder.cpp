@@ -31,7 +31,7 @@ The space complexity is O(N * M^2), where N is the number of words in the wordLi
 
 class Solution {
   public:
-    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+    int ladderLength(string beginWord, string endWord, vector<string> &wordList) {
         unordered_set<string> wordSet(wordList.begin(), wordList.end());  // Convert wordList to a set for efficient lookup
 
         if (wordSet.find(endWord) == wordSet.end()) {

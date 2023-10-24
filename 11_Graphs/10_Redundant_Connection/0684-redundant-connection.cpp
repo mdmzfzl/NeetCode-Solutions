@@ -26,7 +26,7 @@ The space complexity is O(n), where n is the number of nodes. This is the space 
 
 class Solution {
   public:
-    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+    vector<int> findRedundantConnection(vector<vector<int>> &edges) {
         int n = edges.size();
         vector<int> parent(n + 1);
 
@@ -36,7 +36,7 @@ class Solution {
         }
 
         // Iterate through the edges
-        for (const auto& edge : edges) {
+        for (const auto &edge : edges) {
             int node1 = edge[0];
             int node2 = edge[1];
             // Find the parent of each node in the current edge
@@ -56,7 +56,7 @@ class Solution {
     }
 
   private:
-    int findParent(vector<int>& parent, int node) {
+    int findParent(vector<int> &parent, int node) {
         if (parent[node] != node) {
             parent[node] = findParent(parent, parent[node]);
         }

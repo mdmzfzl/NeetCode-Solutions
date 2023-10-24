@@ -23,8 +23,8 @@ Space Complexity:
 O(N + Q), for intervals and sorted_queries.
 */
 
-use std::collections::{BinaryHeap, HashMap};
 use std::cmp::Ordering;
+use std::collections::{BinaryHeap, HashMap};
 
 #[derive(Debug, PartialEq, Eq)]
 struct Interval {

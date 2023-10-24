@@ -32,19 +32,19 @@ impl Solution {
             }
             sum
         }
-        
+
         let mut slow = n;
         let mut fast = n;
-        
+
         loop {
             slow = get_next(slow);
             fast = get_next(get_next(fast));
-            
+
             if slow == fast {
                 break;
             }
         }
-        
+
         slow == 1
     }
 }

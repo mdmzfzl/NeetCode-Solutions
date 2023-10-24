@@ -30,7 +30,7 @@ The space complexity is O(1) since the frequency array has a fixed size of 26 (a
 
 class Solution {
   public:
-    int leastInterval(vector<char>& tasks, int n) {
+    int leastInterval(vector<char> &tasks, int n) {
         // Count the frequency of each task
         vector<int> frequency(26, 0);
 

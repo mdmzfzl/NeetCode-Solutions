@@ -25,16 +25,16 @@ impl Solution {
         let mut max_reach = 0;
         let mut end = 0;
         let mut jumps = 0;
-        
+
         for i in 0..nums.len() - 1 {
             max_reach = max_reach.max(i + nums[i] as usize);
-            
+
             if i == end {
                 end = max_reach;
                 jumps += 1;
             }
         }
-        
+
         jumps
     }
 }

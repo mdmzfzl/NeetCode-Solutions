@@ -33,7 +33,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int change(int amount, vector<int>& coins) {
+    int change(int amount, vector<int> &coins) {
         // Create a DP array to store the number of combinations
         // dp[i] represents the number of combinations to make amount i
         vector<int> dp(amount + 1, 0);

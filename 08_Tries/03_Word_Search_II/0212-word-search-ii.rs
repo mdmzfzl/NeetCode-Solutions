@@ -71,8 +71,17 @@ impl Solution {
             if let Some(word) = next.is_solution.take() {
                 ans.push(word);
             }
-            for &(x, y) in &[(i + 1, j), (i.wrapping_sub(1), j), (i, j + 1), (i, j.wrapping_sub(1))] {
-                if x < board.len() && y < board[0].len() && board[x][y] != ' ' && next.children[(board[x][y] as u8 - b'a') as usize].is_some() {
+            for &(x, y) in &[
+                (i + 1, j),
+                (i.wrapping_sub(1), j),
+                (i, j + 1),
+                (i, j.wrapping_sub(1)),
+            ] {
+                if x < board.len()
+                    && y < board[0].len()
+                    && board[x][y] != ' '
+                    && next.children[(board[x][y] as u8 - b'a') as usize].is_some()
+                {
                     Self::dfs(board, next, ans, x, y);
                 }
             }

@@ -40,11 +40,11 @@ due to the adjacency list representation of the graph.
 
 class Solution {
   public:
-    int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+    int networkDelayTime(vector<vector<int>> &times, int n, int k) {
         // Create a graph representation using an adjacency list
         unordered_map<int, vector<pair<int, int>>> graph;
 
-        for (const auto& time : times) {
+        for (const auto &time : times) {
             graph[time[0]].push_back({time[1], time[2]});
         }
 
@@ -65,7 +65,7 @@ class Solution {
             }
 
             // Update the distances for neighbors
-            for (const auto& neighbor : graph[node]) {
+            for (const auto &neighbor : graph[node]) {
                 int nextNode = neighbor.first;
                 int newDist = dist + neighbor.second;
 

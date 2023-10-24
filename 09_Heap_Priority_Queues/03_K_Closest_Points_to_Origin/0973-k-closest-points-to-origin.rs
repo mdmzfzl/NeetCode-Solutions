@@ -23,8 +23,8 @@ Space Complexity:
 O(K), as the max-heap can contain at most K points.
 */
 
-use std::collections::BinaryHeap;
 use std::cmp::Ordering;
+use std::collections::BinaryHeap;
 
 impl Solution {
     pub fn k_closest(points: Vec<Vec<i32>>, k: i32) -> Vec<Vec<i32>> {
@@ -40,7 +40,11 @@ impl Solution {
             }
         }
 
-        min_heap.into_sorted_vec().into_iter().map(Point::into_vec).collect()
+        min_heap
+            .into_sorted_vec()
+            .into_iter()
+            .map(Point::into_vec)
+            .collect()
     }
 }
 

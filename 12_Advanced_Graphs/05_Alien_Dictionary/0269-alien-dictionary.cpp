@@ -33,7 +33,7 @@ Topological Sorting:
 
 class Solution {
   public:
-    string alienOrder(vector<string>& words) {
+    string alienOrder(vector<string> &words) {
         // Initialize the graph and indegree array
         vector<vector<bool>> graph(26, vector<bool>(26, false));
         vector<int> indegree(26, -1);
@@ -46,8 +46,8 @@ class Solution {
 
   private:
     // Helper function to build the graph and calculate indegrees
-    void buildGraph(vector<string>& words, vector<vector<bool>>& graph, vector<int>& indegree) {
-        for (string& word : words) {
+    void buildGraph(vector<string> &words, vector<vector<bool>> &graph, vector<int> &indegree) {
+        for (string &word : words) {
             for (char c : word) {
                 indegree[c - 'a'] = 0;
             }
@@ -75,7 +75,7 @@ class Solution {
     }
 
     // Helper function for topological sorting using DFS
-    string topologicalSort(vector<vector<bool>>& graph, vector<int>& indegree) {
+    string topologicalSort(vector<vector<bool>> &graph, vector<int> &indegree) {
         string result = "";
         stack<char> st;
 

@@ -15,7 +15,7 @@ Approach:
 5. Return the merged list.
 
 Time Complexity:
-O(N log k), where N is the total number of elements across all lists, and k is the number of lists. 
+O(N log k), where N is the total number of elements across all lists, and k is the number of lists.
    - The min-heap can have at most k elements, and extracting the minimum element takes O(log k) time.
    - We perform this extraction for all N elements.
 
@@ -36,7 +36,7 @@ impl Solution {
 
         // Create a min-heap to keep track of the smallest nodes
         let mut min_heap = BinaryHeap::with_capacity(lists.len());
-        
+
         // Initialize the min-heap with the heads of all lists
         for list in lists {
             if let Some(node) = list {
@@ -55,7 +55,7 @@ impl Solution {
             tail.replace(node.0);
             tail = &mut tail.as_mut().unwrap().next;
         }
-        
+
         // Return the merged list starting from the real head (skip the dummy head)
         merged_head.next.take()
     }

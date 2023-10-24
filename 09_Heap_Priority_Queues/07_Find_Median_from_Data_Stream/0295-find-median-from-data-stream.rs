@@ -23,12 +23,12 @@ Space Complexity:
 O(n), where n is the number of elements in the data stream (space is used to store the elements in heaps).
 */
 
-use std::collections::BinaryHeap;
 use std::cmp::Reverse;
+use std::collections::BinaryHeap;
 
 struct MedianFinder {
-    left_heap: BinaryHeap<i32>,                 // Max-heap for the lower half
-    right_heap: BinaryHeap<Reverse<i32>>,       // Min-heap for the upper half
+    left_heap: BinaryHeap<i32>,           // Max-heap for the lower half
+    right_heap: BinaryHeap<Reverse<i32>>, // Min-heap for the upper half
 }
 
 impl MedianFinder {

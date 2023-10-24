@@ -36,7 +36,7 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 
 class Solution {
   public:
-    bool searchMatrix(std::vector<std::vector<int>>& matrix, int target) {
+    bool searchMatrix(std::vector<std::vector<int>> &matrix, int target) {
         int m = matrix.size();
         int n = matrix[0].size();
         int leftRow = 0;

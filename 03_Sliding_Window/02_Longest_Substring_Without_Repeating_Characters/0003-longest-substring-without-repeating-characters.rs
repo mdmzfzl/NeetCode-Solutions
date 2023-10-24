@@ -32,7 +32,7 @@ impl Solution {
             if let Some(&prev_index) = char_indices.get(&ch) {
                 left = left.max(prev_index + 1);
             }
-            
+
             max_length = max_length.max(right - left + 1);
             char_indices.insert(ch, right);
         }

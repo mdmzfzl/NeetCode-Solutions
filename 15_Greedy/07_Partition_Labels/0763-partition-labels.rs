@@ -28,25 +28,25 @@ impl Solution {
     pub fn partition_labels(s: String) -> Vec<i32> {
         let mut last_occurrence: HashMap<char, usize> = HashMap::new();
         let mut result: Vec<i32> = Vec::new();
-        
+
         // Populate the last_occurrence HashMap
         for (i, c) in s.chars().enumerate() {
             last_occurrence.insert(c, i);
         }
-        
+
         let mut start = 0;
         let mut end = 0;
-        
+
         // Iterate through the string to find partitions
         for (i, c) in s.chars().enumerate() {
             end = end.max(*last_occurrence.get(&c).unwrap());
-            
+
             if i == end {
                 result.push((end - start + 1) as i32);
                 start = i + 1;
             }
         }
-        
+
         result
     }
 }

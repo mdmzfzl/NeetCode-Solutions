@@ -35,7 +35,7 @@ The space complexity is O(n), where n is the size of the input array `candidates
 
 class Solution {
   public:
-    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
         vector<vector<int>> result;
         vector<int> combination;
         sort(candidates.begin(), candidates.end());  // Sort the candidates
@@ -44,7 +44,7 @@ class Solution {
     }
 
   private:
-    void backtrack(const vector<int>& candidates, int target, int index, vector<int>& combination, vector<vector<int>>& result) {
+    void backtrack(const vector<int> &candidates, int target, int index, vector<int> &combination, vector<vector<int>> &result) {
         if (target == 0) {
             result.push_back(combination);
             return;

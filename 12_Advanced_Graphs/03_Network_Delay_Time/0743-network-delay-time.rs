@@ -33,15 +33,15 @@ impl Solution {
             let (u, v, w) = (time[0], time[1], time[2]);
             graph.entry(u).or_insert(Vec::new()).push((v, w));
         }
-        
+
         // Initialize distances with infinity, except for the source.
         let mut dist: Vec<i32> = vec![std::i32::MAX; n as usize];
         dist[k as usize - 1] = 0;
-        
+
         // Create a min heap to store (distance, node) pairs.
         let mut min_heap: BinaryHeap<(i32, i32)> = BinaryHeap::new();
         min_heap.push((0, k));
-        
+
         while let Some((d, u)) = min_heap.pop() {
             if d > dist[u as usize - 1] {
                 continue;
@@ -56,12 +56,12 @@ impl Solution {
                 }
             }
         }
-        
+
         // Check if any node is unreachable.
         if dist.iter().any(|&d| d == std::i32::MAX) {
             return -1;
         }
-        
+
         // Return the maximum distance in "dist."
         *dist.iter().max().unwrap()
     }

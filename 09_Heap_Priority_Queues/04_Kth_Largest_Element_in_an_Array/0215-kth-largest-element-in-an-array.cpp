@@ -50,7 +50,7 @@ Space Complexity:
 
 class Solution {
   public:
-    int quickselect(vector<int>& nums, int left, int right, int k) {
+    int quickselect(vector<int> &nums, int left, int right, int k) {
         // Base case: if the left and right indices are the same, return the element at that index
         if (left >= right) {
             return nums[left];
@@ -88,7 +88,7 @@ class Solution {
         return quickselect(nums, j + 1, right, k - smallerPartitionSize);
     }
 
-    int findKthLargest(vector<int>& nums, int k) {
+    int findKthLargest(vector<int> &nums, int k) {
         // Disable synchronization between C and C++ standard streams for faster I/O
         cin.tie(0);
         ios::sync_with_stdio(false);

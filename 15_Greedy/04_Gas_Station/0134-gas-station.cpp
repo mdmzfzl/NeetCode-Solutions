@@ -35,7 +35,7 @@ The space complexity is O(1), as we use only a constant amount of extra space fo
 
 class Solution {
   public:
-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
         int totalGas = 0; // Total gas available
         int totalCost = 0; // Total cost of traveling the circuit
         int currentGas = 0; // Current gas in the tank

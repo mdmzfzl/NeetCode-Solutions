@@ -30,7 +30,7 @@ The space complexity is O(L), where L is the length of the word. This is the max
 
 class Solution {
   public:
-    bool exist(vector<vector<char>>& board, string word) {
+    bool exist(vector<vector<char>> &board, string word) {
         int m = board.size();
         int n = board[0].size();
 
@@ -46,7 +46,7 @@ class Solution {
     }
 
   private:
-    bool backtrack(vector<vector<char>>& board, const string& word, int row, int col, int index) {
+    bool backtrack(vector<vector<char>> &board, const string &word, int row, int col, int index) {
         if (index == word.length()) {
             return true;  // The entire word has been found
         }

@@ -58,7 +58,7 @@ impl Solution {
                 min_heap.push(Reverse((total_price + price, to, steps + 1)));
             }
         }
-        
+
         -1
     }
 }

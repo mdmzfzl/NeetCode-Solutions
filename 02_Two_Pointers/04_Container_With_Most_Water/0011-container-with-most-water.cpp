@@ -30,7 +30,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 
 class Solution {
   public:
-    int maxArea(vector<int>& height) {
+    int maxArea(vector<int> &height) {
         int left = 0, right = height.size() - 1;
         int maxArea = 0;
 

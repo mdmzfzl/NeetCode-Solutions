@@ -36,7 +36,7 @@ The space complexity is O(1), as we use only a constant amount of extra space fo
 
 class Solution {
   public:
-    int jump(vector<int>& nums) {
+    int jump(vector<int> &nums) {
         int end = 0;
         int farthest = 0;
         int jumps = 0;

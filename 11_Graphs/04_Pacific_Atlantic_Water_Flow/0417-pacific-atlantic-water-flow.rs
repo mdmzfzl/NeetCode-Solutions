@@ -27,20 +27,20 @@ impl Solution {
             return Vec::new();
         }
         let cols = matrix[0].len();
-        
+
         let mut pacific_reachable = vec![vec![false; cols]; rows];
         let mut atlantic_reachable = vec![vec![false; cols]; rows];
-        
+
         for i in 0..rows {
             Solution::dfs(&matrix, &mut pacific_reachable, i, 0, i, 0);
             Solution::dfs(&matrix, &mut atlantic_reachable, i, cols - 1, i, cols - 1);
         }
-        
+
         for j in 0..cols {
             Solution::dfs(&matrix, &mut pacific_reachable, 0, j, 0, j);
             Solution::dfs(&matrix, &mut atlantic_reachable, rows - 1, j, rows - 1, j);
         }
-        
+
         let mut result = Vec::new();
         for i in 0..rows {
             for j in 0..cols {
@@ -49,20 +49,33 @@ impl Solution {
                 }
             }
         }
-        
+
         result
     }
-    
-    fn dfs(matrix: &Vec<Vec<i32>>, reachable: &mut Vec<Vec<bool>>, i: usize, j: usize, prev_i: usize, prev_j: usize) {
+
+    fn dfs(
+        matrix: &Vec<Vec<i32>>,
+        reachable: &mut Vec<Vec<bool>>,
+        i: usize,
+        j: usize,
+        prev_i: usize,
+        prev_j: usize,
+    ) {
         let rows = matrix.len();
         let cols = matrix[0].len();
-        
-        if i < 0 || i >= rows || j < 0 || j >= cols || reachable[i][j] || matrix[i][j] < matrix[prev_i][prev_j] {
+
+        if i < 0
+            || i >= rows
+            || j < 0
+            || j >= cols
+            || reachable[i][j]
+            || matrix[i][j] < matrix[prev_i][prev_j]
+        {
             return;
         }
-        
+
         reachable[i][j] = true;
-        
+
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         for (dx, dy) in directions.iter() {
             let x = (i as isize + dx) as usize;

@@ -31,7 +31,7 @@ The space complexity is O(1), as we use only a constant amount of extra space fo
 
 class Solution {
   public:
-    bool canJump(vector<int>& nums) {
+    bool canJump(vector<int> &nums) {
         int max_reachable = 0; // Initialize the furthest position we can reach
 
         for (int i = 0; i < nums.size(); i++) {

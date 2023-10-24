@@ -29,7 +29,7 @@ The space complexity is O(1) for the result vector, and no additional data struc
 
 class Solution {
   public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+    vector<vector<int>> insert(vector<vector<int>> &intervals, vector<int> &newInterval) {
         vector<vector<int>> result;
         int i = 0;
         int n = intervals.size();

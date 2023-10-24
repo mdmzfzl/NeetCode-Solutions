@@ -55,9 +55,9 @@ impl TimeMap {
                 let mid = left + (right - left) / 2;
                 let (ts, val) = &values[mid as usize];
 
-                if *ts == timestamp { 
+                if *ts == timestamp {
                     return val.clone();
-                } else if *ts < timestamp { 
+                } else if *ts < timestamp {
                     left = mid + 1;
                 } else {
                     right = mid - 1;

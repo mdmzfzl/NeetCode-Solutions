@@ -35,7 +35,7 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
 
 class Solution {
   public:
-    TreeNode* invertTree(TreeNode* root) {
+    TreeNode *invertTree(TreeNode *root) {
         // Base case: if the root is null, return null
         if (root == nullptr) {
             return nullptr;

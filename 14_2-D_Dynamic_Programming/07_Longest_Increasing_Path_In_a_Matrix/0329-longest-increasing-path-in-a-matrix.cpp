@@ -29,7 +29,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
+    int longestIncreasingPath(vector<vector<int>> &matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
         vector<vector<int>> dp(m, vector<int>(n, 0)); // dp[i][j] stores the longest increasing path starting at position (i, j)
@@ -47,7 +47,7 @@ class Solution {
     }
 
     // Helper function to find the longest increasing path starting at position (i, j)
-    int dfs(vector<vector<int>>& matrix, vector<vector<int>>& dp, int i, int j) {
+    int dfs(vector<vector<int>> &matrix, vector<vector<int>> &dp, int i, int j) {
         if (dp[i][j] > 0) {
             return dp[i][j];    // If the result is already calculated, return it from the dp array
         }
@@ -58,7 +58,7 @@ class Solution {
         // Check the four neighbors
         vector<pair<int, int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
-        for (const auto& dir : directions) {
+        for (const auto &dir : directions) {
             int x = i + dir.first;
             int y = j + dir.second;
 

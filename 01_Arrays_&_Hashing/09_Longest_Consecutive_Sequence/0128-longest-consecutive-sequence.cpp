@@ -26,7 +26,7 @@ The space complexity is O(n) as we need to store all the numbers from the input 
 
 class Solution {
   public:
-    int longestConsecutive(vector<int>& nums) {
+    int longestConsecutive(vector<int> &nums) {
         unordered_set<int> numSet(nums.begin(), nums.end());
         int maxLength = 0;
 

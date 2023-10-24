@@ -25,19 +25,19 @@ impl Solution {
             return;
         }
         let cols = board[0].len();
-        
+
         // Mark and traverse the connected regions to the top and bottom boundaries
         for i in 0..rows {
             Solution::dfs(board, i, 0);
             Solution::dfs(board, i, cols - 1);
         }
-        
+
         // Mark and traverse the connected regions to the left and right boundaries
         for j in 0..cols {
             Solution::dfs(board, 0, j);
             Solution::dfs(board, rows - 1, j);
         }
-        
+
         // Update the board based on the marked cells
         for i in 0..rows {
             for j in 0..cols {
@@ -49,17 +49,17 @@ impl Solution {
             }
         }
     }
-    
+
     fn dfs(board: &mut Vec<Vec<char>>, i: usize, j: usize) {
         let rows = board.len();
         let cols = board[0].len();
-        
+
         if i < 0 || i >= rows || j < 0 || j >= cols || board[i][j] != 'O' {
             return;
         }
-        
+
         board[i][j] = 'B'; // Mark as part of connected region
-        
+
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         for (dx, dy) in directions.iter() {
             let x = (i as isize + dx) as usize;

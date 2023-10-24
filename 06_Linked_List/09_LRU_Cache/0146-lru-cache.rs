@@ -21,12 +21,12 @@ Space Complexity:
 O(capacity), where the space complexity is determined by the capacity of the LRU cache.
 */
 
-use std::collections::{HashMap, VecDeque, HashSet};
+use std::collections::{HashMap, HashSet, VecDeque};
 
 struct LRUCache {
     deque: VecDeque<i32>,
     cache: HashMap<i32, i32>,
-    capacity: usize, 
+    capacity: usize,
     keys: HashSet<i32>,
 }
 

@@ -35,7 +35,7 @@ The space complexity is O(N), where N is the number of points. We use the distan
 
 class Solution {
   public:
-    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+    vector<vector<int>> kClosest(vector<vector<int>> &points, int k) {
         // Create a vector to store the distances and indices of points
         vector<pair<int, int>> distances(points.size());
 

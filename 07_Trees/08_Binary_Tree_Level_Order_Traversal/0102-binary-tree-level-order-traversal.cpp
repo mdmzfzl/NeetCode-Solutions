@@ -45,14 +45,14 @@ The space complexity is O(m), where m is the maximum number of nodes at any leve
 
 class Solution {
   public:
-    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> levelOrder(TreeNode *root) {
         vector<vector<int>> result;
 
         if (root == nullptr) {
             return result;
         }
 
-        queue<TreeNode*> q;
+        queue<TreeNode *> q;
         q.push(root);
 
         while (!q.empty()) {
@@ -61,7 +61,7 @@ class Solution {
 
             for (int i = 0; i < levelSize; i++) {
                 // Dequeue a node from the queue
-                TreeNode* node = q.front();
+                TreeNode *node = q.front();
                 q.pop();
                 // Add the value of the dequeued node to the level vector
                 level.push_back(node->val);

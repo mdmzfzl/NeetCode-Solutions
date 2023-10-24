@@ -40,13 +40,13 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
 
 class Solution {
   public:
-    bool isValidBST(TreeNode* root) {
+    bool isValidBST(TreeNode *root) {
         long long prev = LLONG_MIN; // Use long long to handle edge case with INT_MIN
         return isValidBSTHelper(root, prev);
     }
 
   private:
-    bool isValidBSTHelper(TreeNode* node, long long& prev) {
+    bool isValidBSTHelper(TreeNode *node, long long &prev) {
         if (node == nullptr) {
             return true;
         }

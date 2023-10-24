@@ -31,13 +31,13 @@ impl Solution {
         let s = s.chars().collect::<Vec<_>>();
         let mut is_palindrome = vec![vec![false; n]; n];
         let mut count = 0;
-        
+
         // Single characters are palindromes
         for i in 0..n {
             is_palindrome[i][i] = true;
             count += 1;
         }
-        
+
         // Check for palindromes of length 2
         for i in 0..n - 1 {
             if s[i] == s[i + 1] {
@@ -45,7 +45,7 @@ impl Solution {
                 count += 1;
             }
         }
-        
+
         // Check for palindromes of length >= 3
         for len in 3..=n {
             for i in 0..=n - len {
@@ -56,7 +56,7 @@ impl Solution {
                 }
             }
         }
-        
+
         count
     }
 }

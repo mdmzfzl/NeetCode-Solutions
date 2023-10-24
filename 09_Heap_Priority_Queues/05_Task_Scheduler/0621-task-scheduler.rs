@@ -47,6 +47,6 @@ impl Solution {
 
         idle_slots = idle_slots.max(0);
 
-        tasks.len() as i32 + idle_slots 
+        tasks.len() as i32 + idle_slots
     }
 }

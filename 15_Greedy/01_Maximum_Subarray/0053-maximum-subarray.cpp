@@ -32,7 +32,7 @@ The space complexity is O(1), as we use only a constant amount of extra space.
 
 class Solution {
   public:
-    int maxSubArray(vector<int>& nums) {
+    int maxSubArray(vector<int> &nums) {
         int max_sum = nums[0]; // Initialize max_sum with the first element
         int current_sum = nums[0]; // Initialize current_sum with the first element
 

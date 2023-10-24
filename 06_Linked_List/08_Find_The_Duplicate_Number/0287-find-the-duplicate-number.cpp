@@ -32,7 +32,7 @@ The given array is assumed to have at least one duplicate number, and the duplic
 
 class Solution {
   public:
-    int findDuplicate(vector<int>& nums) {
+    int findDuplicate(vector<int> &nums) {
         int slow = nums[0];     // Tortoise
         int fast = nums[0];     // Hare
 

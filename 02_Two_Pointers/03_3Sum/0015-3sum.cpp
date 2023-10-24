@@ -31,7 +31,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 
 class Solution {
   public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> threeSum(vector<int> &nums) {
         vector<vector<int>> result;
         int n = nums.size();
         sort(nums.begin(), nums.end());

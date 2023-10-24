@@ -34,7 +34,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int maxProduct(vector<int>& nums) {
+    int maxProduct(vector<int> &nums) {
         int n = nums.size();
         int maxProduct = nums[0];  // Maximum product of subarrays ending at each position
         int minProduct = nums[0];  // Minimum product of subarrays ending at each position
@@ -43,8 +43,8 @@ class Solution {
         for (int i = 1; i < n; i++) {
             // Update maxProduct and minProduct
             int tempMax = maxProduct;
-            maxProduct = max({nums[i], maxProduct* nums[i], minProduct* nums[i]});
-            minProduct = min({nums[i], tempMax* nums[i], minProduct* nums[i]});
+            maxProduct = max({nums[i], maxProduct *nums[i], minProduct *nums[i]});
+            minProduct = min({nums[i], tempMax *nums[i], minProduct *nums[i]});
             // Update the result
             result = max(result, maxProduct);
         }

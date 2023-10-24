@@ -32,7 +32,7 @@ class Solution {
         return result;
     }
   private:
-    void generate(int n, int open, int close, string str, vector<string>& result) {
+    void generate(int n, int open, int close, string str, vector<string> &result) {
         if (open == n && close == n) {
             result.push_back(str);
             return;

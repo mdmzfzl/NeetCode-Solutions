@@ -45,18 +45,18 @@ The space complexity is O(n), where n is the number of nodes in the binary tree.
 
 class Solution {
   public:
-    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+    TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
         return buildTreeHelper(preorder, inorder, 0, 0, inorder.size() - 1);
     }
 
   private:
-    TreeNode* buildTreeHelper(vector<int>& preorder, vector<int>& inorder, int preStart, int inStart, int inEnd) {
+    TreeNode *buildTreeHelper(vector<int> &preorder, vector<int> &inorder, int preStart, int inStart, int inEnd) {
         if (preStart >= preorder.size() || inStart > inEnd) {
             return nullptr;
         }
 
         int rootVal = preorder[preStart];
-        TreeNode* root = new TreeNode(rootVal);
+        TreeNode *root = new TreeNode(rootVal);
         int rootIndex;
 
         for (int i = inStart; i <= inEnd; i++) {

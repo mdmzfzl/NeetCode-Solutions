@@ -27,7 +27,7 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 
 class Solution {
   public:
-    int maxAreaOfIsland(vector<vector<int>>& grid) {
+    int maxAreaOfIsland(vector<vector<int>> &grid) {
         if (grid.empty()) {
             return 0;
         }
@@ -48,7 +48,7 @@ class Solution {
     }
 
   private:
-    int dfs(vector<vector<int>>& grid, int row, int col) {
+    int dfs(vector<vector<int>> &grid, int row, int col) {
         if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] == 0) {
             return 0;
         }

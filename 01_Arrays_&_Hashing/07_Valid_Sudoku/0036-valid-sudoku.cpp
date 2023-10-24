@@ -27,7 +27,7 @@ The space complexity is O(1) since the arrays used for tracking the used digits 
 
 class Solution {
   public:
-    bool isValidSudoku(vector<vector<char>>& board) {
+    bool isValidSudoku(vector<vector<char>> &board) {
         int usedRows[9][9] = {0};
         int usedCols[9][9] = {0};
         int usedSubgrids[9][9] = {0};

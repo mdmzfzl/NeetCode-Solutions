@@ -37,7 +37,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int rob(vector<int>& nums) {
+    int rob(vector<int> &nums) {
         int n = nums.size();
         vector<int> dp(n + 1);
         dp[0] = 0;

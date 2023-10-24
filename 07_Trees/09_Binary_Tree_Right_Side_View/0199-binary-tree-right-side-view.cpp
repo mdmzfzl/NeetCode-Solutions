@@ -44,14 +44,14 @@ The space complexity is O(m), where m is the maximum number of nodes at any leve
 
 class Solution {
   public:
-    vector<int> rightSideView(TreeNode* root) {
+    vector<int> rightSideView(TreeNode *root) {
         vector<int> result;
 
         if (root == nullptr) {
             return result;
         }
 
-        queue<TreeNode*> q;
+        queue<TreeNode *> q;
         q.push(root);
 
         while (!q.empty()) {
@@ -59,7 +59,7 @@ class Solution {
             int lastValue;
 
             for (int i = 0; i < levelSize; i++) {
-                TreeNode* node = q.front();
+                TreeNode *node = q.front();
                 q.pop();
                 lastValue = node->val;
 

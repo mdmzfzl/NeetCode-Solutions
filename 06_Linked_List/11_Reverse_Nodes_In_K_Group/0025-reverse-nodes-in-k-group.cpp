@@ -32,14 +32,14 @@ The space complexity is O(1), as we use only a constant amount of extra space th
 
 class Solution {
   public:
-    ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode* dummy = new ListNode(0);
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        ListNode *dummy = new ListNode(0);
         dummy->next = head;
-        ListNode* current = dummy;
+        ListNode *current = dummy;
 
         while (current) {
-            ListNode* groupStart = current->next;
-            ListNode* groupEnd = current;
+            ListNode *groupStart = current->next;
+            ListNode *groupEnd = current;
 
             // Find k+1-th node
             for (int i = 0; i < k && groupEnd; i++) {
@@ -50,7 +50,7 @@ class Solution {
                 break; // Remaining nodes are less than k
             }
 
-            ListNode* nextGroup = groupEnd->next;
+            ListNode *nextGroup = groupEnd->next;
             // Reverse the current k-group
             reverseGroup(groupStart, groupEnd);
             // Connect reversed k-group to the previous group
@@ -65,12 +65,12 @@ class Solution {
 
   private:
     // Helper function to reverse a k-group of nodes
-    void reverseGroup(ListNode* head, ListNode* tail) {
-        ListNode* prev = nullptr;
-        ListNode* current = head;
+    void reverseGroup(ListNode *head, ListNode *tail) {
+        ListNode *prev = nullptr;
+        ListNode *current = head;
 
         while (current != tail) {
-            ListNode* nextNode = current->next;
+            ListNode *nextNode = current->next;
             current->next = prev;
             prev = current;
             current = nextNode;

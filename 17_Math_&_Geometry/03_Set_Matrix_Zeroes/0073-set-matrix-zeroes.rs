@@ -26,7 +26,7 @@ impl Solution {
         let mut first_col_zero = false;
         let m = matrix.len();
         let n = matrix[0].len();
-        
+
         // Check if the first row should be zeroed.
         for i in 0..m {
             if matrix[i][0] == 0 {
@@ -34,7 +34,7 @@ impl Solution {
                 break;
             }
         }
-        
+
         // Check if the first column should be zeroed.
         for j in 0..n {
             if matrix[0][j] == 0 {
@@ -42,7 +42,7 @@ impl Solution {
                 break;
             }
         }
-        
+
         // Mark rows and columns to be zeroed using the first row and first column.
         for i in 1..m {
             for j in 1..n {
@@ -52,7 +52,7 @@ impl Solution {
                 }
             }
         }
-        
+
         // Zero out rows based on the information in the first column.
         for i in 1..m {
             if matrix[i][0] == 0 {
@@ -61,7 +61,7 @@ impl Solution {
                 }
             }
         }
-        
+
         // Zero out columns based on the information in the first row.
         for j in 1..n {
             if matrix[0][j] == 0 {
@@ -70,14 +70,14 @@ impl Solution {
                 }
             }
         }
-        
+
         // Zero out the first row if necessary.
         if first_row_zero {
             for j in 0..n {
                 matrix[0][j] = 0;
             }
         }
-        
+
         // Zero out the first column if necessary.
         if first_col_zero {
             for i in 0..m {

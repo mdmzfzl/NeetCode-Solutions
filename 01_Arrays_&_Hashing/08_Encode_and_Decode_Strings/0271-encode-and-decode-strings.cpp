@@ -33,10 +33,10 @@ The space complexity is O(n), where n is the total number of characters in all t
 class Codec {
   public:
     // Encodes a list of strings to a single string.
-    string encode(vector<string>& strs) {
+    string encode(vector<string> &strs) {
         string encodedStr;
 
-        for (const string& str : strs) {
+        for (const string &str : strs) {
             encodedStr += to_string(str.length()) + "#" + str;
         }
 

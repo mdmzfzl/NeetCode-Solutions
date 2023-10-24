@@ -31,7 +31,9 @@ impl Solution {
 
         for i in 1..n {
             let temp_max = max_product;
-            max_product = nums[i].max(max_product * nums[i]).max(min_product * nums[i]);
+            max_product = nums[i]
+                .max(max_product * nums[i])
+                .max(min_product * nums[i]);
             min_product = nums[i].min(temp_max * nums[i]).min(min_product * nums[i]);
             result = result.max(max_product);
         }

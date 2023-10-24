@@ -26,7 +26,7 @@ impl Solution {
         let amount = amount as usize;
         let mut dp = vec![amount + 1; amount + 1];
         dp[0] = 0;
-        
+
         for i in 1..=amount {
             for &coin in &coins {
                 if i >= coin as usize && dp[i - coin as usize] + 1 < dp[i] {
@@ -34,7 +34,7 @@ impl Solution {
                 }
             }
         }
-        
+
         if dp[amount] > amount {
             -1
         } else {

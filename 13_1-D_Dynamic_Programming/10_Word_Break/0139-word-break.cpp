@@ -32,7 +32,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    bool wordBreak(string s, vector<string>& wordDict) {
+    bool wordBreak(string s, vector<string> &wordDict) {
         int n = s.length();
         vector<bool> dp(n + 1, false); // Dynamic programming array to store if substring from 0 to i-1 can be segmented
         dp[0] = true;  // Base case: empty string can be segmented

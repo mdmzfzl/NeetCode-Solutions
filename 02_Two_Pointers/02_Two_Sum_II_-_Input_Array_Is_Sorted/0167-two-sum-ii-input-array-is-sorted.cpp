@@ -27,7 +27,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 
 class Solution {
   public:
-    vector<int> twoSum(vector<int>& numbers, int target) {
+    vector<int> twoSum(vector<int> &numbers, int target) {
         int left = 0, right = numbers.size() - 1;
 
         while (left < right) {

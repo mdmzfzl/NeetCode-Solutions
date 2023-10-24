@@ -33,7 +33,7 @@ The space complexity is O(n + m) to store the vectors of pairs and the priority 
 
 class Solution {
   public:
-    vector<int> minInterval(vector<vector<int>>& intervals, vector<int>& queries) {
+    vector<int> minInterval(vector<vector<int>> &intervals, vector<int> &queries) {
         vector<int> sortedQueries = queries;
         // [size of interval, end of interval]
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;

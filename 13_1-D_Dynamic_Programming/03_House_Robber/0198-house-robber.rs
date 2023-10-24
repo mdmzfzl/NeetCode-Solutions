@@ -21,13 +21,13 @@ O(1), as we use only two variables (`prev` and `curr`) to store intermediate res
 impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
         let (mut prev, mut curr) = (0, 0);
-        
+
         for &num in nums.iter() {
             let temp = curr;
             curr = curr.max(prev + num);
             prev = temp;
         }
-        
+
         curr
     }
 }

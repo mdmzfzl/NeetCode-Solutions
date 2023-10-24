@@ -23,16 +23,16 @@ impl Solution {
         if intervals.is_empty() {
             return true;
         }
-        
+
         let mut intervals = intervals;
         intervals.sort_by_key(|x| x[0]);
-        
+
         for i in 0..intervals.len() - 1 {
             if intervals[i][1] > intervals[i + 1][0] {
                 return false; // Overlapping intervals
             }
         }
-        
+
         true
     }
 }

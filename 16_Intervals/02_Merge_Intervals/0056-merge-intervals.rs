@@ -24,24 +24,24 @@ impl Solution {
         if intervals.is_empty() {
             return vec![];
         }
-        
+
         let mut intervals = intervals;
         intervals.sort_by_key(|x| x[0]);
-        
+
         let mut result: Vec<Vec<i32>> = Vec::new();
         result.push(intervals[0].clone());
-        
+
         for i in 1..intervals.len() {
             let current = intervals[i].clone();
             let last = result.last_mut().unwrap();
-            
+
             if current[0] > last[1] {
                 result.push(current);
             } else {
                 last[1] = last[1].max(current[1]);
             }
         }
-        
+
         result
     }
 }

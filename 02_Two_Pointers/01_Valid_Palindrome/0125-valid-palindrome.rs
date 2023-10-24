@@ -64,4 +64,4 @@ pub fn is_palindrome(s: String) -> bool {
 
     // The result of the comparison is the final result of the function
 }
-/
+*/

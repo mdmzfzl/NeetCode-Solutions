@@ -34,13 +34,13 @@ impl Solution {
         if m < n {
             return 0;
         }
-        
+
         let mut dp = vec![vec![0; n + 1]; m + 1];
-        
+
         for i in 0..=m {
             dp[i][0] = 1; // Any string can form an empty string in one way.
         }
-        
+
         for i in 1..=m {
             for j in 1..=n {
                 if s_chars[i - 1] == t_chars[j - 1] {
@@ -50,7 +50,7 @@ impl Solution {
                 }
             }
         }
-        
+
         dp[m][n]
     }
 }
@@ -60,21 +60,21 @@ impl Solution {
     pub fn num_distinct(s: String, t: String) -> i32 {
         let s_bytes = s.as_bytes();
         let t_bytes = t.as_bytes();
-        
+
         let mut dp = vec![0; s.len()];
         let mut result = 1;
-        
+
         for &char_t in t_bytes {
             let mut temp = result;
             result = 0;
-            
+
             for i in (0..s.len()).rev() {
                 temp -= dp[i];
                 dp[i] = (s_bytes[i] == char_t) as i32 * temp;
                 result += dp[i];
             }
         }
-        
+
         result
     }
 }

@@ -31,10 +31,10 @@ impl Solution {
             return 0;
         }
         let cols = grid[0].len();
-        
+
         let mut queue = VecDeque::new();
         let mut fresh_count = 0;
-        
+
         for i in 0..rows {
             for j in 0..cols {
                 if grid[i][j] == 2 {
@@ -44,21 +44,21 @@ impl Solution {
                 }
             }
         }
-        
+
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         let mut time = 0;
-        
+
         while !queue.is_empty() {
             let (x, y, t) = queue.pop_front().unwrap();
-            
+
             for (dx, dy) in directions.iter() {
                 let new_x = x as isize + dx;
                 let new_y = y as isize + dy;
-                
+
                 if new_x >= 0 && new_x < rows as isize && new_y >= 0 && new_y < cols as isize {
                     let new_x = new_x as usize;
                     let new_y = new_y as usize;
-                    
+
                     if grid[new_x][new_y] == 1 {
                         grid[new_x][new_y] = 2;
                         fresh_count -= 1;
@@ -66,12 +66,12 @@ impl Solution {
                     }
                 }
             }
-            
+
             if fresh_count == 0 {
                 time = t; // All oranges have rotted
             }
         }
-        
+
         if fresh_count == 0 {
             time
         } else {

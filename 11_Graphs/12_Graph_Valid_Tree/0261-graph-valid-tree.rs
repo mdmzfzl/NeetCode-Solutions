@@ -25,7 +25,7 @@ impl Solution {
     pub fn valid_tree(n: i32, edges: Vec<Vec<i32>>) -> bool {
         let n = n as usize;
         let mut graph: Vec<Vec<usize>> = vec![vec![]; n];
-        
+
         // Build the adjacency list
         for edge in edges.iter() {
             let u = edge[0] as usize;
@@ -33,25 +33,31 @@ impl Solution {
             graph[u].push(v);
             graph[v].push(u);
         }
-        
+
         let mut visited: Vec<bool> = vec![false; n];
-        
+
         // Perform DFS to check connectivity
         if !Self::dfs(0, &mut visited, &graph, n, -1) {
             return false;
         }
-        
+
         // Check if all nodes are visited
         if visited.iter().all(|&v| v) {
             return edges.len() == n - 1;
         }
-        
+
         false
     }
-    
-    fn dfs(node: usize, visited: &mut Vec<bool>, graph: &Vec<Vec<usize>>, n: usize, parent: i32) -> bool {
+
+    fn dfs(
+        node: usize,
+        visited: &mut Vec<bool>,
+        graph: &Vec<Vec<usize>>,
+        n: usize,
+        parent: i32,
+    ) -> bool {
         visited[node] = true;
-        
+
         for &neighbor in graph[node].iter() {
             if !visited[neighbor] {
                 if !Self::dfs(neighbor, visited, graph, n, node as i32) {
@@ -61,7 +67,7 @@ impl Solution {
                 return false;
             }
         }
-        
+
         true
     }
 }

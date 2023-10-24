@@ -38,7 +38,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int maxCoins(vector<int>& nums) {
+    int maxCoins(vector<int> &nums) {
         int n = nums.size();
         // Create a new array with borders containing 1 to simplify the logic
         vector<int> numsWithBorders(n + 2, 1);

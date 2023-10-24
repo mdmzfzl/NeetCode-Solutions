@@ -24,8 +24,8 @@ Space Complexity:
 O(h), where 'h' is the height of the binary tree. This space is used for the recursive call stack.
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn diameter_of_binary_tree(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
@@ -43,7 +43,9 @@ impl Solution {
                         diameter_of_binary_tree(&node.right, max_diameter);
 
                     let depth = left_depth.max(right_depth) + 1;
-                    let diameter = left_diameter.max(right_diameter).max(left_depth + right_depth);
+                    let diameter = left_diameter
+                        .max(right_diameter)
+                        .max(left_depth + right_depth);
 
                     *max_diameter = (*max_diameter).max(diameter);
 

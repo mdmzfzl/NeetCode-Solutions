@@ -28,27 +28,27 @@ The space complexity is O(k), as we store the head nodes of all k linked lists i
 */
 
 struct ListNodeComparator {
-    bool operator()(const ListNode* a, const ListNode* b) const {
+    bool operator()(const ListNode *a, const ListNode *b) const {
         return a->val > b->val;
     }
 };
 
 class Solution {
   public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        priority_queue<ListNode*, vector<ListNode*>, ListNodeComparator> pq;
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        priority_queue<ListNode *, vector<ListNode *>, ListNodeComparator> pq;
 
-        for (ListNode* head : lists) {
+        for (ListNode *head : lists) {
             if (head) {
                 pq.push(head);
             }
         }
 
         ListNode dummy(0);
-        ListNode* current = &dummy;
+        ListNode *current = &dummy;
 
         while (!pq.empty()) {
-            ListNode* smallest = pq.top();
+            ListNode *smallest = pq.top();
             pq.pop();
             current->next = smallest;
             current = current->next;

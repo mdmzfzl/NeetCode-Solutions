@@ -26,8 +26,8 @@ Space Complexity:
 - The space complexity is O(1) as we are using a constant amount of extra space.
 */
 
-use std::cmp::min;
 use std::cmp::max;
+use std::cmp::min;
 
 impl Solution {
     pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {
@@ -45,15 +45,32 @@ impl Solution {
             let partition1 = (left1 + right1) / 2;
             let partition2 = half_len - partition1;
 
-            let max_left1 = if partition1 == 0 { i32::MIN } else { nums1[partition1 - 1] };
-            let min_right1 = if partition1 == n { i32::MAX } else { nums1[partition1] };
+            let max_left1 = if partition1 == 0 {
+                i32::MIN
+            } else {
+                nums1[partition1 - 1]
+            };
+            let min_right1 = if partition1 == n {
+                i32::MAX
+            } else {
+                nums1[partition1]
+            };
 
-            let max_left2 = if partition2 == 0 { i32::MIN } else { nums2[partition2 - 1] };
-            let min_right2 = if partition2 == m { i32::MAX } else { nums2[partition2] };
+            let max_left2 = if partition2 == 0 {
+                i32::MIN
+            } else {
+                nums2[partition2 - 1]
+            };
+            let min_right2 = if partition2 == m {
+                i32::MAX
+            } else {
+                nums2[partition2]
+            };
 
             if max_left1 <= min_right2 && max_left2 <= min_right1 {
                 if (n + m) % 2 == 0 {
-                    return (max_left1.max(max_left2) as f64 + min_right1.min(min_right2) as f64) / 2.0;
+                    return (max_left1.max(max_left2) as f64 + min_right1.min(min_right2) as f64)
+                        / 2.0;
                 } else {
                     return max_left1.max(max_left2) as f64;
                 }

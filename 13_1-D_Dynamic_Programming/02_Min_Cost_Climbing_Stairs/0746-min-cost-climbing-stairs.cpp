@@ -35,7 +35,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int minCostClimbingStairs(vector<int>& cost) {
+    int minCostClimbingStairs(vector<int> &cost) {
         int n = cost.size();
         vector<int> dp(n + 1);
         dp[0] = cost[0];

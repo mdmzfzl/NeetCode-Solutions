@@ -19,8 +19,8 @@ Space Complexity:
 O(h), where 'h' is the height of the binary tree. This space is used for the recursive call stack.
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {

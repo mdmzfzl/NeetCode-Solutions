@@ -33,7 +33,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int findTargetSumWays(vector<int>& nums, int target) {
+    int findTargetSumWays(vector<int> &nums, int target) {
         // Calculate the sum of all elements in the nums array
         int sum = accumulate(nums.begin(), nums.end(), 0);
 

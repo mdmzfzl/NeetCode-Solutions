@@ -32,7 +32,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int lengthOfLIS(vector<int>& nums) {
+    int lengthOfLIS(vector<int> &nums) {
         int n = nums.size();
         vector<int> dp(n, 1);  // Length of longest increasing subsequence ending at each index
 

@@ -38,7 +38,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int rob(vector<int>& nums) {
+    int rob(vector<int> &nums) {
         int n = nums.size();
 
         if (n == 1) {
@@ -50,7 +50,7 @@ class Solution {
         return max(max1, max2);
     }
 
-    int robRange(vector<int>& nums, int start, int end) {
+    int robRange(vector<int> &nums, int start, int end) {
         int prev1 = 0;
         int prev2 = 0;
 

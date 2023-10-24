@@ -49,7 +49,7 @@ class Solution {
 
   private:
     // Depth First Search (DFS) Backtracking function
-    void backtrack(const string& digits, const vector<string>& mapping, int index, string& combination, vector<string>& result) {
+    void backtrack(const string &digits, const vector<string> &mapping, int index, string &combination, vector<string> &result) {
         if (index == digits.length()) {
             result.push_back(combination);  // Add the current combination to the result
             return;

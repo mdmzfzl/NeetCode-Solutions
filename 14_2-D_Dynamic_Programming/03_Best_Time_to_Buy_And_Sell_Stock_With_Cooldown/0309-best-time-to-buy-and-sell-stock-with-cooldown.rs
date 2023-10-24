@@ -31,19 +31,19 @@ impl Solution {
         if n <= 1 {
             return 0;
         }
-        
+
         let mut buy = vec![0; n];
         let mut sell = vec![0; n];
         let mut cooldown = vec![0; n];
-        
+
         buy[0] = -prices[0];
-        
+
         for i in 1..n {
             cooldown[i] = cooldown[i - 1].max(sell[i - 1]);
             buy[i] = buy[i - 1].max(cooldown[i - 1] - prices[i]);
             sell[i] = sell[i - 1].max(buy[i - 1] + prices[i]);
         }
-        
+
         cooldown[n - 1].max(sell[n - 1])
     }
 }

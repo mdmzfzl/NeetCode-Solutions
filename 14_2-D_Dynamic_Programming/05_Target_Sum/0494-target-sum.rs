@@ -27,21 +27,21 @@ impl Solution {
     pub fn find_target_sum_ways(nums: Vec<i32>, s: i32) -> i32 {
         let sum: i32 = nums.iter().sum();
         let target = sum - s;
-        
+
         if target < 0 || target % 2 != 0 {
             return 0;
         }
-        
+
         let target = (target / 2) as usize;
         let mut dp = vec![0; target + 1];
         dp[0] = 1;
-        
+
         for num in nums {
             for i in (num as usize..=target).rev() {
                 dp[i] += dp[i - num as usize];
             }
         }
-        
+
         dp[target]
     }
 }

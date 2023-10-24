@@ -23,7 +23,7 @@ The space complexity is O(1), as we are reusing the input array for storing the 
 
 class Solution {
   public:
-    vector<int> productExceptSelf(vector<int>& nums) {
+    vector<int> productExceptSelf(vector<int> &nums) {
         int n = nums.size();
         vector<int> output(n, 1);
         // Calculate prefix product

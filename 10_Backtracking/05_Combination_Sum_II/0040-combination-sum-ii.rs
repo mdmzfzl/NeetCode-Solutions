@@ -28,19 +28,19 @@ The space complexity is O(N) for the recursion stack.
 impl Solution {
     pub fn combination_sum2(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let mut result: Vec<Vec<i32>> = Vec::new();
-        
+
         let mut current_combination: Vec<i32> = Vec::new();
         let mut sorted_candidates = candidates.clone();
         sorted_candidates.sort();
-        
+
         Self::backtrack(
             &mut current_combination,
             0,
             target,
             &mut result,
-            &sorted_candidates
+            &sorted_candidates,
         );
-        
+
         result
     }
 
@@ -50,29 +50,29 @@ impl Solution {
         start_index: usize,
         remaining_target: i32,
         result: &mut Vec<Vec<i32>>,
-        candidates: &Vec<i32>
+        candidates: &Vec<i32>,
     ) {
         if remaining_target == 0 {
             result.push(current_combination.clone());
             return;
         }
-        
+
         for i in start_index..candidates.len() {
             if candidates[i] > remaining_target {
                 break;
             }
-            
+
             if i > start_index && candidates[i] == candidates[i - 1] {
                 continue; // Skip duplicates
             }
-            
+
             current_combination.push(candidates[i]);
             Self::backtrack(
                 current_combination,
                 i + 1,
                 remaining_target - candidates[i],
                 result,
-                candidates
+                candidates,
             );
             current_combination.pop();
         }

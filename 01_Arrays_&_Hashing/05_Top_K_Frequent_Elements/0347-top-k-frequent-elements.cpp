@@ -29,7 +29,7 @@ The space complexity is O(n), as we store the frequencies of elements in the has
 
 class Solution {
   public:
-    vector<int> topKFrequent(vector<int>& nums, int k) {
+    vector<int> topKFrequent(vector<int> &nums, int k) {
         int n = nums.size();
         unordered_map<int, int> m;
 

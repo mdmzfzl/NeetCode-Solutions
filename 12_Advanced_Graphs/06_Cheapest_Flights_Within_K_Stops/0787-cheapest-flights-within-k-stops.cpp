@@ -27,10 +27,10 @@ The space complexity is O(E + V), where E is the number of flights and V is the 
 
 class Solution {
   public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
+    int findCheapestPrice(int n, vector<vector<int>> &flights, int src, int dst, int K) {
         vector<vector<pair<int, int>>> adjList(n);
 
-        for (const auto& flight : flights) {
+        for (const auto &flight : flights) {
             adjList[flight[0]].emplace_back(flight[1], flight[2]);
         }
 
@@ -52,7 +52,7 @@ class Solution {
             }
 
             if (stops <= K) {
-                for (const auto& neighbor : adjList[city]) {
+                for (const auto &neighbor : adjList[city]) {
                     int neighborCity = neighbor.first;
                     int neighborCost = neighbor.second;
 

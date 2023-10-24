@@ -25,7 +25,7 @@ impl Solution {
     pub fn count_components(n: i32, edges: Vec<Vec<i32>>) -> i32 {
         let n = n as usize;
         let mut graph: Vec<Vec<usize>> = vec![vec![]; n];
-        
+
         // Build the adjacency list
         for edge in edges.iter() {
             let u = edge[0] as usize;
@@ -33,10 +33,10 @@ impl Solution {
             graph[u].push(v);
             graph[v].push(u);
         }
-        
+
         let mut visited: Vec<bool> = vec![false; n];
         let mut num_components = 0;
-        
+
         // Perform DFS to find connected components
         for node in 0..n {
             if !visited[node] {
@@ -44,13 +44,13 @@ impl Solution {
                 num_components += 1;
             }
         }
-        
+
         num_components
     }
-    
+
     fn dfs(node: usize, visited: &mut Vec<bool>, graph: &Vec<Vec<usize>>) {
         visited[node] = true;
-        
+
         for &neighbor in graph[node].iter() {
             if !visited[neighbor] {
                 Self::dfs(neighbor, visited, graph);

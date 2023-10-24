@@ -42,7 +42,7 @@ class Solution {
 
   private:
     // Backtracking function to generate all valid solutions
-    void backtrack(int n, int row, vector<string>& board, vector<int>& queens, vector<vector<string>>& result) {
+    void backtrack(int n, int row, vector<string> &board, vector<int> &queens, vector<vector<string>> &result) {
         if (row == n) {
             result.push_back(board);  // Add the current valid solution to the result
             return;
@@ -61,7 +61,7 @@ class Solution {
     }
 
     // Function to check if placing a queen at the current position is valid
-    bool isValidPlacement(int row, int col, const vector<int>& queens) {
+    bool isValidPlacement(int row, int col, const vector<int> &queens) {
         for (int i = 0; i < queens.size(); ++i) {
             int rowDiff = abs(row - i);
             int colDiff = abs(col - queens[i]);

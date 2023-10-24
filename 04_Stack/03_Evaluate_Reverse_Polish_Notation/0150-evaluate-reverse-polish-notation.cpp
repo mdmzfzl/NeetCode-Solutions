@@ -25,10 +25,10 @@ The space complexity is O(n), where n is the number of tokens in the input list.
 
 class Solution {
   public:
-    int evalRPN(std::vector<std::string>& tokens) {
+    int evalRPN(std::vector<std::string> &tokens) {
         std::stack<int> stack;
 
-        for (const auto& token : tokens) {
+        for (const auto &token : tokens) {
             if (isOperator(token)) {
                 int operand2 = stack.top();
                 stack.pop();
@@ -45,11 +45,11 @@ class Solution {
     }
 
   private:
-    bool isOperator(const std::string& token) {
+    bool isOperator(const std::string &token) {
         return token == "+" || token == "-" || token == "*" || token == "/";
     }
 
-    int performOperation(int operand1, int operand2, const std::string& operatorStr) {
+    int performOperation(int operand1, int operand2, const std::string &operatorStr) {
         if (operatorStr == "+") {
             return operand1 + operand2;
         } else if (operatorStr == "-") {

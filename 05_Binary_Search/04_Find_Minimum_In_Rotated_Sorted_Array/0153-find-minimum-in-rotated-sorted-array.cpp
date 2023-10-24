@@ -24,7 +24,7 @@ The space complexity is O(1), as the algorithm uses a constant amount of extra s
 
 class Solution {
   public:
-    int findMin(vector<int>& nums) {
+    int findMin(vector<int> &nums) {
         int left = 0; // Initialize the left pointer to the start of the array
         int right = nums.size() - 1; // Initialize the right pointer to the end of the array
 

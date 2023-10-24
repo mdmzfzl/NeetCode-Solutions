@@ -28,7 +28,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 
 class Solution {
   public:
-    int maxProfit(vector<int>& prices) {
+    int maxProfit(vector<int> &prices) {
         int minPrice = INT_MAX;
         int maxProfit = 0;
 

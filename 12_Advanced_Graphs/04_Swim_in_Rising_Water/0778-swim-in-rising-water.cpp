@@ -54,7 +54,7 @@ The space complexity is O(N^2) due to the visited set used in the DFS function.
 
 class Solution {
   public:
-    bool dfs(int x, int y, int t, vector<vector<int>>& grid) {
+    bool dfs(int x, int y, int t, vector<vector<int>> &grid) {
         int n = grid.size();
 
         // Check if current position is out of bounds or blocked
@@ -78,7 +78,7 @@ class Solution {
         return canReach;
     }
 
-    int swimInWater(vector<vector<int>>& grid) {
+    int swimInWater(vector<vector<int>> &grid) {
         int n = grid.size();
         int low = 0, high = n * n - 1;
 

@@ -29,25 +29,20 @@ impl Solution {
     pub fn solve_n_queens(n: i32) -> Vec<Vec<String>> {
         let mut board: Vec<Vec<char>> = vec![vec!['.'; n as usize]; n as usize];
         let mut result: Vec<Vec<String>> = Vec::new();
-        
+
         Self::backtrack(n, 0, &mut board, &mut result);
-        
+
         result
     }
 
-    fn backtrack(
-        n: i32,
-        row: i32,
-        board: &mut Vec<Vec<char>>,
-        result: &mut Vec<Vec<String>>,
-    ) {
+    fn backtrack(n: i32, row: i32, board: &mut Vec<Vec<char>>, result: &mut Vec<Vec<String>>) {
         if row == n {
             // We've successfully placed queens in all rows, so add this solution.
             let solution: Vec<String> = board.iter().map(|row| row.iter().collect()).collect();
             result.push(solution);
             return;
         }
-        
+
         for col in 0..n {
             if Self::is_safe(row as usize, col as usize, n as usize, board) {
                 // Place the queen in the current cell.
@@ -59,7 +54,7 @@ impl Solution {
             }
         }
     }
-    
+
     fn is_safe(row: usize, col: usize, n: usize, board: &Vec<Vec<char>>) -> bool {
         // Check the column above this row.
         for i in 0..row {
@@ -67,7 +62,7 @@ impl Solution {
                 return false;
             }
         }
-        
+
         // Check the upper-left diagonal.
         let mut i = row as i32 - 1;
         let mut j = col as i32 - 1;
@@ -78,7 +73,7 @@ impl Solution {
             i -= 1;
             j -= 1;
         }
-        
+
         // Check the upper-right diagonal.
         let mut i = row as i32 - 1;
         let mut j = col as i32 + 1;
@@ -89,7 +84,7 @@ impl Solution {
             i -= 1;
             j += 1;
         }
-        
+
         true
     }
 }

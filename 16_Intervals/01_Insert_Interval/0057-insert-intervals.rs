@@ -26,29 +26,29 @@ impl Solution {
         let mut new_interval = new_interval;
         let mut i = 0;
         let n = intervals.len();
-        
+
         // Add intervals that come before the new_interval
         while i < n && intervals[i][1] < new_interval[0] {
             result.push(intervals[i].clone());
             i += 1;
         }
-        
+
         // Merge intervals with overlap
         while i < n && intervals[i][0] <= new_interval[1] {
             new_interval[0] = new_interval[0].min(intervals[i][0]);
             new_interval[1] = new_interval[1].max(intervals[i][1]);
             i += 1;
         }
-        
+
         // Add the merged new_interval
         result.push(new_interval);
-        
+
         // Add intervals that come after the new_interval
         while i < n {
             result.push(intervals[i].clone());
             i += 1;
         }
-        
+
         result
     }
 }

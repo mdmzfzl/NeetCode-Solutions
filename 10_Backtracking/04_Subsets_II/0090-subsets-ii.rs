@@ -26,13 +26,13 @@ The space complexity is O(N) for the recursion stack.
 impl Solution {
     pub fn subsets_with_dup(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut result: Vec<Vec<i32>> = Vec::new();
-                
+
         let mut current_subset: Vec<i32> = Vec::new();
         let mut sorted_nums = nums.clone();
         sorted_nums.sort();
-        
+
         Self::backtrack(&mut current_subset, 0, &mut result, &sorted_nums);
-        
+
         result
     }
 
@@ -41,10 +41,10 @@ impl Solution {
         current_subset: &mut Vec<i32>,
         start_index: usize,
         result: &mut Vec<Vec<i32>>,
-        nums: &Vec<i32>
+        nums: &Vec<i32>,
     ) {
         result.push(current_subset.clone());
-        
+
         for i in start_index..nums.len() {
             if i == start_index || nums[i] != nums[i - 1] {
                 current_subset.push(nums[i]);

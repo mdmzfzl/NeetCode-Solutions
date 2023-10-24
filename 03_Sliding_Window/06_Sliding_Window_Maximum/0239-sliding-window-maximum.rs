@@ -32,7 +32,7 @@ impl Solution {
             while !deque.is_empty() && deque.front().unwrap() <= &(i as i32 - k as i32) {
                 deque.pop_front();
             }
-            
+
             while !deque.is_empty() && nums[*deque.back().unwrap() as usize] < nums[i] {
                 deque.pop_back();
             }

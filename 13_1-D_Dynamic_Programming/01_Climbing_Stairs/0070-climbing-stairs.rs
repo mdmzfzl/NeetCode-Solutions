@@ -25,15 +25,15 @@ impl Solution {
         if n <= 2 {
             return n;
         }
-        
+
         let (mut prev, mut curr) = (1, 2);
-        
+
         for _ in 3..=n {
             let temp = curr;
             curr = prev + curr;
             prev = temp;
         }
-        
+
         curr
     }
 }

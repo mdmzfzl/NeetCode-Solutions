@@ -33,7 +33,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    bool canPartition(vector<int>& nums) {
+    bool canPartition(vector<int> &nums) {
         int n = nums.size();
         int sum = accumulate(nums.begin(), nums.end(), 0); // Calculate the total sum
 

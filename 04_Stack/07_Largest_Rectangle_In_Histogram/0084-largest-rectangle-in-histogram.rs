@@ -25,24 +25,32 @@ impl Solution {
         let mut stack: Vec<usize> = Vec::new();
         let mut max_area = 0;
         let mut i = 0;
-        
+
         while i < heights.len() {
             if stack.is_empty() || heights[i] >= heights[*stack.last().unwrap()] {
                 stack.push(i);
                 i += 1;
             } else {
                 let top = stack.pop().unwrap();
-                let width = if stack.is_empty() { i } else { i - stack.last().unwrap() - 1 };
+                let width = if stack.is_empty() {
+                    i
+                } else {
+                    i - stack.last().unwrap() - 1
+                };
                 max_area = max_area.max(heights[top] * width as i32);
             }
         }
-        
+
         while !stack.is_empty() {
             let top = stack.pop().unwrap();
-            let width = if stack.is_empty() { i } else { i - stack.last().unwrap() - 1 };
+            let width = if stack.is_empty() {
+                i
+            } else {
+                i - stack.last().unwrap() - 1
+            };
             max_area = max_area.max(heights[top] * width as i32);
         }
-        
+
         max_area
     }
 }

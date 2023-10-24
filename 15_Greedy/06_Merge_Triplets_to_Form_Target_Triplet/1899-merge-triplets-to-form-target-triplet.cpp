@@ -29,10 +29,10 @@ The space complexity is O(1) as we are using only a constant amount of extra spa
 
 class Solution {
   public:
-    bool mergeTriplets(vector<vector<int>>& triplets, vector<int>& target) {
+    bool mergeTriplets(vector<vector<int>> &triplets, vector<int> &target) {
         int x = 0, y = 0, z = 0;
 
-        for (auto& t : triplets) {
+        for (auto &t : triplets) {
             if (t[0] <= target[0] && t[1] <= target[1] && t[2] <= target[2]) {
                 x = max(x, t[0]);
                 y = max(y, t[1]);

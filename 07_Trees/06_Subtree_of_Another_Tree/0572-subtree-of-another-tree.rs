@@ -19,14 +19,11 @@ Space Complexity:
 O(h), where 'h' is the height of the first tree. This space is used for the recursive call stack.
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
-    pub fn is_subtree(
-        s: Option<Rc<RefCell<TreeNode>>>,
-        t: Option<Rc<RefCell<TreeNode>>>,
-    ) -> bool {
+    pub fn is_subtree(s: Option<Rc<RefCell<TreeNode>>>, t: Option<Rc<RefCell<TreeNode>>>) -> bool {
         fn is_subtree(
             s: &Option<Rc<RefCell<TreeNode>>>,
             t: &Option<Rc<RefCell<TreeNode>>>,
@@ -51,7 +48,9 @@ impl Solution {
             match s {
                 Some(s_node) => {
                     let s_node = s_node.borrow();
-                    is_subtree(s, t) || is_subtree_helper(&s_node.left, t) || is_subtree_helper(&s_node.right, t)
+                    is_subtree(s, t)
+                        || is_subtree_helper(&s_node.left, t)
+                        || is_subtree_helper(&s_node.right, t)
                 }
                 None => false,
             }

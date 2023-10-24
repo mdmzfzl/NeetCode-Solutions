@@ -25,9 +25,15 @@ The space complexity depends on the number of valid combinations. In the worst c
 impl Solution {
     pub fn combination_sum(candidates: Vec<i32>, target: i32) -> Vec<Vec<i32>> {
         let mut result: Vec<Vec<i32>> = Vec::new();
-        
+
         let mut current_combination: Vec<i32> = Vec::new();
-        Self::backtrack(0, &mut current_combination, target, &candidates, &mut result);
+        Self::backtrack(
+            0,
+            &mut current_combination,
+            target,
+            &candidates,
+            &mut result,
+        );
 
         result
     }
@@ -38,7 +44,7 @@ impl Solution {
         current_combination: &mut Vec<i32>,
         remaining_target: i32,
         candidates: &Vec<i32>,
-        result: &mut Vec<Vec<i32>>
+        result: &mut Vec<Vec<i32>>,
     ) {
         if remaining_target == 0 {
             // Base case: Target sum reached, add current combination to result
@@ -58,7 +64,7 @@ impl Solution {
             current_combination,
             remaining_target - candidates[index],
             candidates,
-            result
+            result,
         );
 
         // Exclude the current number from the combination and recurse with the next number
@@ -68,7 +74,7 @@ impl Solution {
             current_combination,
             remaining_target,
             candidates,
-            result
+            result,
         );
     }
 }

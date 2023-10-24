@@ -41,12 +41,12 @@ The space complexity is O(h), where h is the height of the binary tree. This is 
 
 class Solution {
   public:
-    int goodNodes(TreeNode* root) {
+    int goodNodes(TreeNode *root) {
         return countGoodNodesHelper(root, INT_MIN);
     }
 
   private:
-    int countGoodNodesHelper(TreeNode* node, int maxSoFar) {
+    int countGoodNodesHelper(TreeNode *node, int maxSoFar) {
         if (node == nullptr) {
             return 0;
         }

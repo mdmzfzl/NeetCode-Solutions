@@ -23,28 +23,28 @@ impl Solution {
     pub fn find_redundant_connection(edges: Vec<Vec<i32>>) -> Vec<i32> {
         let n = edges.len();
         let mut parent: Vec<usize> = (0..n + 1).collect();
-        
+
         fn find(mut x: usize, parent: &mut Vec<usize>) -> usize {
             while parent[x] != x {
                 x = parent[x];
             }
             x
         }
-        
+
         for edge in edges.iter() {
             let u = edge[0] as usize;
             let v = edge[1] as usize;
-            
+
             let root_u = find(u, &mut parent);
             let root_v = find(v, &mut parent);
-            
+
             if root_u == root_v {
                 return edge.clone();
             } else {
                 parent[root_u] = root_v;
             }
         }
-        
+
         vec![]
     }
 }

@@ -26,18 +26,18 @@ impl Solution {
         if n == 0 {
             return 1.0;
         }
-        
+
         let mut x = x;
         let mut n = n as i64;
-        
+
         if n < 0 {
             x = 1.0 / x;
             n = -n;
         }
-        
+
         let mut result = 1.0;
         let mut current_x = x;
-        
+
         while n > 0 {
             if n % 2 == 1 {
                 result *= current_x;
@@ -45,7 +45,7 @@ impl Solution {
             current_x *= current_x;
             n /= 2;
         }
-        
+
         result
     }
 }

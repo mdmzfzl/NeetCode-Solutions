@@ -37,7 +37,7 @@ using namespace std;
 
 class Solution {
   public:
-    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+    int carFleet(int target, vector<int> &position, vector<int> &speed) {
         int n = position.size();
         vector<pair<int, int>> cars;
 
@@ -47,7 +47,7 @@ class Solution {
         }
 
         // Sort the vector of pairs based on positions in descending order
-        sort(cars.begin(), cars.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        sort(cars.begin(), cars.end(), [](const pair<int, int> &a, const pair<int, int> &b) {
             return a.first > b.first;
         });
         int count = 0;

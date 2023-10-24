@@ -15,7 +15,7 @@ Approach:
    - `search(word: String) -> bool`: Search for a word in the Trie by traversing nodes. For each character:
      - If it is a regular letter, move to the corresponding child node.
      - If it is a dot ('.'), recursively search all child nodes for the remaining word.
-   
+
 Time Complexity:
 - Adding a word has a time complexity of O(L), where L is the length of the word.
 - Searching for a word has a time complexity of O(26^M), where M is the number of dots ('.') in the word. In the worst case, all child nodes need to be explored.
@@ -44,7 +44,9 @@ pub struct WordDictionary {
 
 impl WordDictionary {
     pub fn new() -> Self {
-        WordDictionary { root: TrieNode::new() }
+        WordDictionary {
+            root: TrieNode::new(),
+        }
     }
 
     pub fn add_word(&mut self, word: String) {

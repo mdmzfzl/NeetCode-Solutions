@@ -23,11 +23,11 @@ The space complexity is O(E), where E is the total number of tickets. We use a h
 
 class Solution {
   public:
-    vector<string> findItinerary(vector<vector<string>>& tickets) {
+    vector<string> findItinerary(vector<vector<string>> &tickets) {
         // Create a graph representation using hashmap
         unordered_map<string, multiset<string>> graph;
 
-        for (const auto& ticket : tickets) {
+        for (const auto &ticket : tickets) {
             graph[ticket[0]].insert(ticket[1]);
         }
 
@@ -38,7 +38,7 @@ class Solution {
         return itinerary;
     }
 
-    void dfs(string airport, unordered_map<string, multiset<string>>& graph, vector<string>& itinerary) {
+    void dfs(string airport, unordered_map<string, multiset<string>> &graph, vector<string> &itinerary) {
         while (!graph[airport].empty()) {
             string nextAirport = *graph[airport].begin();
             graph[airport].erase(graph[airport].begin());

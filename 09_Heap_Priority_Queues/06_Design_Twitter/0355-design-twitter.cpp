@@ -73,13 +73,13 @@ class Twitter {
         priority_queue<pair<int, int>> pq;  // Use a priority queue to sort tweets by timestamp (max-heap)
 
         // Add the user's own tweets to the priority queue
-        for (const auto& tweet : userTweets[userId]) {
+        for (const auto &tweet : userTweets[userId]) {
             pq.push({ tweet.timestamp, tweet.tweetId });
         }
 
         // Add tweets from the user's followees to the priority queue
         for (int followeeId : userFollowees[userId]) {
-            for (const auto& tweet : userTweets[followeeId]) {
+            for (const auto &tweet : userTweets[followeeId]) {
                 pq.push({ tweet.timestamp, tweet.tweetId });
             }
         }

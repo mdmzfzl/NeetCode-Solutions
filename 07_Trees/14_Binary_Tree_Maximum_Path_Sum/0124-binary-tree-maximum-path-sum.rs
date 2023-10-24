@@ -26,8 +26,8 @@ Space Complexity:
 The space complexity is O(h), where 'h' is the height of the binary tree. In the worst case (unbalanced tree), 'h' can be equal to 'n', but in the average case (balanced tree), 'h' is O(log n).
 */
 
-use std::cmp::max;
 use std::cell::RefCell;
+use std::cmp::max;
 use std::rc::Rc;
 
 impl Solution {
@@ -40,18 +40,18 @@ impl Solution {
 
                 // Calculate the maximum path sum including the current node.
                 let node_sum = max(val, max(val + left_sum, val + right_sum));
-                
+
                 // Update the global maximum path sum.
                 *max_sum = max(*max_sum, max(node_sum, val + left_sum + right_sum));
-                
+
                 // Return the maximum path sum starting from the current node.
                 return node_sum;
             }
-            
+
             // If the node is None, return 0.
             0
         }
-        
+
         let mut max_sum = i32::min_value();
         max_path_sum_helper(root, &mut max_sum);
         max_sum

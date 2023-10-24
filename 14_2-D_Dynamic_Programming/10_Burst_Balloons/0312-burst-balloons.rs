@@ -26,7 +26,7 @@ impl Solution {
     pub fn max_coins(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         let mut dp = vec![vec![0; n]; n];
-        
+
         for len in 1..=n {
             for i in 0..=n - len {
                 let j = i + len - 1;
@@ -40,7 +40,7 @@ impl Solution {
                 }
             }
         }
-        
+
         dp[0][n - 1]
     }
 }

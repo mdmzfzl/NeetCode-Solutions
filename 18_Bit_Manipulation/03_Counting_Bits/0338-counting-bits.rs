@@ -23,11 +23,11 @@ O(num), as we use a vector of size 'num + 1' to store the count of set bits for 
 impl Solution {
     pub fn count_bits(num: i32) -> Vec<i32> {
         let mut count = vec![0; (num + 1) as usize];
-        
+
         for i in 1..=num {
             count[i as usize] = count[(i / 2) as usize] + (i & 1);
         }
-        
+
         count
     }
 }
@@ -38,7 +38,7 @@ impl Solution {
         let mut result:Vec<i32> = Vec::new();
         for i in 0..n+1 {
             result.push(i.count_ones() as i32);
-        } 
+        }
         result
     }
 }

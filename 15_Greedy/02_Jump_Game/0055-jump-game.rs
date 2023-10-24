@@ -22,19 +22,19 @@ O(1), as we only use a constant amount of extra space to store 'max_reach'.
 impl Solution {
     pub fn can_jump(nums: Vec<i32>) -> bool {
         let mut max_reach = 0;
-        
+
         for i in 0..nums.len() {
             if max_reach < i {
                 return false; // Cannot reach the current index
             }
-            
+
             max_reach = max_reach.max(i + nums[i] as usize);
-            
+
             if max_reach >= nums.len() - 1 {
                 return true; // Can reach or surpass the last index
             }
         }
-        
+
         false
     }
 }

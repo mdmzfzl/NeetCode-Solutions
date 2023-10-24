@@ -30,7 +30,7 @@ The space complexity is O(n), where n is the size of the input array `nums`. Thi
 
 class Solution {
   public:
-    vector<vector<int>> subsets(vector<int>& nums) {
+    vector<vector<int>> subsets(vector<int> &nums) {
         vector<vector<int>> result;
         vector<int> subset;
         generateSubsets(nums, 0, subset, result);
@@ -38,7 +38,7 @@ class Solution {
     }
 
   private:
-    void generateSubsets(const vector<int>& nums, int index, vector<int>& subset, vector<vector<int>>& result) {
+    void generateSubsets(const vector<int> &nums, int index, vector<int> &subset, vector<vector<int>> &result) {
         // Base case: If we have processed all elements, add the current subset to the result
         if (index == nums.size()) {
             result.push_back(subset);

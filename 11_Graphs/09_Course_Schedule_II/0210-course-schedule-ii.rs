@@ -29,7 +29,7 @@ impl Solution {
         let num_courses = num_courses as usize;
         let mut graph: Vec<Vec<i32>> = vec![vec![]; num_courses];
         let mut in_degrees: Vec<i32> = vec![0; num_courses];
-        
+
         // Build the directed graph and in-degrees
         for prerequisite in prerequisites.iter() {
             let course = prerequisite[0] as usize;
@@ -37,10 +37,10 @@ impl Solution {
             graph[prereq].push(course as i32);
             in_degrees[course as usize] += 1;
         }
-        
+
         let mut queue: std::collections::VecDeque<i32> = std::collections::VecDeque::new();
         let mut result: Vec<i32> = Vec::new();
-        
+
         // Enqueue courses with no prerequisites
         for (course, &in_degree) in in_degrees.iter().enumerate() {
             if in_degree == 0 {
@@ -48,7 +48,7 @@ impl Solution {
                 result.push(course as i32);
             }
         }
-        
+
         while let Some(course) = queue.pop_front() {
             for &next_course in graph[course as usize].iter() {
                 in_degrees[next_course as usize] -= 1;
@@ -58,7 +58,7 @@ impl Solution {
                 }
             }
         }
-        
+
         if result.len() == num_courses {
             result
         } else {

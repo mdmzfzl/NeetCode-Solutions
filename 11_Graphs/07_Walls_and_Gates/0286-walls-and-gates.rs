@@ -28,10 +28,10 @@ impl Solution {
             return;
         }
         let cols = rooms[0].len();
-        
+
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         let mut queue = std::collections::VecDeque::new();
-        
+
         // Enqueue all gate positions
         for i in 0..rows {
             for j in 0..cols {
@@ -40,13 +40,13 @@ impl Solution {
                 }
             }
         }
-        
+
         while !queue.is_empty() {
             if let Some((x, y, distance)) = queue.pop_front() {
                 for (dx, dy) in directions.iter() {
                     let new_x = (x as i32 + dx) as usize;
                     let new_y = (y as i32 + dy) as usize;
-                    
+
                     if new_x < rows && new_y < cols && rooms[new_x][new_y] == std::i32::MAX {
                         rooms[new_x][new_y] = distance + 1;
                         queue.push_back((new_x, new_y, distance + 1));

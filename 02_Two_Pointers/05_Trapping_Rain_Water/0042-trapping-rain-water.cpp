@@ -34,7 +34,7 @@ The space complexity is O(1) as we are using a constant amount of space to store
 
 class Solution {
   public:
-    int trap(vector<int>& height) {
+    int trap(vector<int> &height) {
         int left = 0, right = height.size() - 1;
         int leftMax = 0, rightMax = 0;
         int water = 0;

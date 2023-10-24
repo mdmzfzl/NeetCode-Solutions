@@ -25,7 +25,7 @@ The space complexity is O(1) as we are performing the rotation in-place without 
 
 class Solution {
   public:
-    void rotate(vector<vector<int>>& matrix) {
+    void rotate(vector<vector<int>> &matrix) {
         int n = matrix.size();
 
         // Step 1: Transpose the matrix

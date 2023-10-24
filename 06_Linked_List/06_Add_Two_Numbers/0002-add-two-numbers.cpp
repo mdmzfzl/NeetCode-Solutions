@@ -26,9 +26,9 @@ The space complexity is O(max(N, M)), where N and M are the number of nodes in t
 
 class Solution {
   public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* dummy = new ListNode(0);
-        ListNode* current = dummy;
+    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+        ListNode *dummy = new ListNode(0);
+        ListNode *current = dummy;
         int carry = 0;
 
         while (l1 || l2) {

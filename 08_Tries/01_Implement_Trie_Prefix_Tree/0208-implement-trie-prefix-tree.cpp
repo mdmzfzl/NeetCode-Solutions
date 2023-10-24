@@ -44,7 +44,7 @@ Space Complexity:
 class TrieNode {
   public:
     bool isWord;
-    TrieNode* children[26];
+    TrieNode *children[26];
 
     TrieNode() {
         isWord = false;
@@ -57,7 +57,7 @@ class TrieNode {
 
 class Trie {
   private:
-    TrieNode* root;
+    TrieNode *root;
 
   public:
     Trie() {
@@ -65,7 +65,7 @@ class Trie {
     }
 
     void insert(string word) {
-        TrieNode* node = root;
+        TrieNode *node = root;
 
         for (char c : word) {
             int index = c - 'a';
@@ -81,7 +81,7 @@ class Trie {
     }
 
     bool search(string word) {
-        TrieNode* node = root;
+        TrieNode *node = root;
 
         for (char c : word) {
             int index = c - 'a';
@@ -97,7 +97,7 @@ class Trie {
     }
 
     bool startsWith(string prefix) {
-        TrieNode* node = root;
+        TrieNode *node = root;
 
         for (char c : prefix) {
             int index = c - 'a';

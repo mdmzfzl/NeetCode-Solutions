@@ -37,14 +37,14 @@ impl Solution {
             vec!['t', 'u', 'v'],
             vec!['w', 'x', 'y', 'z'],
         ];
-        
+
         let mut result: Vec<String> = Vec::new();
         let mut current: String = String::new();
-        
+
         if !digits.is_empty() {
             Self::backtrack(&digits, 0, &mut current, &mut result, &mapping);
         }
-        
+
         result
     }
 
@@ -60,7 +60,7 @@ impl Solution {
             result.push(current.clone());
             return;
         }
-        
+
         let digit = digits.chars().nth(index).unwrap() as usize - '0' as usize;
         for &letter in &mapping[digit] {
             current.push(letter);

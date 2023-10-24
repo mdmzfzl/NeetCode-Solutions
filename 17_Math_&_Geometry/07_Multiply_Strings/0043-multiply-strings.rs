@@ -25,9 +25,9 @@ impl Solution {
         let num2: Vec<u8> = num2.chars().map(|c| (c as u8) - b'0').collect();
         let len1 = num1.len();
         let len2 = num2.len();
-        
+
         let mut result: Vec<u8> = vec![0; len1 + len2];
-        
+
         for i in (0..len1).rev() {
             for j in (0..len2).rev() {
                 let product = num1[i] * num2[j];
@@ -36,11 +36,11 @@ impl Solution {
                 result[i + j] += sum / 10;
             }
         }
-        
+
         // Convert result to string, removing leading zeros
         let mut result_str = String::new();
         let mut leading_zeros = true;
-        
+
         for digit in result {
             if digit != 0 {
                 leading_zeros = false;
@@ -49,11 +49,11 @@ impl Solution {
                 result_str.push((digit + b'0') as char);
             }
         }
-        
+
         if result_str.is_empty() {
             return "0".to_string();
         }
-        
+
         result_str
     }
 }

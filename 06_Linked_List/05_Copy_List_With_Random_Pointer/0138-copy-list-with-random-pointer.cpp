@@ -21,13 +21,13 @@ The space complexity is O(N) as we use extra space to store the hashmap, where N
 
 class Solution {
   public:
-    Node* copyRandomList(Node* head) {
+    Node *copyRandomList(Node *head) {
         if (!head) {
             return nullptr;
         }
 
-        unordered_map<Node*, Node*> nodeMap;
-        Node* current = head;
+        unordered_map<Node *, Node *> nodeMap;
+        Node *current = head;
 
         // Traverse the original list and create a copy of each node
         while (current) {

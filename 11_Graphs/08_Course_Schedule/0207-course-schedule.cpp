@@ -26,12 +26,12 @@ The space complexity is O(V + E), where V is the number of courses (nodes) and E
 
 class Solution {
   public:
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+    bool canFinish(int numCourses, vector<vector<int>> &prerequisites) {
         vector<vector<int>> graph(numCourses);  // Adjacency list representation of the graph
         vector<int> visited(numCourses, 0);     // Visited array to track the visited nodes
 
         // Build the graph
-        for (const auto& prerequisite : prerequisites) {
+        for (const auto &prerequisite : prerequisites) {
             int course = prerequisite[0];
             int prerequisiteCourse = prerequisite[1];
             graph[course].push_back(prerequisiteCourse);
@@ -48,7 +48,7 @@ class Solution {
     }
 
   private:
-    bool dfs(int course, vector<vector<int>>& graph, vector<int>& visited) {
+    bool dfs(int course, vector<vector<int>> &graph, vector<int> &visited) {
         // If the current course is being visited, it means there is a cycle
         if (visited[course] == 1) {
             return false;
@@ -62,7 +62,7 @@ class Solution {
         visited[course] = 1;  // Mark the current course as being visited
 
         // Perform a DFS traversal on the neighbors
-        for (const auto& neighbor : graph[course]) {
+        for (const auto &neighbor : graph[course]) {
             if (!dfs(neighbor, graph, visited)) {
                 return false;
             }

@@ -24,28 +24,22 @@ O(2^n), as there can be a total of 2^(2n) valid combinations in the result vecto
 impl Solution {
     pub fn generate_parenthesis(n: i32) -> Vec<String> {
         let mut result: Vec<String> = Vec::new();
-        
-        fn generate(
-            current: String,
-            open: i32,
-            close: i32,
-            n: i32,
-            result: &mut Vec<String>,
-        ) {
+
+        fn generate(current: String, open: i32, close: i32, n: i32, result: &mut Vec<String>) {
             if current.len() == (2 * n) as usize {
                 result.push(current);
                 return;
             }
-            
+
             if open < n {
                 generate(current.clone() + "(", open + 1, close, n, result);
             }
-            
+
             if close < open {
                 generate(current.clone() + ")", open, close + 1, n, result);
             }
         }
-        
+
         generate("".to_string(), 0, 0, n, &mut result);
         result
     }

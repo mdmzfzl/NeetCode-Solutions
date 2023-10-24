@@ -30,7 +30,7 @@ using namespace std;
 
 class Solution {
   public:
-    int largestRectangleArea(vector<int>& heights) {
+    int largestRectangleArea(vector<int> &heights) {
         int n = heights.size();
         stack<int> stack;
         int maxArea = 0;

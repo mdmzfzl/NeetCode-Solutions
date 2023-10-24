@@ -21,8 +21,8 @@ Space Complexity:
 O(k), where k is the capacity of the min-heap.
 */
 
-use std::collections::BinaryHeap;
 use std::cmp::Reverse;
+use std::collections::BinaryHeap;
 
 struct KthLargest {
     k: usize,

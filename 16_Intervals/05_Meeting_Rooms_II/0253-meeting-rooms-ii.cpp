@@ -24,13 +24,13 @@ The space complexity is O(n) as we use a priority queue to store the end times o
 
 class Solution {
   public:
-    int minMeetingRooms(vector<vector<int>>& intervals) {
+    int minMeetingRooms(vector<vector<int>> &intervals) {
         if (intervals.empty()) {
             return 0;
         }
 
         // Sort the intervals based on their start times in ascending order
-        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+        sort(intervals.begin(), intervals.end(), [](const vector<int> &a, const vector<int> &b) {
             return a[0] < b[0];
         });
         // Use a priority queue to keep track of end times of the meetings in different rooms

@@ -27,15 +27,15 @@ impl Solution {
         if n <= 1 {
             return s;
         }
-        
+
         let mut dp = vec![vec![false; n]; n];
         let (mut start, mut max_len) = (0, 1);
-        
+
         // All substrings of length 1 are palindromes.
         for i in 0..n {
             dp[i][i] = true;
         }
-        
+
         // Check for palindromes of length 2.
         for i in 0..n - 1 {
             if s_chars[i] == s_chars[i + 1] {
@@ -44,15 +44,15 @@ impl Solution {
                 max_len = 2;
             }
         }
-        
+
         // Check for palindromes of length >= 3.
         for len in 3..=n {
             for i in 0..=n - len {
                 let j = i + len - 1;
-                
+
                 if s_chars[i] == s_chars[j] && dp[i + 1][j - 1] {
                     dp[i][j] = true;
-                    
+
                     if len > max_len {
                         start = i;
                         max_len = len;
@@ -60,7 +60,7 @@ impl Solution {
                 }
             }
         }
-        
+
         s_chars[start..start + max_len].iter().collect()
     }
 }

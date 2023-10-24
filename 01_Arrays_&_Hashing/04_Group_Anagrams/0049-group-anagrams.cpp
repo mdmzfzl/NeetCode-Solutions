@@ -25,7 +25,7 @@ The space complexity is O(n * k), as we store all the strings in the hash map, w
 
 class Solution {
   public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    vector<vector<string>> groupAnagrams(vector<string> &strs) {
         // To store the sorted string and all its anagrams
         unordered_map<string, vector<string>> M;
 

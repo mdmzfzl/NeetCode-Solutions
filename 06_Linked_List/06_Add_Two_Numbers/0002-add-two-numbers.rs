@@ -24,36 +24,39 @@ O(max(N, M)), as the result linked list can have a maximum length of max(N, M) +
 */
 
 impl Solution {
-    pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn add_two_numbers(
+        l1: Option<Box<ListNode>>,
+        l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
         let mut dummy = ListNode::new(0);
         let (mut p, mut q, mut carry) = (l1, l2, 0);
         let mut current = &mut dummy;
-        
+
         while p.is_some() || q.is_some() {
             let x = p.as_ref().map_or(0, |node| node.val);
             let y = q.as_ref().map_or(0, |node| node.val);
             let sum = x + y + carry;
-            
+
             carry = sum / 10;
             current.next = Some(Box::new(ListNode::new(sum % 10)));
-            
+
             if let Some(ref mut node) = current.next {
                 current = &mut *node;
             }
-            
+
             if let Some(ref mut node) = p {
                 p = node.next.take();
             }
-            
+
             if let Some(ref mut node) = q {
                 q = node.next.take();
             }
         }
-        
+
         if carry > 0 {
             current.next = Some(Box::new(ListNode::new(carry)));
         }
-        
+
         dummy.next
     }
 }

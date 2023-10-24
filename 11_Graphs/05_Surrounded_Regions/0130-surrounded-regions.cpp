@@ -26,7 +26,7 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 
 class Solution {
   public:
-    void solve(vector<vector<char>>& board) {
+    void solve(vector<vector<char>> &board) {
         if (board.empty()) {
             return;
         }
@@ -59,7 +59,7 @@ class Solution {
     }
 
   private:
-    void dfs(vector<vector<char>>& board, int row, int col) {
+    void dfs(vector<vector<char>> &board, int row, int col) {
         int m = board.size();
         int n = board[0].size();
 

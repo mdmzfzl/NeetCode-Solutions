@@ -31,7 +31,7 @@ use std::collections::{BinaryHeap, HashMap};
 impl Solution {
     pub fn find_itinerary(tickets: Vec<Vec<String>>) -> Vec<String> {
         let mut graph: HashMap<&str, BinaryHeap<Reverse<&str>>> = HashMap::new();
-        
+
         // Build the graph.
         for ticket in &tickets {
             graph
@@ -39,7 +39,7 @@ impl Solution {
                 .or_insert(BinaryHeap::new())
                 .push(Reverse(&ticket[1]));
         }
-        
+
         let mut itinerary: Vec<String> = Vec::with_capacity(tickets.len() + 1);
         let mut stack: Vec<&str> = vec!["JFK"];
 
@@ -50,12 +50,12 @@ impl Solution {
                     continue;
                 }
             }
-            
+
             if let Some(last) = stack.pop() {
                 itinerary.push(last.to_string());
             }
         }
-        
+
         itinerary.reverse();
         itinerary
     }

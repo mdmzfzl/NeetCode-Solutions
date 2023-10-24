@@ -18,13 +18,17 @@ Space Complexity:
 O(1), as we are using a constant amount of space for traversal.
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 type TreeNodeRef = Option<Rc<RefCell<TreeNode>>>;
 
 impl Solution {
-    pub fn lowest_common_ancestor(root: TreeNodeRef, p: TreeNodeRef, q: TreeNodeRef) -> TreeNodeRef {
+    pub fn lowest_common_ancestor(
+        root: TreeNodeRef,
+        p: TreeNodeRef,
+        q: TreeNodeRef,
+    ) -> TreeNodeRef {
         let p_value = p.as_ref().unwrap().borrow().val;
         let q_value = q.as_ref().unwrap().borrow().val;
         let mut current_node = root;

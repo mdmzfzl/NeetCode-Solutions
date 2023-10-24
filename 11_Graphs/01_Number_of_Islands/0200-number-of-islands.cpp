@@ -27,7 +27,7 @@ The space complexity is O(min(m, n)), where m is the number of rows and n is the
 
 class Solution {
   public:
-    int numIslands(vector<vector<char>>& grid) {
+    int numIslands(vector<vector<char>> &grid) {
         if (grid.empty()) {
             return 0;
         }
@@ -50,7 +50,7 @@ class Solution {
     }
 
   private:
-    void dfs(vector<vector<char>>& grid, int row, int col) {
+    void dfs(vector<vector<char>> &grid, int row, int col) {
         if (row < 0 || row >= grid.size() || col < 0 || col >= grid[0].size() || grid[row][col] != '1') {
             return;  // Out of bounds or already visited cell
         }
@@ -63,7 +63,7 @@ class Solution {
         dfs(grid, row, col + 1);  // Right
     }
 
-    void bfs(vector<vector<char>>& grid, int row, int col) {
+    void bfs(vector<vector<char>> &grid, int row, int col) {
         int m = grid.size();  // Number of rows in the grid
         int n = grid[0].size();  // Number of columns in the grid
         queue<pair<int, int>> q;  // Queue to store cell positions
@@ -77,7 +77,7 @@ class Solution {
             q.pop();
 
             // Explore the neighboring cells
-            for (const auto& dir : directions) {
+            for (const auto &dir : directions) {
                 int nr = r + dir.first;  // Row of the neighboring cell
                 int nc = c + dir.second;  // Column of the neighboring cell
 

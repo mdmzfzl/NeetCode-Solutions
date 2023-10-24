@@ -34,7 +34,10 @@ impl DetectSquares {
     }
 
     fn add(&mut self, point: Vec<i32>) {
-        self.points_count.entry(point).and_modify(|count| *count += 1).or_insert(1);
+        self.points_count
+            .entry(point)
+            .and_modify(|count| *count += 1)
+            .or_insert(1);
     }
 
     fn count(&self, point: Vec<i32>) -> i32 {

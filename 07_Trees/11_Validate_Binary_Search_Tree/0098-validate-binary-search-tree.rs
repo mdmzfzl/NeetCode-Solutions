@@ -22,8 +22,8 @@ Space Complexity:
 The space complexity is O(h), where 'h' is the height of the binary tree. In the worst case, 'h' can be equal to 'n' in a skewed tree, making the space complexity O(n). In a balanced tree, 'h' is O(log n).
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn is_valid_bst(root: Option<Rc<RefCell<TreeNode>>>) -> bool {

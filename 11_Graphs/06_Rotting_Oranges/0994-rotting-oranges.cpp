@@ -34,7 +34,7 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 
 class Solution {
   public:
-    int orangesRotting(vector<vector<int>>& grid) {
+    int orangesRotting(vector<vector<int>> &grid) {
         if (grid.empty()) {
             return 0;
         }
@@ -67,7 +67,7 @@ class Solution {
                 // Check adjacent cells (up, down, left, right)
                 vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-                for (const auto& dir : directions) {
+                for (const auto &dir : directions) {
                     int newRow = row + dir.first;
                     int newCol = col + dir.second;
 

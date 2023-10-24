@@ -41,7 +41,7 @@ class Solution {
 
   private:
     // Depth First Search
-    void backtrack(const string& s, int start, vector<string>& partition, vector<vector<string>>& result) {
+    void backtrack(const string &s, int start, vector<string> &partition, vector<vector<string>> &result) {
         if (start == s.length()) {
             result.push_back(partition);  // Add the current partition to the result
             return;
@@ -56,7 +56,7 @@ class Solution {
         }
     }
 
-    bool isPalindrome(const string& s, int start, int end) {
+    bool isPalindrome(const string &s, int start, int end) {
         while (start < end) {
             if (s[start] != s[end]) {  // If characters don't match, it's not a palindrome
                 return false;

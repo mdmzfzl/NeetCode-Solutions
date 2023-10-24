@@ -27,12 +27,12 @@ impl Solution {
         if matrix.is_empty() || matrix[0].is_empty() {
             return 0;
         }
-        
+
         let m = matrix.len();
         let n = matrix[0].len();
         let mut dp = vec![vec![0; n]; m];
         let mut max_length = 0;
-        
+
         fn dfs(
             matrix: &Vec<Vec<i32>>,
             dp: &mut Vec<Vec<i32>>,
@@ -44,29 +44,34 @@ impl Solution {
             if dp[i][j] != 0 {
                 return dp[i][j];
             }
-            
+
             let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
             let mut max_len = 1;
-            
+
             for &(dx, dy) in directions.iter() {
                 let x = i as i32 + dx;
                 let y = j as i32 + dy;
-                
-                if x >= 0 && x < m as i32 && y >= 0 && y < n as i32 && matrix[x as usize][y as usize] > matrix[i][j] {
+
+                if x >= 0
+                    && x < m as i32
+                    && y >= 0
+                    && y < n as i32
+                    && matrix[x as usize][y as usize] > matrix[i][j]
+                {
                     max_len = max_len.max(1 + dfs(matrix, dp, m, n, x as usize, y as usize));
                 }
             }
-            
+
             dp[i][j] = max_len;
             max_len
         }
-        
+
         for i in 0..m {
             for j in 0..n {
                 max_length = max_length.max(dfs(&matrix, &mut dp, m, n, i, j));
             }
         }
-        
+
         max_length
     }
 }

@@ -31,7 +31,7 @@ The space complexity is O(n), where n is the size of the input array `nums`. Thi
 
 class Solution {
   public:
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+    vector<vector<int>> subsetsWithDup(vector<int> &nums) {
         vector<vector<int>> result;
         vector<int> subset;
         sort(nums.begin(), nums.end());  // Sort the array to handle duplicates
@@ -40,7 +40,7 @@ class Solution {
     }
 
   private:
-    void backtrack(const vector<int>& nums, int index, vector<int>& subset, vector<vector<int>>& result) {
+    void backtrack(const vector<int> &nums, int index, vector<int> &subset, vector<vector<int>> &result) {
         result.push_back(subset);  // Add the current subset to the result vector
 
         for (int i = index; i < nums.size(); ++i) {

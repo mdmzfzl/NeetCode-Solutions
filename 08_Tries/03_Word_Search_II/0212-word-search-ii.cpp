@@ -43,7 +43,7 @@ Space Complexity:
 class TrieNode {
   public:
     bool isWord;
-    unordered_map<char, TrieNode*> children; // Map to store the child nodes
+    unordered_map<char, TrieNode *> children; // Map to store the child nodes
 
     TrieNode() {
         isWord = false;
@@ -52,8 +52,8 @@ class TrieNode {
 
 class Solution {
   public:
-    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        TrieNode* root = buildTrie(words); // Build the Trie
+    vector<string> findWords(vector<vector<char>> &board, vector<string> &words) {
+        TrieNode *root = buildTrie(words); // Build the Trie
         int rows = board.size();
         int cols = board[0].size();
         vector<string> result;
@@ -69,11 +69,11 @@ class Solution {
     }
 
   private:
-    TrieNode* buildTrie(vector<string>& words) {
-        TrieNode* root = new TrieNode();
+    TrieNode *buildTrie(vector<string> &words) {
+        TrieNode *root = new TrieNode();
 
-        for (string& word : words) {
-            TrieNode* node = root;
+        for (string &word : words) {
+            TrieNode *node = root;
 
             for (char c : word) {
                 if (node->children.find(c) == node->children.end()) {
@@ -89,7 +89,7 @@ class Solution {
         return root;
     }
 
-    void dfs(vector<vector<char>>& board, int row, int col, TrieNode* node, string& currentWord, vector<string>& result) {
+    void dfs(vector<vector<char>> &board, int row, int col, TrieNode *node, string &currentWord, vector<string> &result) {
         if (row < 0 || row >= board.size() || col < 0 || col >= board[0].size() || board[row][col] == '#') {
             return;
         }

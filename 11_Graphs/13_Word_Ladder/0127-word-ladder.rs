@@ -36,41 +36,41 @@ impl Solution {
         queue.push_back(begin_word.clone());
         visited.insert(begin_word.clone());
         let mut level = 1;
-        
+
         while !queue.is_empty() {
             let level_size = queue.len();
-            
+
             for _ in 0..level_size {
                 if let Some(word) = queue.pop_front() {
                     let chars: Vec<char> = word.chars().collect();
-                    
+
                     for i in 0..chars.len() {
                         let original_char = chars[i];
-                        
+
                         for c in b'a'..=b'z' {
                             chars[i] = c as char;
                             let new_word: String = chars.iter().collect();
-                            
+
                             if word_set.contains(&new_word) {
                                 if new_word == end_word {
                                     return level + 1;
                                 }
-                                
+
                                 if !visited.contains(&new_word) {
                                     visited.insert(new_word.clone());
                                     queue.push_back(new_word.clone());
                                 }
                             }
                         }
-                        
+
                         chars[i] = original_char;
                     }
                 }
             }
-            
+
             level += 1;
         }
-        
+
         0
     }
 }

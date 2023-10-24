@@ -28,7 +28,7 @@ The space complexity is O(k), where k is the size of the sliding window. The deq
 
 class Solution {
   public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+    vector<int> maxSlidingWindow(vector<int> &nums, int k) {
         vector<int> result;
         deque<int> indices;
 

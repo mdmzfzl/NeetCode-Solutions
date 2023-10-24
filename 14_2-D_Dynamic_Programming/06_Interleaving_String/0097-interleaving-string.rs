@@ -33,29 +33,30 @@ impl Solution {
         let len1 = s1.len();
         let len2 = s2.len();
         let len3 = s3.len();
-        
+
         if len1 + len2 != len3 {
             return false;
         }
-        
+
         let mut dp = vec![vec![false; len2 + 1]; len1 + 1];
         dp[0][0] = true;
-        
+
         for i in 1..=len1 {
             dp[i][0] = dp[i - 1][0] && s1[i - 1] == s3[i - 1];
         }
-        
+
         for j in 1..=len2 {
             dp[0][j] = dp[0][j - 1] && s2[j - 1] == s3[j - 1];
         }
-        
+
         for i in 1..=len1 {
             for j in 1..=len2 {
                 let k = i + j;
-                dp[i][j] = (dp[i - 1][j] && s1[i - 1] == s3[k - 1]) || (dp[i][j - 1] && s2[j - 1] == s3[k - 1]);
+                dp[i][j] = (dp[i - 1][j] && s1[i - 1] == s3[k - 1])
+                    || (dp[i][j - 1] && s2[j - 1] == s3[k - 1]);
             }
         }
-        
+
         dp[len1][len2]
     }
 }

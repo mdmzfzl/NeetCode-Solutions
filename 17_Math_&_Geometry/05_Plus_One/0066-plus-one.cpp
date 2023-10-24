@@ -25,7 +25,7 @@ The space complexity is O(1) as we are modifying the input array in place and no
 
 class Solution {
   public:
-    vector<int> plusOne(vector<int>& digits) {
+    vector<int> plusOne(vector<int> &digits) {
         int n = digits.size();
         // Start from the end and add one to the last digit
         digits[n - 1] += 1;

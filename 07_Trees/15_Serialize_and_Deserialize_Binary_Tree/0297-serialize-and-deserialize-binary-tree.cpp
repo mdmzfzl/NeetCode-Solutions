@@ -49,20 +49,20 @@ Space Complexity:
 
 class Codec {
   public:
-    string serialize(TreeNode* root) {
+    string serialize(TreeNode *root) {
         string serialized = "";
         PreOrder(root, serialized);
         return serialized;
     }
 
-    TreeNode* deserialize(string data) {
+    TreeNode *deserialize(string data) {
         queue<string> Q;
         split(data, Q);
         return MakeTree(Q);
     }
 
   private:
-    void PreOrder(TreeNode* root, string& str) {
+    void PreOrder(TreeNode *root, string &str) {
         if (!root) {
             str.push_back('N');
             str.push_back(',');
@@ -74,7 +74,7 @@ class Codec {
         PreOrder(root->right, str);
     }
 
-    TreeNode* MakeTree(queue<string>& Q) {
+    TreeNode *MakeTree(queue<string> &Q) {
         string S = Q.front();
         Q.pop();
 
@@ -83,13 +83,13 @@ class Codec {
         }
 
         // stoi -> string to integer
-        TreeNode* root = new TreeNode(stoi(S));
+        TreeNode *root = new TreeNode(stoi(S));
         root->left = MakeTree(Q);
         root->right = MakeTree(Q);
         return root;
     }
 
-    void split(const string& data, queue<string>& Q) {
+    void split(const string &data, queue<string> &Q) {
         size_t start = 0;
         size_t pos = data.find(",");
 

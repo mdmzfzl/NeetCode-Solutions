@@ -2,7 +2,7 @@
 Problem: LeetCode 21 - Merge Two Sorted Lists
 
 Key Idea:
-The key idea is to create a new linked list while comparing and merging nodes from both input lists in a sorted manner. 
+The key idea is to create a new linked list while comparing and merging nodes from both input lists in a sorted manner.
 
 Approach:
 1. Start by handling the base cases:
@@ -42,7 +42,10 @@ O(1), as we use a constant amount of extra space for pointers and nodes.
 // }
 
 impl Solution {
-    pub fn merge_two_lists(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+    pub fn merge_two_lists(
+        l1: Option<Box<ListNode>>,
+        l2: Option<Box<ListNode>>,
+    ) -> Option<Box<ListNode>> {
         match (l1, l2) {
             (None, None) => None,
             (Some(node1), None) => Some(node1),

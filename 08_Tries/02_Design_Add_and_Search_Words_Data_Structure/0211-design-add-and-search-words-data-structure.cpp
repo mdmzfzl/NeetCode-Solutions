@@ -46,7 +46,7 @@ Space Complexity:
 class TrieNode {
   public:
     bool isWord;
-    TrieNode* children[26];
+    TrieNode *children[26];
 
     TrieNode() {
         isWord = false;
@@ -59,7 +59,7 @@ class TrieNode {
 
 class WordDictionary {
   private:
-    TrieNode* root;
+    TrieNode *root;
 
   public:
     WordDictionary() {
@@ -67,7 +67,7 @@ class WordDictionary {
     }
 
     void addWord(string word) {
-        TrieNode* node = root;
+        TrieNode *node = root;
 
         for (char c : word) {
             int index = c - 'a';
@@ -86,7 +86,7 @@ class WordDictionary {
         return searchHelper(word, root, 0);
     }
 
-    bool searchHelper(string word, TrieNode* node, int index) {
+    bool searchHelper(string word, TrieNode *node, int index) {
         if (index == word.length()) {
             return node->isWord;
         }

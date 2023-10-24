@@ -25,11 +25,11 @@ O(m * n) for the recursion stack, as in the worst case, we might have to explore
 impl Solution {
     pub fn max_area_of_island(grid: Vec<Vec<i32>>) -> i32 {
         let mut grid = grid; // Make grid mutable
-        
+
         let rows = grid.len();
         let cols = grid[0].len();
         let mut max_area = 0;
-        
+
         for i in 0..rows {
             for j in 0..cols {
                 if grid[i][j] == 1 {
@@ -38,30 +38,30 @@ impl Solution {
                 }
             }
         }
-        
+
         max_area
     }
-    
+
     fn dfs(grid: &mut Vec<Vec<i32>>, i: usize, j: usize) -> i32 {
         let rows = grid.len();
         let cols = grid[0].len();
-        
+
         if i >= rows || j >= cols || grid[i][j] == 0 {
             return 0;
         }
-        
+
         grid[i][j] = 0; // Mark as visited
-        
+
         // Explore neighbors in all four directions
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         let mut area = 1;
-        
+
         for (dx, dy) in directions.iter() {
             let x = (i as isize + dx) as usize;
             let y = (j as isize + dy) as usize;
             area += Solution::dfs(grid, x, y);
         }
-        
+
         area
     }
 }

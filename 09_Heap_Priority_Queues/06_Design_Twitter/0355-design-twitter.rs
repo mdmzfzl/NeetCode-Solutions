@@ -2,7 +2,7 @@
 Problem: LeetCode 355 - Design Twitter
 
 Key Idea:
-The key idea is to use a combination of data structures: a hash map to store users and their tweets, a priority queue to retrieve the most recent tweets, and a timestamp to track tweet posting times. 
+The key idea is to use a combination of data structures: a hash map to store users and their tweets, a priority queue to retrieve the most recent tweets, and a timestamp to track tweet posting times.
 
 Approach:
 1. Create two data structures: one for user-to-tweets mapping and another for user-to-following mapping.
@@ -23,9 +23,9 @@ Space Complexity:
 O(m + n), where m is the total number of tweets, and n is the total number of users.
 */
 
-use std::collections::HashSet;
-use std::collections::{HashMap, BinaryHeap};
 use std::cmp::Reverse;
+use std::collections::HashSet;
+use std::collections::{BinaryHeap, HashMap};
 
 struct Twitter {
     user_tweets: HashMap<i32, Vec<(i32, i32)>>, // User ID -> List of (Tweet ID, Timestamp)
@@ -41,12 +41,15 @@ impl Twitter {
             timestamp: 0,
         }
     }
-    
+
     fn post_tweet(&mut self, user_id: i32, tweet_id: i32) {
         self.timestamp += 1;
-        self.user_tweets.entry(user_id).or_insert(vec![]).push((tweet_id, self.timestamp));
+        self.user_tweets
+            .entry(user_id)
+            .or_insert(vec![])
+            .push((tweet_id, self.timestamp));
     }
-    
+
     fn get_news_feed(&self, user_id: i32) -> Vec<i32> {
         let mut tweet_set = HashSet::new();
         let mut min_heap = BinaryHeap::new();
@@ -87,13 +90,15 @@ impl Twitter {
         result
     }
 
-    
     fn follow(&mut self, follower_id: i32, followee_id: i32) {
         if follower_id != followee_id {
-            self.user_follows.entry(follower_id).or_insert(vec![]).push(followee_id);
+            self.user_follows
+                .entry(follower_id)
+                .or_insert(vec![])
+                .push(followee_id);
         }
     }
-    
+
     fn unfollow(&mut self, follower_id: i32, followee_id: i32) {
         if let Some(followees) = self.user_follows.get_mut(&follower_id) {
             if let Some(pos) = followees.iter().position(|&id| id == followee_id) {

@@ -25,13 +25,13 @@ impl Solution {
         let amount = amount as usize;
         let mut dp = vec![0; amount + 1];
         dp[0] = 1;
-        
+
         for coin in coins.iter() {
             for i in *coin as usize..=amount {
                 dp[i] += dp[i - *coin as usize];
             }
         }
-        
+
         dp[amount]
     }
 }

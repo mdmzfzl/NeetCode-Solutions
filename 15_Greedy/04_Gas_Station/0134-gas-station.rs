@@ -25,18 +25,18 @@ impl Solution {
         let mut total_gas = 0;
         let mut current_gas = 0;
         let mut start_station = 0;
-        
+
         for i in 0..gas.len() {
             let diff = gas[i] - cost[i];
             current_gas += diff;
             total_gas += diff;
-            
+
             if current_gas < 0 {
                 current_gas = 0;
                 start_station = i + 1;
             }
         }
-        
+
         if total_gas >= 0 {
             start_station as i32
         } else {

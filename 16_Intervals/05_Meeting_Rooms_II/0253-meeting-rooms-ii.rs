@@ -26,21 +26,21 @@ impl Solution {
         if intervals.is_empty() {
             return 0;
         }
-        
+
         let mut starts: Vec<i32> = Vec::new();
         let mut ends: Vec<i32> = Vec::new();
-        
+
         for interval in &intervals {
             starts.push(interval[0]);
             ends.push(interval[1]);
         }
-        
+
         starts.sort();
         ends.sort();
-        
+
         let mut rooms = 0;
         let mut end_ptr = 0;
-        
+
         for start in starts {
             if start < ends[end_ptr] {
                 rooms += 1;
@@ -48,7 +48,7 @@ impl Solution {
                 end_ptr += 1;
             }
         }
-        
+
         rooms
     }
 }

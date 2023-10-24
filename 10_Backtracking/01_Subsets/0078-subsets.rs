@@ -24,7 +24,7 @@ O(2^n) in the worst case, as there can be up to 2^n subsets.
 impl Solution {
     pub fn subsets(nums: Vec<i32>) -> Vec<Vec<i32>> {
         let mut result: Vec<Vec<i32>> = Vec::new();
-        
+
         let mut current_subset: Vec<i32> = Vec::new();
         Self::backtrack(0, &mut current_subset, &nums, &mut result);
 
@@ -36,7 +36,7 @@ impl Solution {
         index: usize,
         current_subset: &mut Vec<i32>,
         nums: &Vec<i32>,
-        result: &mut Vec<Vec<i32>>
+        result: &mut Vec<Vec<i32>>,
     ) {
         if index == nums.len() {
             // Base case: All elements processed, add current subset to the result

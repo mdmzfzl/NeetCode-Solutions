@@ -29,7 +29,7 @@ impl Solution {
         let word_chars: Vec<char> = word.chars().collect();
         let rows = board.len();
         let cols = board[0].len();
-                
+
         for row in 0..rows {
             for col in 0..cols {
                 if Self::dfs(&mut board.clone(), row, col, &word_chars, 0) {
@@ -37,7 +37,7 @@ impl Solution {
                 }
             }
         }
-        
+
         false
     }
 
@@ -47,34 +47,33 @@ impl Solution {
         row: usize,
         col: usize,
         word_chars: &Vec<char>,
-        word_idx: usize
+        word_idx: usize,
     ) -> bool {
         if word_idx == word_chars.len() {
             return true; // Word found
         }
-        
+
         if row < 0 || col < 0 || row >= board.len() || col >= board[0].len() {
             return false; // Out of bounds
         }
-        
+
         if board[row][col] != word_chars[word_idx] {
             return false; // Mismatched character
         }
-        
+
         // Mark the cell as visited
         let original_char = board[row][col];
         board[row][col] = '#';
-        
+
         // Explore adjacent cells
-        let found = 
-            Self::dfs(board, row - 1, col, word_chars, word_idx + 1) ||
-            Self::dfs(board, row + 1, col, word_chars, word_idx + 1) ||
-            Self::dfs(board, row, col - 1, word_chars, word_idx + 1) ||
-            Self::dfs(board, row, col + 1, word_chars, word_idx + 1);
-        
+        let found = Self::dfs(board, row - 1, col, word_chars, word_idx + 1)
+            || Self::dfs(board, row + 1, col, word_chars, word_idx + 1)
+            || Self::dfs(board, row, col - 1, word_chars, word_idx + 1)
+            || Self::dfs(board, row, col + 1, word_chars, word_idx + 1);
+
         // Restore the original character
         board[row][col] = original_char;
-        
+
         found
     }
 }

@@ -26,23 +26,23 @@ use std::collections::BinaryHeap;
 impl Solution {
     pub fn last_stone_weight(stones: Vec<i32>) -> i32 {
         let mut max_heap = BinaryHeap::new();
-        
+
         // Insert all stone weights into the max-heap
         for stone in stones {
             max_heap.push(stone);
         }
-        
+
         // Simulate stone smashing until only one stone remains or none
         while max_heap.len() >= 2 {
             let stone1 = max_heap.pop().unwrap();
             let stone2 = max_heap.pop().unwrap();
             let diff = stone1 - stone2;
-            
+
             if diff > 0 {
                 max_heap.push(diff);
             }
         }
-        
+
         // Return the remaining stone weight or 0
         max_heap.pop().unwrap_or(0)
     }

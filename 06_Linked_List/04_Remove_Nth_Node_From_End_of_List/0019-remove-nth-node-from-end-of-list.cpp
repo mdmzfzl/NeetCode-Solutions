@@ -23,11 +23,11 @@ The space complexity is O(1) as we are using constant extra space for the pointe
 
 class Solution {
   public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* dummy = new ListNode(0);
+    ListNode *removeNthFromEnd(ListNode *head, int n) {
+        ListNode *dummy = new ListNode(0);
         dummy->next = head;
-        ListNode* first = dummy;
-        ListNode* second = dummy;
+        ListNode *first = dummy;
+        ListNode *second = dummy;
 
         // Move second pointer n+1 steps ahead
         for (int i = 0; i <= n; i++) {
@@ -41,7 +41,7 @@ class Solution {
         }
 
         // Remove the nth node by updating the next pointer of the previous node
-        ListNode* temp = first->next;
+        ListNode *temp = first->next;
         first->next = first->next->next;
         delete temp;
         return dummy->next;

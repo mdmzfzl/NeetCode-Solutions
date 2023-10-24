@@ -22,7 +22,7 @@ The space complexity is O(1) since we only use a constant amount of extra space 
 
 class Solution {
   public:
-    int singleNumber(vector<int>& nums) {
+    int singleNumber(vector<int> &nums) {
         int result = 0;
 
         // Perform XOR operation on all elements in the array

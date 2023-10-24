@@ -24,20 +24,20 @@ impl Solution {
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         let n = matrix.len();
         let mut layer = 0;
-        
+
         while layer < n / 2 {
             for i in layer..n - layer - 1 {
                 let top = matrix[layer][i];
                 let left = matrix[n - i - 1][layer];
                 let bottom = matrix[n - layer - 1][n - i - 1];
                 let right = matrix[i][n - layer - 1];
-                
+
                 matrix[layer][i] = left;
                 matrix[n - i - 1][layer] = bottom;
                 matrix[n - layer - 1][n - i - 1] = right;
                 matrix[i][n - layer - 1] = top;
             }
-            
+
             layer += 1;
         }
     }
@@ -47,7 +47,7 @@ impl Solution {
 impl Solution {
     pub fn rotate(matrix: &mut Vec<Vec<i32>>) {
         let n = matrix.len();
-        
+
         for i in 0..n {
             for j in i+1..n {
                 matrix.swap(i, j, j, i);

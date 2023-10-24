@@ -25,10 +25,10 @@ impl Solution {
     pub fn car_fleet(target: i32, position: Vec<i32>, speed: Vec<i32>) -> i32 {
         let mut cars: Vec<(i32, i32)> = position.into_iter().zip(speed.into_iter()).collect();
         cars.sort_by_key(|&(pos, _)| -pos); // Sort by position in descending order.
-        
+
         let mut time = 0.0;
         let mut count = 0;
-        
+
         for (pos, spd) in cars {
             let curr_time = (target - pos) as f64 / spd as f64;
             if curr_time > time {
@@ -36,7 +36,7 @@ impl Solution {
                 time = curr_time;
             }
         }
-        
+
         count
     }
 }

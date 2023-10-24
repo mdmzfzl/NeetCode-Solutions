@@ -28,28 +28,28 @@ O(1), as we use a constant amount of extra space to store `prev` and `curr`.
 impl Solution {
     pub fn rob(nums: Vec<i32>) -> i32 {
         let n = nums.len();
-        
+
         if n == 0 {
             return 0;
         } else if n == 1 {
             return nums[0];
         }
-        
+
         let max_case1 = Self::rob_range(&nums[1..]);
         let max_case2 = Self::rob_range(&nums[..n - 1]);
-        
+
         max_case1.max(max_case2)
     }
-    
+
     fn rob_range(nums: &[i32]) -> i32 {
         let (mut prev, mut curr) = (0, 0);
-        
+
         for &num in nums {
             let temp = curr;
             curr = curr.max(prev + num);
             prev = temp;
         }
-        
+
         curr
     }
 }

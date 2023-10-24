@@ -26,7 +26,7 @@ impl Solution {
     pub fn reverse_bits(n: u32) -> u32 {
         let mut result = 0;
         let mut n = n;
-        
+
         for _ in 0..32 {
             result <<= 1;
             if n & 1 == 1 {
@@ -34,7 +34,7 @@ impl Solution {
             }
             n >>= 1;
         }
-        
+
         result
     }
 }

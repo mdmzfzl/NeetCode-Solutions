@@ -30,41 +30,53 @@ impl Solution {
         let n = grid.len();
         let mut low = grid[0][0];
         let mut high = (n * n) as i32 - 1;
-        
+
         while low < high {
             let mid = low + (high - low) / 2;
             let mut visited = vec![vec![false; n]; n];
-            
+
             if Self::dfs(&grid, &mut visited, 0, 0, mid) {
                 high = mid;
             } else {
                 low = mid + 1;
             }
         }
-        
+
         low
     }
-    
-    fn dfs(grid: &Vec<Vec<i32>>, visited: &mut Vec<Vec<bool>>, i: usize, j: usize, time: i32) -> bool {
+
+    fn dfs(
+        grid: &Vec<Vec<i32>>,
+        visited: &mut Vec<Vec<bool>>,
+        i: usize,
+        j: usize,
+        time: i32,
+    ) -> bool {
         if i == grid.len() - 1 && j == grid[0].len() - 1 {
             return true;
         }
-        
+
         visited[i][j] = true;
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         let n = grid.len();
-        
+
         for (dx, dy) in &directions {
             let ni = i as i32 + dx;
             let nj = j as i32 + dy;
-            
-            if ni >= 0 && ni < n as i32 && nj >= 0 && nj < n as i32 && !visited[ni as usize][nj as usize] && grid[ni as usize][nj as usize] <= time {
+
+            if ni >= 0
+                && ni < n as i32
+                && nj >= 0
+                && nj < n as i32
+                && !visited[ni as usize][nj as usize]
+                && grid[ni as usize][nj as usize] <= time
+            {
                 if Self::dfs(grid, visited, ni as usize, nj as usize, time) {
                     return true;
                 }
             }
         }
-        
+
         false
     }
 }

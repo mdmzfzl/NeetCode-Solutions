@@ -24,13 +24,13 @@ impl Solution {
         if n <= 2 {
             return cost.iter().min().unwrap_or(&0).to_owned();
         }
-        
+
         let mut dp = vec![0; n + 1];
-        
+
         for i in 2..=n {
             dp[i] = std::cmp::min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
         }
-        
+
         dp[n]
     }
 }

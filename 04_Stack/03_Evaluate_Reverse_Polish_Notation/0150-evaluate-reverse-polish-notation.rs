@@ -23,7 +23,7 @@ O(n), where n is the number of elements in the input tokens. The stack can have 
 impl Solution {
     pub fn eval_rpn(tokens: Vec<String>) -> i32 {
         let mut stack: Vec<i32> = Vec::new();
-        
+
         for token in tokens {
             if let Ok(operand) = token.parse::<i32>() {
                 stack.push(operand);
@@ -40,7 +40,7 @@ impl Solution {
                 stack.push(result);
             }
         }
-        
+
         stack.pop().unwrap()
     }
 }

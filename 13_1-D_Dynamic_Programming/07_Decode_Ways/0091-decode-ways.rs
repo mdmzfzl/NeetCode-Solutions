@@ -29,7 +29,7 @@ impl Solution {
         let n = s.len();
         let mut dp = vec![0; n + 1];
         dp[n] = 1;
-        
+
         for i in (0..n).rev() {
             if s[i] == b'0' {
                 dp[i] = 0;
@@ -40,7 +40,7 @@ impl Solution {
                 }
             }
         }
-        
+
         dp[0]
     }
 }

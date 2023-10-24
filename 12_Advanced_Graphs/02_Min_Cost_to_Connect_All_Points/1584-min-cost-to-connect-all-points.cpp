@@ -30,12 +30,12 @@ to represent the graph.
 
 class Solution {
   public:
-    int minCostConnectPoints(vector<vector<int>>& points) {
+    int minCostConnectPoints(vector<vector<int>> &points) {
         int n = points.size();
         vector<bool> visited(n, false);
         vector<int> minCost(n, INT_MAX);
         // A lambda function to calculate the Manhattan distance between two points
-        auto getManhattanDistance = [](const vector<int>& p1, const vector<int>& p2) {
+        auto getManhattanDistance = [](const vector<int> &p1, const vector<int> &p2) {
             return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1]);
         };
         int result = 0;

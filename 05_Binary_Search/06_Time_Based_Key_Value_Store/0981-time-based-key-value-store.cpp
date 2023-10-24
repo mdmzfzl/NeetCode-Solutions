@@ -52,7 +52,7 @@ class TimeMap {
             return ""; // Key does not exist, return empty string
         }
 
-        const vector<pair<int, string>>& entries = data[key]; // Get the list of entries for the key
+        const vector<pair<int, string>> &entries = data[key]; // Get the list of entries for the key
         int left = 0;
         int right = entries.size() - 1;
 

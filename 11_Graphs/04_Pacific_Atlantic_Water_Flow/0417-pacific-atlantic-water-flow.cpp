@@ -28,7 +28,7 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 
 class Solution {
   public:
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+    vector<vector<int>> pacificAtlantic(vector<vector<int>> &matrix) {
         vector<vector<int>> result;
 
         if (matrix.empty()) {
@@ -65,7 +65,7 @@ class Solution {
     }
 
   private:
-    void dfs(const vector<vector<int>>& matrix, int row, int col, int prevHeight, vector<vector<bool>>& canReachOcean) {
+    void dfs(const vector<vector<int>> &matrix, int row, int col, int prevHeight, vector<vector<bool>> &canReachOcean) {
         int m = matrix.size();
         int n = matrix[0].size();
 

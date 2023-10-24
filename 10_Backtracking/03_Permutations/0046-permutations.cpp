@@ -32,7 +32,7 @@ The space complexity is O(N), where N is the size of the input array `nums`. Thi
 
 class Solution {
   public:
-    vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int>> permute(vector<int> &nums) {
         vector<vector<int>> result;
         vector<int> permutation;
         vector<bool> used(nums.size(), false);  // Track used elements to avoid duplicates
@@ -41,7 +41,7 @@ class Solution {
     }
 
   private:
-    void backtrack(const vector<int>& nums, vector<bool>& used, vector<int>& permutation, vector<vector<int>>& result) {
+    void backtrack(const vector<int> &nums, vector<bool> &used, vector<int> &permutation, vector<vector<int>> &result) {
         if (permutation.size() == nums.size()) {
             result.push_back(permutation);
             return;

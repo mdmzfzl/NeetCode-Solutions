@@ -35,7 +35,7 @@ Space Complexity:
 
 class Solution {
   public:
-    int lastStoneWeight(vector<int>& stones) {
+    int lastStoneWeight(vector<int> &stones) {
         priority_queue<int> maxHeap; // Max-heap to store the stone weights
 
         // Populate the max-heap with the elements from the 'stones' array

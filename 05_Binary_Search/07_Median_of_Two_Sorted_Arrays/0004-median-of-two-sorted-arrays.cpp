@@ -29,7 +29,7 @@ The space complexity is O(1) as the approach uses only a constant amount of extr
 
 class Solution {
   public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    double findMedianSortedArrays(vector<int> &nums1, vector<int> &nums2) {
         // Ensure nums1 is the smaller array
         if (nums1.size() > nums2.size()) {
             nums1.swap(nums2);

@@ -27,9 +27,9 @@ Space Complexity:
 The space complexity is O(n) due to the recursion stack.
 */
 
+use std::cell::RefCell;
 use std::collections::HashMap;
 use std::rc::Rc;
-use std::cell::RefCell;
 
 impl Solution {
     pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
@@ -45,7 +45,7 @@ impl Solution {
             if pre_start > pre_end {
                 return None;
             }
-            
+
             let root_val = preorder[pre_start];
             let root_inorder_index = *inorder_map.get(&root_val).unwrap();
             let left_size = root_inorder_index - in_start;
@@ -69,7 +69,7 @@ impl Solution {
                 in_end,
                 inorder_map,
             );
-            
+
             Some(Rc::new(RefCell::new(root)))
         }
 

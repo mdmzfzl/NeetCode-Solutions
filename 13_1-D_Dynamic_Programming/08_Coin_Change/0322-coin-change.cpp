@@ -32,7 +32,7 @@ Dynamic Programming:
 
 class Solution {
   public:
-    int coinChange(vector<int>& coins, int amount) {
+    int coinChange(vector<int> &coins, int amount) {
         vector<int> dp(amount + 1, INT_MAX);  // DP array to store the minimum number of coins needed for each amount
         dp[0] = 0;  // Base case: zero coins are needed to make up an amount of zero
 

@@ -40,7 +40,7 @@ The space complexity is O(max(m, n)), where m and n are the number of nodes in `
 
 class Solution {
   public:
-    bool isSubtree(TreeNode* s, TreeNode* t) {
+    bool isSubtree(TreeNode *s, TreeNode *t) {
         // Base case: if `s` is null, return false as `t` cannot be a subtree of an empty tree
         if (s == nullptr) {
             return false;
@@ -56,7 +56,7 @@ class Solution {
     }
 
   private:
-    bool isIdentical(TreeNode* s, TreeNode* t) {
+    bool isIdentical(TreeNode *s, TreeNode *t) {
         // Base cases: if either `s` or `t` is null, return true only if both are null
         if (s == nullptr && t == nullptr) {
             return true;

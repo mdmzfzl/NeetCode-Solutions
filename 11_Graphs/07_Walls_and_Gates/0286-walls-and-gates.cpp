@@ -32,7 +32,7 @@ The space complexity is O(m * n), where m is the number of rows and n is the num
 
 class Solution {
   public:
-    void wallsAndGates(vector<vector<int>>& rooms) {
+    void wallsAndGates(vector<vector<int>> &rooms) {
         if (rooms.empty()) {
             return;
         }
@@ -61,7 +61,7 @@ class Solution {
                 // Check neighboring rooms (up, down, left, right)
                 vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
-                for (const auto& dir : directions) {
+                for (const auto &dir : directions) {
                     int newRow = row + dir.first;
                     int newCol = col + dir.second;
 

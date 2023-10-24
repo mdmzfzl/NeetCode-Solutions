@@ -22,12 +22,16 @@ Space Complexity:
 The space complexity is O(h) due to the recursion stack. In the worst case, 'h' can be equal to 'n' in a skewed tree, making the space complexity O(n). In a balanced tree, 'h' is O(log n).
 */
 
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 impl Solution {
     pub fn kth_smallest(root: Option<Rc<RefCell<TreeNode>>>, k: i32) -> i32 {
-        fn in_order_traversal(node: Option<Rc<RefCell<TreeNode>>>, k: i32, count: &mut i32) -> Option<i32> {
+        fn in_order_traversal(
+            node: Option<Rc<RefCell<TreeNode>>>,
+            k: i32,
+            count: &mut i32,
+        ) -> Option<i32> {
             if let Some(n) = node {
                 let node_ref = n.borrow();
                 let left_result = in_order_traversal(node_ref.left.clone(), k, count);

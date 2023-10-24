@@ -35,7 +35,7 @@ impl Solution {
     pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
         let mut original_head = head;
         let mut current_group = &mut original_head;
-        
+
         // Advance the current_group pointer by k nodes
         for _ in 0..k {
             if let Some(node) = current_group {
@@ -45,10 +45,10 @@ impl Solution {
                 return original_head;
             }
         }
-        
+
         // Recursively reverse the next group and get its head
         let mut reversed_next_group = Self::reverse_k_group(current_group.take(), k);
-        
+
         // Reverse the current group and attach it to the reversed_next_group
         let mut new_head = None;
         while let Some(mut node) = original_head.take() {
@@ -56,14 +56,14 @@ impl Solution {
             node.next = new_head;
             new_head = Some(node);
         }
-        
+
         // Connect the reversed current group to the reversed next group
         let mut current = &mut new_head;
         while current.as_ref().is_some() {
             current = &mut current.as_mut().unwrap().next;
         }
         *current = reversed_next_group;
-        
+
         new_head
     }
 }

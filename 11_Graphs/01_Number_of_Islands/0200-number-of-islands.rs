@@ -25,13 +25,13 @@ impl Solution {
         if grid.is_empty() || grid[0].is_empty() {
             return 0;
         }
-        
+
         let mut grid = grid; // Make grid mutable
-        
+
         let rows = grid.len();
         let cols = grid[0].len();
         let mut count = 0;
-        
+
         for i in 0..rows {
             for j in 0..cols {
                 if grid[i][j] == '1' {
@@ -40,20 +40,20 @@ impl Solution {
                 }
             }
         }
-        
+
         count
     }
-    
+
     fn dfs(grid: &mut Vec<Vec<char>>, i: usize, j: usize) {
         let rows = grid.len();
         let cols = grid[0].len();
-        
+
         if i >= rows || j >= cols || grid[i][j] == '0' {
             return;
         }
-        
+
         grid[i][j] = '0'; // Mark as visited
-        
+
         // Explore neighbors in all four directions
         let directions = [(0, 1), (0, -1), (1, 0), (-1, 0)];
         for (dx, dy) in directions.iter() {

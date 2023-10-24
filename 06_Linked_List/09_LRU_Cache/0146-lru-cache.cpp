@@ -38,19 +38,19 @@ class LRUCache {
     struct ListNode {
         int key;         // The key of the cache item
         int value;       // The value of the cache item
-        ListNode* prev;  // Pointer to the previous node in the list
-        ListNode* next;  // Pointer to the next node in the list
+        ListNode *prev;  // Pointer to the previous node in the list
+        ListNode *next;  // Pointer to the next node in the list
 
         ListNode(int k, int v) : key(k), value(v), prev(nullptr), next(nullptr) {}
     };
 
     int capacity;                     // Maximum capacity of the LRUCache
-    unordered_map<int, ListNode*> hashmap; // Hashmap to store key-node mappings
-    ListNode* head;                   // Dummy head node for the doubly linked list
-    ListNode* tail;                   // Dummy tail node for the doubly linked list
+    unordered_map<int, ListNode *> hashmap; // Hashmap to store key-node mappings
+    ListNode *head;                   // Dummy head node for the doubly linked list
+    ListNode *tail;                   // Dummy tail node for the doubly linked list
 
     // Helper function to add a node to the front of the linked list
-    void addToFront(ListNode* node) {
+    void addToFront(ListNode *node) {
         node->next = head->next;
         node->prev = head;
         head->next->prev = node;
@@ -58,7 +58,7 @@ class LRUCache {
     }
 
     // Helper function to remove a node from the linked list
-    void removeFromList(ListNode* node) {
+    void removeFromList(ListNode *node) {
         node->prev->next = node->next;
         node->next->prev = node->prev;
     }
@@ -76,7 +76,7 @@ class LRUCache {
     // Function to get the value of the given key from the cache
     int get(int key) {
         if (hashmap.find(key) != hashmap.end()) {
-            ListNode* node = hashmap[key];
+            ListNode *node = hashmap[key];
             removeFromList(node); // Move the accessed node to the front
             addToFront(node);
             return node->value;   // Return the value associated with the key
@@ -88,19 +88,19 @@ class LRUCache {
     // Function to put a key-value pair in the cache
     void put(int key, int value) {
         if (hashmap.find(key) != hashmap.end()) {
-            ListNode* node = hashmap[key];
+            ListNode *node = hashmap[key];
             removeFromList(node);  // Remove the existing node from the list
             node->value = value;   // Update the value
             addToFront(node);      // Move the updated node to the front
         } else {
             if (hashmap.size() >= capacity) {
-                ListNode* removedNode = tail->prev;
+                ListNode *removedNode = tail->prev;
                 removeFromList(removedNode); // Remove the last node (least recently used)
                 hashmap.erase(removedNode->key); // Remove the key from the hashmap
                 delete removedNode; // Free the memory of the removed node
             }
 
-            ListNode* newNode = new ListNode(key, value); // Create a new node for the key-value pair
+            ListNode *newNode = new ListNode(key, value); // Create a new node for the key-value pair
             addToFront(newNode); // Add the new node to the front of the list
             hashmap[key] = newNode; // Add the key-node mapping to the hashmap
         }
@@ -108,10 +108,10 @@ class LRUCache {
 
     // Destructor to properly deallocate memory for the ListNode objects
     ~LRUCache() {
-        ListNode* curr = head;
+        ListNode *curr = head;
 
         while (curr) {
-            ListNode* temp = curr;
+            ListNode *temp = curr;
             curr = curr->next;
             delete temp;
         }

@@ -25,9 +25,9 @@ Space Complexity:
 The space complexity is O(m), where 'm' is the maximum number of nodes at any level. In the worst case, 'm' can be the number of leaf nodes, which is O(n/2) in a balanced tree, making the space complexity O(n).
 */
 
+use std::cell::RefCell;
 use std::collections::VecDeque;
 use std::rc::Rc;
-use std::cell::RefCell;
 
 impl Solution {
     pub fn level_order(root: Option<Rc<RefCell<TreeNode>>>) -> Vec<Vec<i32>> {

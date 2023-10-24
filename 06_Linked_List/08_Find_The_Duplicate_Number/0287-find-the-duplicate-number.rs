@@ -22,24 +22,24 @@ impl Solution {
     pub fn find_duplicate(nums: Vec<i32>) -> i32 {
         let mut slow = nums[0];
         let mut fast = nums[0];
-        
+
         // Phase 1: Detect cycle
         loop {
             slow = nums[slow as usize];
             fast = nums[nums[fast as usize] as usize];
-            
+
             if slow == fast {
                 break;
             }
         }
-        
+
         // Phase 2: Find entrance to the cycle
         slow = nums[0];
         while slow != fast {
             slow = nums[slow as usize];
             fast = nums[fast as usize];
         }
-        
+
         slow
     }
 }
