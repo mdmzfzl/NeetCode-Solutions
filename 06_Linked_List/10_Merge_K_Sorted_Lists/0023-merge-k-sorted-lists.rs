@@ -23,7 +23,6 @@ Space Complexity:
 O(k), as the min-heap can have at most k elements.
 */
 
-// This solution is not mine.
 // Solution: https://leetcode.com/problems/merge-k-sorted-lists/solutions/1427861/Rust-Two-solutions-using-priority-queue-and-merging-the-lists-one-by-one/
 
 use std::cmp::{Ordering, Reverse};
