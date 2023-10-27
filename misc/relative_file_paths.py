@@ -1,6 +1,6 @@
 import os
 
-directory = "path/to/this/repo"
+directory = "../"
 output_file = "output.txt"
 
 with open(output_file, "w") as f:
