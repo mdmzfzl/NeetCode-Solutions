@@ -24,9 +24,6 @@ Space Complexity:
 The space complexity is O(n), where n is the number of temperatures. In the worst case, the stack may store all the indices of the temperatures.
 */
 
-#include<bits/stdc++.h>
-using namespace std;
-
 class Solution {
   public:
     vector<int> dailyTemperatures(vector<int> &temperatures) {
